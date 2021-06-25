@@ -1,0 +1,88 @@
+Como funciona o React Js:
+A ideia base é criar funções que retornam um trecho de HTML, tornando assim a construção do 
+site algo bem mais dinamico.
+
+Exemplo:
+import React from 'react'; //Pra funcionar tem que importar isso
+
+function ComponenteQualquer(parametros_caso_queira){
+    return(
+        <h1>Tutorial</h1>
+        <p>
+            Um trecho de HTML
+        </p> 
+    );
+}
+
+Geralmente colocamos cada componente em um arquivo .js ou .jsx (tanto faz)
+Quando vamos chama-lo em outro lugar, geralmente é assim:
+
+import NomeDoComponente from './ComponenteQualquer' //o diretorio de onde o componente esta 
+
+function OutroComponente(){
+    return(
+        <ComponenteQualquer/>
+    );
+}
+
+Detalhe importante: as funçoes só podem retornar 1 tag. Nao tem problema se tive varias tags
+uma dentro da outra, mas no fim tem que ser somente 1 tag sendo retornada.
+
+Se a gente quiser passar algum dado como parametro para o componente:
+Exemplo (quero passar um titulo como parametro)
+
+function OutroComponente(){
+    return(
+        <ComponenteQualquer parametro_titulo="Titulo passado como parametro"/>
+    );
+}
+
+ai, no ComponenteQualquer:
+
+function ComponenteQualquer(parametros_caso_queira){
+    return(
+        <h1>{parametros_caso_queira.parametro_titulo}</h1>
+        <p>
+            Um trecho de HTML
+        </p> 
+    );
+}
+
+entao... os parametros_caso_queira, na verdade é um só, que é um objeto (Objetos em Javascripts
+tem o comportamento muito semelhante ás bibliotecas em Python), por isso muitas vezes usamos o nome
+props pra representar esse objeto
+
+function ComponenteQualquer(props){
+    return(
+        <h1>{props.parametro_titulo}</h1>
+        <p>
+            Um trecho de HTML
+        </p> 
+    );
+}
+
+Esses parametros podem ser qualquer coisa, variaveis, objetos, listas, funções...
+no caso teriamos que lembrar de passar usando o {}.
+Exemplo:
+
+function OutroComponente(){
+    let texto = "um texto teste"
+    let numero = 2;
+    let lista = [1,2,3,4,5];
+    let objeto = {nome:"Enzo", altura:1.76}
+    /*
+        Outro detalhe: Javascript permite voce criar funções dentro de funções (eu sei, parece confuso)
+    */
+    function funcao(parametro){
+        //print em javascript
+        console.log(parametro);
+    }
+
+    return(
+        <ComponenteQualquer param_texto = {texto}/>
+        <ComponenteQualquer param_numero = {numero}/>
+        <ComponenteQualquer param_lista = {lista}/>
+        <ComponenteQualquer param_objeto = {objeto}/>
+        <ComponenteQualquer param_funcao = {funcao}/>
+    );
+}

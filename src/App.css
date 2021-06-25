@@ -1,38 +1,69 @@
-.App {
+.Cabecalho{
+  background-color: rgb(50, 166, 219);
+  text-align: center;
+  color:#fff;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* .campInicial{
+
+} */
+
+
+.campProduto{
+  display:flex;
+  flex-wrap: wrap;
+}
+
+.div-prod{
+  padding:10px;
+}
+
+.Produto{
+  flex: 1;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgb(230, 228, 228);
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  min-width: 300px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Produto h3{
+  background-color: rgb(1, 40, 58);
+  font-size: 20pt;
+  color:#fff;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.campCarrinho{
+  background-color: rgb(206, 206, 206);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.campCarrinho h3{
+  background-color: rgb(1, 40, 58);
+  color:rgb(230, 228, 228);
+  text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+.Carrinho-section{
+  width: 800px;
+  background-color: rgb(230, 228, 228);
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.campoProduto h3{
+
+  text-align:right;
+  margin-right: 50px;
+}
+
+.campFormulario{
+  margin-left: 75px;
+  margin-bottom: 25px;
 }

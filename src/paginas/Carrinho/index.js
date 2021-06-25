@@ -1,0 +1,43 @@
+import React from 'react';
+import ProdCarrinho from '../../componentes/ProdCarrinho';
+import Formulario from '../../componentes/Formulario';
+import { useListaCarrinho } from '../../context/carrinho';
+
+export default function Carrinho() {
+    /**Ajeitar o CSS*/
+    
+    const { lista } = useListaCarrinho() 
+
+    function precoTotal() {
+        let total = 0;
+        for(let i in lista){
+            total += lista[i].preco;
+        }
+        return total;
+    }
+
+    return (
+
+            <section className="Carrinho-section">
+                <section className="campoProduto">
+                    {lista.map((produto) => {
+                        return (
+                            <div key={produto.id}>
+                                <ProdCarrinho
+                                    id={produto.id}
+                                    nome={produto.nome}
+                                    categoria={produto.categoria}
+                                    preco={produto.preco}
+                                />
+                            </div>
+                        );
+                    })}
+                    <h3>Total: R$ {precoTotal()}</h3>
+                </section>
+                <div className="campFormulario">
+                    <Formulario />
+                </div>
+            </section>
+
+    );
+}
