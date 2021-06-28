@@ -10,7 +10,7 @@ export default function AddProduto(){
     function id_disponivel(){
         let val = 1;
         for(let i in listaProdutos){
-            if( listaProdutos[i].id == val){
+            if( listaProdutos[i].id === val){
                 val += 1;
             }
         }
