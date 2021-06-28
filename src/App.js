@@ -8,10 +8,12 @@ import Inicial from './paginas/Inicial';
 import Carrinho from './paginas/Carrinho';
 import AdmInicial from './paginas/AdmInicial';
 import AdmLogin from './paginas/AdmLogin';
+import AddCategoria from './paginas/AddCategoria';
+import AddProduto from './paginas/AddProduto';
 import ListaProvider from './context/carrinho';
 import ListaCatProvider from './context/categoria';
 
-/**Criar context para login
+/**
  * Problema persistente:
  *  Jogar os dados do carrinho no db.json
  */
@@ -25,7 +27,7 @@ function App() {
   }, [])
 
   function QualCabecalho() {
-    return acesso ? <CabecalhoAdm setAcesso={setAcesso}/> : <Cabecalho />
+    return acesso ? <CabecalhoAdm setAcesso={setAcesso} /> : <Cabecalho />
   }
 
   function acessoInicialAdm() {
@@ -39,28 +41,34 @@ function App() {
 
   return (
     <>
-        <Router>
-          <ListaCatProvider>
-            {QualCabecalho()}
-          </ListaCatProvider>
-          <ListaProvider>
-            <Switch>
-              <Route exact path='/'>
-                <Inicial />
-              </Route>
-              <Route path='/carrinho'>
-                <Carrinho />
-              </Route>
-              <Route path="/adm_inicial">
-                {acessoInicialAdm()}
-              </Route>
-              <Route path="/login">
-                <AdmLogin valida={efetuado} />
-              </Route>
-            </Switch>
-            <Rodape />
-          </ListaProvider>
-        </Router>
+      <Router>
+        <ListaCatProvider>
+          {QualCabecalho()}
+        </ListaCatProvider>
+        <ListaProvider>
+          <Switch>
+            <Route exact path='/'>
+              <Inicial />
+            </Route>
+            <Route path='/carrinho'>
+              <Carrinho />
+            </Route>
+            <Route path="/adm_inicial">
+              {acessoInicialAdm()}
+            </Route>
+            <Route path="/login">
+              <AdmLogin valida={efetuado} />
+            </Route>
+            <Route path="/add_categoria">
+              <AddCategoria />
+            </Route>
+            <Route path="/add_produto">
+              <AddProduto />
+            </Route>
+          </Switch>
+          <Rodape />
+        </ListaProvider>
+      </Router>
     </>
   );
 }

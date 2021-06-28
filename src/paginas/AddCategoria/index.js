@@ -4,6 +4,8 @@ import { TextField, Button } from '@material-ui/core';
 
 export default function AddCategoria({enviar}){
     
+    /**Jogar a atualizacao direto no banco de dados */
+
     const [nomeCat, setNome] = useState('');
     
     function preEnviar(event){

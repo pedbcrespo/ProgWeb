@@ -3,8 +3,10 @@ import { useState } from 'react';
 import FormProduto from '../../componentes/FormProduto';
 export default function AddProduto(){
     
+    /**Jogar os dados direto no banco de dados*/
+
     const [listaProdutos, setListaProdutos] = useState([]);
-    
+
     function id_disponivel(){
         let val = 1;
         for(let i in listaProdutos){
