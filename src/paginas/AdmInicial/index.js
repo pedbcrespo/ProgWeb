@@ -1,12 +1,10 @@
 import React from 'react';
-import CabecalhoAdm from '../../componentes/CabecalhoAdm';
 
 export default function AdmInicial(){
     
-    
     return (
         <>
-            <CabecalhoAdm/>
+            <h4>Aqui fica a pagina inicial do Administrador</h4>
         </>
     );
 }

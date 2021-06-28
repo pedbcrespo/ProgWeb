@@ -4,7 +4,7 @@ import React from 'react';
 export default function Rodape(){
     return (
         <footer>
-            <Link to="/login">administrador</Link>
+            <Link to="/adm_inicial">administrador</Link>
         </footer>
     );
 }

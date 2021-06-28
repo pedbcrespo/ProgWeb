@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Link } from '@material-ui/core';
+import { TextField, Button} from '@material-ui/core';
 
 export default function AdmLogin({ valida }) {
     /**Criar context para dados do Adm;
@@ -12,6 +12,7 @@ export default function AdmLogin({ valida }) {
     function verificar(event) {
         event.preventDefault();
         let val = usuario === "admin" && senha === "admin";
+        console.log(usuario, senha);
         valida(val);
     }
 

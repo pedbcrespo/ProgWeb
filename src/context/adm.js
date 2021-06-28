@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 
 export const admContext = createContext(false);
 
-export default function ListaProvider({ children }) {
+export default function AdmProvider({ children }) {
     const [acesso, setAcesso] = useState(false)
 
     useEffect(()=>{
-        console.log(acesso)
+        
     },[])
 
     return (

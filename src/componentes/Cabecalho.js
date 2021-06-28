@@ -9,7 +9,7 @@ export default function Cabecalho() {
 
     useEffect(()=>{
         getCategorias(setListaCat);
-    },[])
+    },[setListaCat])
 
     return (
         <>
