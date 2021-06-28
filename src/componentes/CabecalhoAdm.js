@@ -1,23 +1,13 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useListaCateg } from '../context/categoria';
-import { getCategorias } from '../server/api';
 
-export default function Cabecalho() {
-    const {listaCat, setListaCat} = useListaCateg();
-
-    useEffect(()=>{
-        getCategorias(setListaCat);
-    },[])
-
+export default function CabecalhoAdm(){
     return (
         <>
-            <header className="Cabecalho">
-                <h1>ProgWeb Commerce</h1>
-                <h2>A lojinha mais sagaz da internet</h2>
-            </header>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <header>
+            <h1>ADM</h1>
+        </header>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">Inicial</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,25 +16,22 @@ export default function Cabecalho() {
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/carrinho">Carrinho</Link>
+                                <Link className="nav-link active" aria-current="page" to="/manual">Manual</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Categoria
+                                    Adicionar
                                 </Link>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    {listaCat.map((cat, indice)=>{
-                                        return (<li key={indice}>
-                                            <Link className="dropdown-item" to={`/categoria/${cat}`}>{cat}</Link>
-                                        </li>)
-                                    })}
+                                    <li><Link className="dropdown-item" to="/add_categoria">Categoria</Link></li>
+                                    <li><Link className="dropdown-item" to="/add_produto">Produto</Link></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
-
+        
         </>
     );
 }

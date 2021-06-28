@@ -16,6 +16,10 @@ export default function Carrinho() {
         return total;
     }
 
+    function enviar(dados){
+        console.log(dados);
+    }
+
     return (
 
             <section className="Carrinho-section">
@@ -35,7 +39,7 @@ export default function Carrinho() {
                     <h3>Total: R$ {precoTotal()}</h3>
                 </section>
                 <div className="campFormulario">
-                    <Formulario />
+                    <Formulario enviar={enviar}/>
                 </div>
             </section>
 

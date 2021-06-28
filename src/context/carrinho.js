@@ -17,6 +17,9 @@ export default function ListaProvider({ children }) {
     );
 }
 
+
+
+
 function useListaCarrinho() {
     const context = useContext(listaContext);
     const {lista, setLista} = context;

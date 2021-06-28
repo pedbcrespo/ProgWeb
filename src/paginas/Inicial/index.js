@@ -18,6 +18,10 @@ export default function Inicial() {
         console.log(lista)
     }
 
+    function rmv(indice){
+        lista.splice(indice, 1);
+        setLista(lista);
+    }
     return (
         <section className="campInicial">
             <section className="campProduto">
@@ -29,7 +33,8 @@ export default function Inicial() {
                                 nome={prod.nome}
                                 categoria={prod.categoria}
                                 preco={prod.preco}
-                                funcao={add} />
+                                funcao={add} 
+                                />
                         </div>
                     )
                 })}
@@ -43,10 +48,12 @@ export default function Inicial() {
                     {lista.map((prod, indice) => {
                         return <li key={indice} className="prodCarrinho">
                             <ProdCarrinho
+                                indice={indice}
                                 id={prod.id}
                                 nome={prod.nome}
                                 categoria={prod.categoria}
                                 preco={prod.preco}
+                                funcao={rmv}
                             />
                         </li>
                     })}

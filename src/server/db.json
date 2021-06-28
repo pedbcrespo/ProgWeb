@@ -16,5 +16,6 @@
         {"id":14, "nome":"Caneca Estampa Fisica", "categoria":"caneca", "preco": 15.50},
         {"id":15, "nome":"Caneca Estampa Piada", "categoria":"caneca", "preco": 17.00}
     ],
-    "carrinho":[]
+    "carrinho":[],
+    "categoria":["caneca", "camisa"]
 }

@@ -14,6 +14,14 @@ function getProduto(ident, setFunction){
     })
 }
 
+function getCategorias(setFunction){
+    fetch(`http://localhost:3001/categoria`)
+    .then(res=>res.json())
+    .then(data=>{
+        setFunction(data)
+    })
+}
+
 function getCarrinho(setFunction){
     fetch('http://localhost:3001/carrinho')
     .then(res=>res.json())
@@ -32,5 +40,6 @@ export {
     getProdutos,
     getProduto,
     getCarrinho,
+    getCategorias,
     postCarrinho,
 }

@@ -1,20 +1,25 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Carrinho from './paginas/Carrinho';
 import Cabecalho from './componentes/Cabecalho';
 import Inicial from './paginas/Inicial';
+import Carrinho from './paginas/Carrinho';
+import AdmInicial from './paginas/AdmInicial';
+import AdmLogin from './paginas/AdmLogin';
 import ListaProvider from './context/carrinho';
-
-/**Problema persistente:
- * Jogar os dados do carrinho no db.json
+import ListaCatProvider from './context/categoria';
+/**Criar context para login
+ * Problema persistente:
+ *  Jogar os dados do carrinho no db.json
  */
 
 function App() {
   return (
     <>
-      <ListaProvider>
-        <Router>
+      <Router>
+        <ListaCatProvider>
           <Cabecalho />
+        </ListaCatProvider>
+        <ListaProvider>
           <Switch>
             <Route exact path='/'>
               <Inicial />
@@ -22,9 +27,18 @@ function App() {
             <Route path='/carrinho'>
               <Carrinho />
             </Route>
+            <Route path="/adm_inicial">
+              <AdmInicial/>
+            </Route>
+            <Route path="/login">
+              <AdmLogin/>
+            </Route>
+            <Route>
+              
+            </Route>
           </Switch>
-        </Router>
-      </ListaProvider>
+        </ListaProvider>
+      </Router>
     </>
   );
 }
