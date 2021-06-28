@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAcessoAdm } from '../context/adm';
 
 export default function CabecalhoAdm(){
+    
+    const {acesso, setAcesso} = useAcessoAdm()
+    
     return (
         <>
         <header>
@@ -26,6 +30,11 @@ export default function CabecalhoAdm(){
                                     <li><Link className="dropdown-item" to="/add_categoria">Categoria</Link></li>
                                     <li><Link className="dropdown-item" to="/add_produto">Produto</Link></li>
                                 </ul>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active" aria-current="page" to="/" onClick={(event)=>{
+                                    setAcesso(false)
+                                }}>Sair</Link>
                             </li>
                         </ul>
                     </div>
