@@ -1,4 +1,5 @@
-from flask import Flask
+import json
+from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_cors import CORS
 from bd_con import BancoDados
@@ -40,10 +41,15 @@ class Carrinho(Resource, Conexao):
 class Produtos(Resource, Conexao):
     def get(self):
         return self.bd.getTabela("produto", "*")
-    
+
+
 class Categorias(Resource, Conexao):
     def get(self):
         return self.bd.getTabela("categoria", "*")
+
+    def post(self):
+        dado_request = json.loads(request.data)
+        return self.bd.postDado("categoria", dado_request)
 
 api.add_resource(Produto, "/produto/<int:id_produto>")
 api.add_resource(Categoria, "/categoria/<int:id_categoria>")

@@ -56,7 +56,7 @@ class BancoDados():
         try:
             comando = "INSERT INTO {} VALUES ({})".format(tabela, self.__formata(dado))
             self.__cursor.execute(comando)
-            self.__cursor.commit()
+            self.__conexao.commit()
 
             return {"status": "Operacao realizada com sucesso", "inserido": dado} 
         except:
@@ -66,7 +66,7 @@ class BancoDados():
         try:
             comando = "DELETE FROM {} WHERE id = {}".format(tabela, id)
             self.__cursor.execute(comando)
-            self.__cursor.commit()
+            self.__conexao.commit()
 
             return {"status": "Operacao realizada com sucesso", "removido": id} 
         except:
