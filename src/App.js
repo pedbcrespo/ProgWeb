@@ -16,6 +16,8 @@ import ListaCatProvider from './context/categoria';
 /**
  * Problema persistente:
  *  Jogar os dados do carrinho no db.json
+ * 
+ * Preciso criar um Context para todos os dados, e nele colocar os dados das api's
  */
 
 function App() {
@@ -37,6 +39,7 @@ function App() {
   function efetuado(val) {
     setAcesso(val)
     console.log(val)
+    return <Redirect to="/adm_inicial"/>
   }
 
   return (

@@ -30,11 +30,14 @@ function getCarrinho(setFunction){
     })
 }
 
-function postCarrinho(ident){
+function postCarrinho(dados){
 
 }
 /**Para carregar o db.json digite 
- * npx json-server --watch ./src/server/db.json --port 3001*/
+ * npx json-server --watch ./src/server/db.json --port 3001
+ *
+ * Quando for usar a api, usar Express e porta 5000 
+ */
 
 export {
     getProdutos,

@@ -34,17 +34,19 @@ class BancoDados():
             if type(dado[key])==str:
                 lista.append(f"'{dado[key]}'")
             else:
-                lista.append(dado[key])
+                lista.append(str(dado[key]))
+        print(lista)
         return ",".join(lista)
 
-    def getTabela(self, tabela, dados, complemento=""):
+    def getTabela(self, tabela, dados, complemento="", colunas=None):
         try:
             comando = "SELECT {} FROM {} {}".format(dados, tabela, complemento)
             self.__cursor.execute(comando)
 
             lista_tupla = [tupla for tupla in self.__cursor]
-            self.__cursor.execute(f"SHOW COLUMNS FROM {tabela}")
-            colunas = [coluna[0] for coluna in self.__cursor]
+            if colunas == None:
+                self.__cursor.execute(f"SHOW COLUMNS FROM {tabela}")
+                colunas = [coluna[0] for coluna in self.__cursor]
 
             return list(map(lambda x: self.__dic(colunas, x), lista_tupla))
         except:
