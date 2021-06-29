@@ -20,15 +20,33 @@ class Produto(Resource, Conexao):
         lista_resposta = self.bd.getTabela("produto", dados, complemento, colunas)
         return lista_resposta[0]
 
+    def put(self, id_produto):
+        pass
+
+    def delete(self, id_produto):
+        pass
+
 class Categoria(Resource, Conexao):
     def get(self, id_categoria):
         lista_resposta = self.bd.getTabela("categoria", "*", f"WHERE id = {id_categoria}")
         return lista_resposta[0]
 
+    def put(self, id_produto):
+        pass
+
+    def delete(self, id_produto):
+        pass
+
 class Cliente(Resource, Conexao):
     def get(self, id_cliente):
         lista_resposta = self.bd.getTabela("cliente", "*", f"WHERE id = {id_cliente}")
         return lista_resposta[0]
+
+    def put(self, id_cliente):
+        pass
+
+    def delete(self, id_cliente):
+        pass
 
 class Carrinho(Resource, Conexao):
     def get(self, id_carrinho):
@@ -37,10 +55,20 @@ class Carrinho(Resource, Conexao):
         lista_resposta = self.bd.getTabela("carrinho", dados, complemento)
         return lista_resposta[0]
 
+    def put(self, id_carrinho):
+        pass
+
+    def delete(self, id_carrinho):
+        pass
+
 # Classes com busca de todos os valores registrados 
 class Produtos(Resource, Conexao):
     def get(self):
         return self.bd.getTabela("produto", "*")
+
+    def post(self):
+        dado_request = json.loads(request.data)
+        return self.bd.postDado("produto", dado_request)
 
 
 class Categorias(Resource, Conexao):
@@ -51,12 +79,30 @@ class Categorias(Resource, Conexao):
         dado_request = json.loads(request.data)
         return self.bd.postDado("categoria", dado_request)
 
+class Clientes(Resource, Conexao):
+    def get(self):
+        return self.bd.getTabela("cliente", "*")
+
+    def post(self):
+        dado_request = json.loads(request.data)
+        return self.bd.postDado("cliente", dado_request)
+
+class Carrinhos(Resource, Conexao):
+    def get(self):
+        return self.bd.getTabela("carrinho", "*")
+
+    def post(self):
+        dado_request = json.loads(request.data)
+        return self.bd.postDado("carrinho", dado_request)
+
 api.add_resource(Produto, "/produto/<int:id_produto>")
 api.add_resource(Categoria, "/categoria/<int:id_categoria>")
 api.add_resource(Cliente, "/cliente/<int:id_cliente>")
 api.add_resource(Carrinho, "/carrinho/<int:id_carrinho>")
 api.add_resource(Produtos, "/produtos")
 api.add_resource(Categorias, "/categorias")
+api.add_resource(Clientes, "/clientes")
+api.add_resource(Produtos, "/produtos")
 
 
 if __name__ == '__main__':
