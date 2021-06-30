@@ -14,3 +14,4 @@
     -Remover itens do carrinho
     -Mostrar a imagem dos produtos
     -Melhorar o design da pagina
+    -Colocar o painel do carrinho do lado do painel dos produtos
