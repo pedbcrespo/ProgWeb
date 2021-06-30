@@ -1,5 +1,10 @@
+/**Conectar com a api feita em python 
+ * 
+ * Usar o Express
+*/
+
 function getProdutos(setFunction){
-    fetch('http://localhost:3001/produto')
+    fetch('http://localhost:3001/produtos')
     .then(res=>res.json())
     .then((data)=>{
         setFunction(data);
@@ -15,7 +20,7 @@ function getProduto(ident, setFunction){
 }
 
 function getCategorias(setFunction){
-    fetch(`http://localhost:3001/categoria`)
+    fetch(`http://localhost:3001/categorias`)
     .then(res=>res.json())
     .then(data=>{
         setFunction(data)
@@ -23,7 +28,7 @@ function getCategorias(setFunction){
 }
 
 function getCarrinho(setFunction){
-    fetch('http://localhost:3001/carrinho')
+    fetch('http://localhost:3001/carrinhos')
     .then(res=>res.json())
     .then((data)=>{
         setFunction(data)
@@ -33,11 +38,6 @@ function getCarrinho(setFunction){
 function postCarrinho(dados){
 
 }
-/**Para carregar o db.json digite 
- * npx json-server --watch ./src/server/db.json --port 3001
- *
- * Quando for usar a api, usar Express e porta 5000 
- */
 
 export {
     getProdutos,
