@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useListaCateg } from '../context/categoria';
-import { getCategorias } from '../server/api';
+import { getCategorias } from '../server/api_sim';
 
 export default function Cabecalho() {
     const {listaCat, setListaCat} = useListaCateg();

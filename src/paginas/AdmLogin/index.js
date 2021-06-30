@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button} from '@material-ui/core';
+import { validarUsuario, validarSenha } from '../../models/validacao';
 
 export default function AdmLogin({ valida }) {
     /**Criar context para dados do Adm;
@@ -8,14 +9,13 @@ export default function AdmLogin({ valida }) {
      */
     const [usuario, setUsuario] = useState('');
     const [senha, setSenha] = useState('');
+    const [valUsuario, setValUsuario] = useState({valido:false, texto:""});
+    const [valSenha, setValSenha] = useState({valido:false, texto:""});
 
-    function verificar(event) {
+    function verificar(event){
         event.preventDefault();
-        let val = usuario === "admin" && senha === "admin";
-        console.log(usuario, senha);
-        valida(val);
+        
     }
-
 
     return (
         <form onSubmit={verificar}>
@@ -25,7 +25,10 @@ export default function AdmLogin({ valida }) {
                 variant="outlined"
                 onChange={(event) => {
                     setUsuario(event.target.value);
-                }} />
+                }} 
+                onBlur={""}
+                />
+
             <TextField
                 id="outlined-basic"
                 label="Senha"

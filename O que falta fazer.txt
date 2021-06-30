@@ -9,7 +9,8 @@
     -Criar um context para todos as requisições
     -Implementar o metodo post, put e delete
     -Consumir dados da api de localização
-
+    -Talvez tenha que criar uma api para as imagens dos produtos
+    
 *Front:
     -Enviar os formularios
     -Remover itens do carrinho (Mais ou menos funcionando - Pesquisar mais sobre o useEffect)

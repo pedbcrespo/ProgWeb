@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
+// import { validarCartao, validarCep } from '../models/validacao';
 export default function Formulario({ enviar }) {
 
     const [numCartao, setNumCartao] = useState('');
@@ -10,14 +11,6 @@ export default function Formulario({ enviar }) {
         event.preventDefault();//lembrar de apagar dps
         enviar({ endereco, cep, numCartao });
     }
-
-    // function verificaCep(textCep) {
-    //     return textCep.length !== 8;
-    // }
-
-    // function verificaNumCartao(cartao) {
-    //     return cartao.length !== 16;
-    // }
 
     return (
         <form noValidate autoComplete="off" onSubmit={prepararEnviar}>

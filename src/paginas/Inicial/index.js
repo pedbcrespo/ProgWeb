@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Produto from '../../componentes/Produto';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
-import { getProdutos } from '../../server/api';
+import { getProdutos } from '../../server/api_sim';
 import { useListaCarrinho } from '../../context/carrinho';
+import { rmv, add } from '../../models/prodCar';
 
 export default function Inicial() {
 
@@ -13,17 +14,6 @@ export default function Inicial() {
         getProdutos(setListaProdutos)
     }, []);
 
-    function add(dado) {
-        setLista([...lista, dado]);
-        console.log(lista)
-    }
-    /**Colocar essa funçao em uma pasta separada pois sera usada em componentes diferentes */
-    function rmv(indice){
-        let nova_lista = lista;
-        nova_lista.splice(indice, 1);
-        console.log(nova_lista);
-        setLista(nova_lista);
-    }
     return (
         <section className="campInicial">
             <section className="campProduto">
@@ -35,7 +25,7 @@ export default function Inicial() {
                                 nome={prod.nome}
                                 categoria={prod.categoria}
                                 preco={prod.preco}
-                                funcao={add} 
+                                funcao={add(setLista, lista)} 
                                 />
                         </div>
                     )
@@ -55,7 +45,7 @@ export default function Inicial() {
                                 nome={prod.nome}
                                 categoria={prod.categoria}
                                 preco={prod.preco}
-                                funcao={rmv}
+                                funcao={rmv(setLista, lista)}
                             />
                         </li>
                     })}

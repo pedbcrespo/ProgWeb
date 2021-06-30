@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import { useEffect } from 'react';
+import { getCarrinho } from '../server/api_sim';
 
 export const listaContext = createContext([]);
 
@@ -7,8 +8,8 @@ export default function ListaProvider({ children }) {
     const [lista, setLista] = useState([])
 
     useEffect(()=>{
-        
-    },[lista])
+        getCarrinho(setLista)
+    }, [lista])
 
     return (
         <listaContext.Provider value={{ lista, setLista, }}>

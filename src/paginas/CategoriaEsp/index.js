@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Produto from '../../componentes/Produto';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
-import { getProdutoCategoria, getProdutos } from '../../server/api';
+import { getProdutos } from '../../server/api_sim';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useParams } from 'react-router-dom';
 
@@ -12,7 +12,6 @@ export default function CategoriaEsp(){
     const {categoria} = useParams();
 
     useEffect(() => {
-        // getProdutoCategoria(setListaProduto, categoria);
         getProdutos(setListaProduto);
     }, []);
 
