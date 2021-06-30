@@ -1,0 +1,16 @@
+*Banco de dados:
+    -Implementar os metodos put e delete
+    -Implementar o metodo de update do BD
+    -Alimentar o banco
+
+*Api:
+    -Conectar com o banco de dados
+    -Criar um context para todos as requisições
+    -Implementar o metodo post, put e delete
+    -Consumir dados da api de localização
+
+*Front:
+    -Enviar os formularios
+    -Remover itens do carrinho
+    -Mostrar a imagem dos produtos
+    -Melhorar o design da pagina
