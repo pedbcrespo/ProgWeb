@@ -40,7 +40,7 @@ function App() {
   function efetuado(val) {
     setAcesso(val)
     console.log(val)
-    return <Redirect to="/adm_inicial"/>
+    return <Redirect to="/adm_inicial" />
   }
 
   return (
@@ -48,32 +48,32 @@ function App() {
       <Router>
         <ListaCatProvider>
           {QualCabecalho()}
+          <ListaProvider>
+            <Switch>
+              <Route exact path='/'>
+                <Inicial />
+              </Route>
+              <Route path='/carrinho'>
+                <Carrinho />
+              </Route>
+              <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
+              </Route>
+              <Route path="/adm_inicial">
+                {acessoInicialAdm()}
+              </Route>
+              <Route path="/login">
+                <AdmLogin valida={efetuado} />
+              </Route>
+              <Route path="/add_categoria">
+                <AddCategoria />
+              </Route>
+              <Route path="/add_produto">
+                <AddProduto />
+              </Route>
+            </Switch>
+            <Rodape />
+          </ListaProvider>
         </ListaCatProvider>
-        <ListaProvider>
-          <Switch>
-            <Route exact path='/'>
-              <Inicial />
-            </Route>
-            <Route path='/carrinho'>
-              <Carrinho />
-            </Route>
-            <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
-            </Route>
-            <Route path="/adm_inicial">
-              {acessoInicialAdm()}
-            </Route>
-            <Route path="/login">
-              <AdmLogin valida={efetuado} />
-            </Route>
-            <Route path="/add_categoria">
-              <AddCategoria />
-            </Route>
-            <Route path="/add_produto">
-              <AddProduto />
-            </Route>
-          </Switch>
-          <Rodape />
-        </ListaProvider>
       </Router>
     </>
   );

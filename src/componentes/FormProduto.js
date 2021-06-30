@@ -1,16 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
-import { TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@material-ui/core';
+import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import { useListaCateg } from '../context/categoria';
 
 
 export default function FormProduto({ enviar, id }) {
 
-    const {listaCat} = useListaCateg();
+    const { listaCat } = useListaCateg();
 
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState(0);
-    const [categoria, setCategoria] = useState('');
+    const [categoria, setCategoria] = useState({})
 
     function prepararEnviar(event) {
         event.preventDefault();
@@ -34,6 +34,19 @@ export default function FormProduto({ enviar, id }) {
                 onChange={(event) => {
                     setPreco(event.target.value);
                 }} />
+            <FormControl variant="outlined" >
+                <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                >
+                
+                    {listaCat.map((cat)=>{
+                        return <MenuItem value={cat.nome} key={cat.id}>{cat.nome}</MenuItem>
+                    })}
+
+                </Select>
+            </FormControl>
             <br></br>
             <Button variant="contained" color="primary" type="submit">
                 Confirmar

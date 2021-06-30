@@ -2,6 +2,7 @@
     -Implementar os metodos put e delete
     -Implementar o metodo de update do BD
     -Alimentar o banco
+    -Usar imagens jpeg
 
 *Api:
     -Conectar com o banco de dados
@@ -11,7 +12,13 @@
 
 *Front:
     -Enviar os formularios
-    -Remover itens do carrinho
+    -Remover itens do carrinho (Mais ou menos funcionando - Pesquisar mais sobre o useEffect)
+        -Botao x só funciona na pagina inicial
     -Mostrar a imagem dos produtos
     -Melhorar o design da pagina
     -Colocar o painel do carrinho do lado do painel dos produtos
+    -Resolver cadastro de produtos com Select de categorias
+    -Resolver problema de login:
+        Mesmo logando na primeira vez, se vai para a pagina inicial, quando volta precisa logar 
+        denovo
+    
