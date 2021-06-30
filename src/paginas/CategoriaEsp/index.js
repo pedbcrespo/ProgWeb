@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Produto from '../../componentes/Produto';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
-import { getProdutos } from '../../server/api';
+import { getProdutoCategoria, getProdutos } from '../../server/api';
 import { useListaCarrinho } from '../../context/carrinho';
+import { useParams } from 'react-router-dom';
 
-export default function Inicial() {
-
-    const [listaProdutos, setListaProdutos] = useState([])
+export default function CategoriaEsp(){
+    const [listaProdutos, setListaProduto] = useState([])
     const { lista, setLista } = useListaCarrinho();
 
+    const {categoria} = useParams();
+
     useEffect(() => {
-        getProdutos(setListaProdutos)
+        // getProdutoCategoria(setListaProduto, categoria);
+        getProdutos(setListaProduto);
     }, []);
+
+    function listaPorCategoria(){
+        let lista_filtrada = listaProdutos.filter((prod)=>{
+            return prod.categoria === categoria
+        })
+        return lista_filtrada
+    }
 
     function add(dado) {
         setLista([...lista, dado]);
@@ -22,10 +32,11 @@ export default function Inicial() {
         lista.splice(indice, 1);
         setLista(lista);
     }
+
     return (
         <section className="campInicial">
             <section className="campProduto">
-                {listaProdutos.map((prod) => {
+                {listaPorCategoria().map((prod) => {
                     return (
                         <div key={prod.id}>
                             <Produto
@@ -61,5 +72,5 @@ export default function Inicial() {
 
             </aside>
         </section>
-    )
+    );
 }

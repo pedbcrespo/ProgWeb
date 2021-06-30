@@ -35,7 +35,7 @@ export default function Cabecalho() {
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     {listaCat.map((cat, indice)=>{
                                         return (<li key={indice}>
-                                            <Link className="dropdown-item" to={`/categoria/${cat}`}>{cat}</Link>
+                                            <Link className="dropdown-item" to={`/categoria/${cat.nome}`}>{cat.nome}</Link>
                                         </li>)
                                     })}
                                 </ul>

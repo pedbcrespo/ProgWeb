@@ -4,7 +4,7 @@
 */
 
 function getProdutos(setFunction){
-    fetch('http://localhost:3001/produtos')
+    fetch('http://localhost:3001/produto')
     .then(res=>res.json())
     .then((data)=>{
         setFunction(data);
@@ -20,7 +20,7 @@ function getProduto(ident, setFunction){
 }
 
 function getCategorias(setFunction){
-    fetch(`http://localhost:3001/categorias`)
+    fetch(`http://localhost:3001/categoria`)
     .then(res=>res.json())
     .then(data=>{
         setFunction(data)
@@ -28,15 +28,23 @@ function getCategorias(setFunction){
 }
 
 function getCarrinho(setFunction){
-    fetch('http://localhost:3001/carrinhos')
+    fetch('http://localhost:3001/carrinho')
     .then(res=>res.json())
     .then((data)=>{
         setFunction(data)
     })
 }
 
-function postCarrinho(dados){
+function getProdutoCategoria(setFunction, categoria){
+    fetch('http://localhost:3001/carrinho')
+    .then(res=>res.json())
+    .then((data)=>{
+        let data_filtrada = data.filter((prod)=>{
+            return prod.categoria === categoria
+        })
 
+        setFunction(data_filtrada)
+    })
 }
 
 export {
@@ -44,5 +52,5 @@ export {
     getProduto,
     getCarrinho,
     getCategorias,
-    postCarrinho,
+    getProdutoCategoria,
 }

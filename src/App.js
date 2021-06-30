@@ -10,6 +10,7 @@ import AdmInicial from './paginas/AdmInicial';
 import AdmLogin from './paginas/AdmLogin';
 import AddCategoria from './paginas/AddCategoria';
 import AddProduto from './paginas/AddProduto';
+import CategoriaEsp from './paginas/CategoriaEsp';
 import ListaProvider from './context/carrinho';
 import ListaCatProvider from './context/categoria';
 
@@ -55,6 +56,8 @@ function App() {
             </Route>
             <Route path='/carrinho'>
               <Carrinho />
+            </Route>
+            <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
             </Route>
             <Route path="/adm_inicial">
               {acessoInicialAdm()}
