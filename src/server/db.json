@@ -1,18 +1,111 @@
 {
-    "produto":[
-        {"id":1, "nome": "Camisa Preta", "categoria":"camisa", "preco": 20.00, "img":"./bdimg/camisa1"},
-        {"id":2, "nome": "Camisa Vermelha", "categoria":"camisa", "preco": 21.00, "img":"./bdimg/camisa2"},
-        {"id":3, "nome": "Camisa Verde", "categoria":"camisa", "preco": 25.00, "img":"./bdimg/camisa3"},
-        {"id":4, "nome": "Camisa Azul", "categoria":"camisa", "preco": 17.00, "img":"./bdimg/camisa4"},
-        {"id":5, "nome": "Camisa Cinza", "categoria":"camisa", "preco": 15.00, "img":"./bdimg/camisa5"},
-        {"id":6, "nome": "Camisa Roxa", "categoria":"camisa", "preco": 20.50, "img":"./bdimg/camisa6"},
-        {"id":7, "nome": "Caneca Listrada", "categoria":"caneca", "preco": 17.89, "img":"./bdimg/caneca1"},
-        {"id":8, "nome": "Caneca Estampada", "categoria":"caneca", "preco": 20.00, "img":"./bdimg/caneca2"},
-        {"id":9, "nome":"Caneca Estampa Nome", "categoria":"caneca", "preco": 15.00, "img":"./bdimg/caneca3"},
-        {"id":10, "nome":"Caneca Estampa Banda", "categoria":"caneca", "preco": 12.50, "img":"./bdimg/caneca4"},
-        {"id":11, "nome":"Caneca Estampa Profissao", "categoria":"caneca", "preco": 20.00, "img":"./bdimg/caneca5"},
-        {"id":12, "nome":"Caneca Estampa Fisica", "categoria":"caneca", "preco": 15.50, "img":"./bdimg/caneca6"}
+    "produto": [
+        {
+            "id": 1,
+            "nome": "Camisa Preta",
+            "categoria": "camisa",
+            "id_categoria": 1,
+            "preco": 20.00,
+            "img": "./bdimg/camisa1.jfif"
+        },
+        {
+            "id": 2,
+            "nome": "Camisa Vermelha",
+            "categoria": "camisa",
+            "id_categoria": 1,
+            "preco": 21.00,
+            "img": "./bdimg/camisa2.jfif"
+        },
+        {
+            "id": 3,
+            "nome": "Camisa Verde",
+            "categoria": "camisa",
+            "id_categoria": 1,
+            "preco": 25.00,
+            "img": "./bdimg/camisa3.jfif"
+        },
+        {
+            "id": 4,
+            "nome": "Camisa Azul",
+            "categoria": "camisa",
+            "id_categoria": 1,
+            "preco": 17.00,
+            "img": "./bdimg/camisa4.jfif"
+        },
+        {
+            "id": 5,
+            "nome": "Camisa Cinza",
+            "categoria": "camisa",
+            "id_categoria": 1,
+            "preco": 15.00,
+            "img": "./bdimg/camisa5.jfif"
+        },
+        {
+            "id": 6,
+            "nome": "Camisa Roxa",
+            "categoria": "camisa",
+            "id_categoria": 1,
+            "preco": 20.50,
+            "img": "./bdimg/camisa6.jfif"
+        },
+        {
+            "id": 7,
+            "nome": "Caneca Listrada",
+            "categoria": "caneca",
+            "id_categoria": 2,
+            "preco": 17.89,
+            "img": "./bdimg/caneca1.jfif"
+        },
+        {
+            "id": 8,
+            "nome": "Caneca Estampada",
+            "categoria": "caneca",
+            "id_categoria": 2,
+            "preco": 20.00,
+            "img": "./bdimg/caneca2.jfif"
+        },
+        {
+            "id": 9,
+            "nome": "Caneca Estampa Nome",
+            "categoria": "caneca",
+            "id_categoria": 2,
+            "preco": 15.00,
+            "img": "./bdimg/caneca3.jfif"
+        },
+        {
+            "id": 10,
+            "nome": "Caneca Estampa Banda",
+            "categoria": "caneca",
+            "id_categoria": 2,
+            "preco": 12.50,
+            "img": "./bdimg/caneca4.jfif"
+        },
+        {
+            "id": 11,
+            "nome": "Caneca Estampa Profissao",
+            "categoria": "caneca",
+            "id_categoria": 2,
+            "preco": 20.00,
+            "img": "./bdimg/caneca5.jfif"
+        },
+        {
+            "id": 12,
+            "nome": "Caneca Estampa Fisica",
+            "categoria": "caneca",
+            "id_categoria": 2,
+            "preco": 15.50,
+            "img": "./bdimg/caneca6.jfif"
+        }
     ],
-    "carrinho":[],
-    "categoria":[{"id":1,"nome":"caneca"}, {"id":2,"nome":"camisa"}]
+    "carrinho": [],
+    "categoria": [
+        {
+            "id": 1,
+            "nome": "caneca"
+        },
+        {
+            "id": 2,
+            "nome": "camisa"
+        }
+    ]
 }

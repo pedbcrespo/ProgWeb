@@ -7,8 +7,8 @@ export default function ListaProvider({ children }) {
     const [lista, setLista] = useState([])
 
     useEffect(()=>{
-        console.log(lista)
-    },[])
+        
+    },[lista])
 
     return (
         <listaContext.Provider value={{ lista, setLista, }}>

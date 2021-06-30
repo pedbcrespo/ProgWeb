@@ -17,10 +17,12 @@ export default function Inicial() {
         setLista([...lista, dado]);
         console.log(lista)
     }
-
+    /**Colocar essa funçao em uma pasta separada pois sera usada em componentes diferentes */
     function rmv(indice){
-        lista.splice(indice, 1);
-        setLista(lista);
+        let nova_lista = lista;
+        nova_lista.splice(indice, 1);
+        console.log(nova_lista);
+        setLista(nova_lista);
     }
     return (
         <section className="campInicial">
