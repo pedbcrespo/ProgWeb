@@ -9,7 +9,7 @@ export default function ListaProvider({ children }) {
 
     useEffect(()=>{
         getCarrinho(setLista)
-    }, [lista])
+    }, [])
 
     return (
         <listaContext.Provider value={{ lista, setLista, }}>
@@ -17,8 +17,6 @@ export default function ListaProvider({ children }) {
         </listaContext.Provider>
     );
 }
-
-
 
 
 function useListaCarrinho() {

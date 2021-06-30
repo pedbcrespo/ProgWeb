@@ -59,11 +59,19 @@ function postCarrinho(dado) {
         .then(res => console.log(res));
 }
 
+function deleteCarrinho(id){
+    fetch(`https://localhost:3001/carrinho/${id}`, {
+        method: 'delete'
+    }).then(res => res.json())
+        .then(res => console.log(res));
+}
+
 export {
     getProdutos,
     getProduto,
     getCarrinho,
     getCategorias,
     getProdutoCategoria,
-    postCarrinho
+    postCarrinho,
+    deleteCarrinho,
 }

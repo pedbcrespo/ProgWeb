@@ -13,17 +13,21 @@ function validarSenha(senha){
 }
 
 function validarCep(cep){
-    if(cep.length  != 8){
+    if(cep.length  !== 8){
         return {valido:false, texto:"CEP invalido"}
     }
     return {valido:true, texto:""}
 }
 
 function validarCartao(cartao){
-    if(cartao.length != 16){
+    if(cartao.length !== 16){
         return {valido:false, texto:"Cartão invalido"}
     }
     return {valido: true, texto:""}
+}
+
+function acessoAdm(validacao, pagina1, pagina2){
+    return validacao ? pagina1 : pagina2;
 }
 
 
@@ -32,4 +36,5 @@ export {
     validarSenha,
     validarCep,
     validarCartao,
+    acessoAdm
 }

@@ -23,6 +23,7 @@ export default function FormProduto({ enviar, id }) {
                 id="outlined-basic"
                 label="Nome"
                 variant="outlined"
+                value={nome}
                 onChange={(event) => {
                     setNome(event.target.value);
                 }} />
@@ -31,12 +32,14 @@ export default function FormProduto({ enviar, id }) {
                 id="outlined-basic"
                 label="Preço"
                 variant="outlined"
+                value={preco}
                 onChange={(event) => {
                     setPreco(event.target.value);
                 }} />
+                {/* consertar, a categoria nao é selecionada */}
             <FormControl variant="outlined" >
                 <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
-                <Select
+                <Select 
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                 >

@@ -13,6 +13,9 @@ import AddProduto from './paginas/AddProduto';
 import CategoriaEsp from './paginas/CategoriaEsp';
 import ListaProvider from './context/carrinho';
 import ListaCatProvider from './context/categoria';
+import { acessoAdm } from './models/validacao';
+import { useAdmin } from './context/admin';
+import AdminProvider from './context/admin';
 
 /**
  * Problema persistente:
@@ -23,14 +26,11 @@ import ListaCatProvider from './context/categoria';
 
 function App() {
 
-  const [acesso, setAcesso] = useState(false);
-
-  useEffect(() => {
-    console.log(acesso);
-  }, [])
+  const {acesso, setAcesso} = useAdmin();
 
   function QualCabecalho() {
-    return acesso ? <CabecalhoAdm setAcesso={setAcesso} /> : <Cabecalho />
+    // return acesso ? <CabecalhoAdm setAcesso={setAcesso} /> : <Cabecalho />
+    return acessoAdm(acesso, <CabecalhoAdm/>, <Cabecalho/>)
   }
 
   function acessoInicialAdm() {
@@ -46,34 +46,38 @@ function App() {
   return (
     <>
       <Router>
-        <ListaCatProvider>
-          {QualCabecalho()}
-          <ListaProvider>
-            <Switch>
-              <Route exact path='/'>
-                <Inicial />
-              </Route>
-              <Route path='/carrinho'>
-                <Carrinho />
-              </Route>
-              <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
-              </Route>
-              <Route path="/adm_inicial">
-                {acessoInicialAdm()}
-              </Route>
-              <Route path="/login">
-                <AdmLogin valida={efetuado} />
-              </Route>
-              <Route path="/add_categoria">
-                <AddCategoria />
-              </Route>
-              <Route path="/add_produto">
-                <AddProduto />
-              </Route>
-            </Switch>
-            <Rodape />
-          </ListaProvider>
-        </ListaCatProvider>
+        <AdminProvider>
+
+          <ListaCatProvider>
+            {QualCabecalho()}
+            <ListaProvider>
+              <Switch>
+                <Route exact path='/'>
+                  <Inicial />
+                </Route>
+                <Route path='/carrinho'>
+                  <Carrinho />
+                </Route>
+                <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
+                </Route>
+                <Route path="/adm_inicial">
+                  {acessoInicialAdm()}
+                </Route>
+                <Route path="/login">
+                  <AdmLogin valida={efetuado} />
+                </Route>
+                <Route path="/add_categoria">
+                  <AddCategoria />
+                </Route>
+                <Route path="/add_produto">
+                  <AddProduto />
+                </Route>
+              </Switch>
+              <Rodape />
+            </ListaProvider>
+          </ListaCatProvider>
+
+        </AdminProvider>
       </Router>
     </>
   );
