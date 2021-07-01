@@ -31,7 +31,7 @@ export default function Login(){
                     setUsuario(event.target.value);
                 }}
                 fullWidth
-                error={valUsuario['valido']}
+                error={!valUsuario['valido']}
                 onBlur={(event)=>{
                     setValUsuario(preValidaUsuario(usuario))
                 }} 
@@ -46,7 +46,7 @@ export default function Login(){
                     setSenha(event.target.value);
                 }} 
                 fullWidth
-                error={valSenha['valido']}
+                error={!valSenha['valido']}
                 onBlur={(event)=>{
                     setValSenha(preValidaSenha(senha))
                 }}/>

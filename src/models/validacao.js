@@ -31,14 +31,14 @@ function acessoAdm(validacao, pagina1, pagina2){
 }
 
 function preValidaUsuario(usuario){
-    if(usuario.length <= 4){
+    if(usuario.length <= 4 && usuario.length > 0){
         return {valido:false, texto:"Minimo de 4 caracteres"}
     }
     return {valido:true, texto:""}
 }
 
 function preValidaSenha(senha){
-    if(senha.length <= 4){
+    if(senha.length <= 4 && senha.length >0){
         return {valido:false, texto:"Senha invalida"}
     }
     return {valido: true, texto:""}
