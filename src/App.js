@@ -40,7 +40,8 @@ function App() {
                 <Route path="/login">
                   <AdmLogin />
                 </Route>
-                <Adm />
+                {/* <Route path="/adm/:caminho" children={<Adm/>}></Route> */}
+                <Adm/>
               </Switch>
               <Rodape />
             </ListaProvider>

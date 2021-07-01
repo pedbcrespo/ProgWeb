@@ -1,31 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import CabecalhoAdm from '../componentes/CabecalhoAdm';
+import { Switch, Route, Redirect } from "react-router-dom";
 import AdmInicial from '../paginas/AdmInicial';
 import AddCategoria from '../paginas/AddCategoria';
 import AddProduto from '../paginas/AddProduto';
-// import ListaCatProvider from '../context/categoria';
 import { useAdmin } from '../context/admin';
 
 export default function Adm() {
     const { acesso } = useAdmin();
+    console.log("componente adm:", acesso)
+    
+    return acesso ? (
+        <Switch>
+            <Route exact path='/adm/inicial' children={<AdmInicial />} />
+            <Route exact path="/adm/add_categoria" children={<AddCategoria />} />
+            <Route exact path="/adm/add_produto" children={<AddProduto />}/>
+        </Switch>
 
-    return acesso? (
-        <>
-            <Router>
-                <Switch>
-                    <Route path='/inicial'>
-                        <AdmInicial />
-                    </Route>
-                    <Route path="/add_categoria">
-                        <AddCategoria />
-                    </Route>
-                    <Route path="/add_produto">
-                        <AddProduto />
-                    </Route>
-                </Switch>
-            </Router>
-
-        </>
-    ) : <Redirect to="/login"/>
+    ) : <Redirect to="/login" />
 }

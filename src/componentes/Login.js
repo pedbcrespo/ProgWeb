@@ -19,7 +19,6 @@ export default function Login(){
         setValSenha(validarSenha(senha));
         let efetuado = usuario === "admin" && senha === "admin"
         setAcesso(efetuado);
-        console.log(acesso)
     };
 
     return (

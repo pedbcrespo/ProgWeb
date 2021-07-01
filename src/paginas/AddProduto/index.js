@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useAdmin } from '../../context/admin';
 import FormProduto from '../../componentes/FormProduto';
 export default function AddProduto(){
     
     /**Jogar os dados direto no banco de dados*/
 
     const [listaProdutos, setListaProdutos] = useState([]);
+    const { acesso } = useAdmin();
 
     function id_disponivel(){
         let val = 1;
@@ -20,8 +23,8 @@ export default function AddProduto(){
     function enviar(dados){
         setListaProdutos([...listaProdutos, dados]);
     }
-
-    return (
+    console.log("Form de produto")
+    return(
         <form>
             <FormProduto enviar={enviar} id={id_disponivel()}/>
         </form>

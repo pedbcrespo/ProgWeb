@@ -1,10 +1,9 @@
 import React from 'react';
 // import { TextField, Button} from '@material-ui/core';
 // import { validarUsuario, validarSenha } from '../../models/validacao';
-// import { Redirect } from 'react-router';
-import AdmInicial from '../AdmInicial';
 import Login from '../../componentes/Login';
 import { useAdmin } from '../../context/admin';
+import { Redirect } from 'react-router-dom';
 
 export default function AdmLogin() {
     /**Criar context para dados do Adm;
@@ -14,5 +13,5 @@ export default function AdmLogin() {
      */
     const { acesso } = useAdmin();
     
-    return acesso? <AdmInicial/> : <Login/>;
+    return acesso? <Redirect to="/adm/inicial"/> : <Login/>;
 }

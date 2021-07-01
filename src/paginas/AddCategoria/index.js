@@ -1,11 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
+import { useAdmin } from '../../context/admin';
+import { Redirect } from 'react-router-dom';
 
 export default function AddCategoria({enviar}){
     
     /**Jogar a atualizacao direto no banco de dados */
-
+    const {acesso} = useAdmin();
     const [nomeCat, setNome] = useState('');
     
     function preEnviar(event){
@@ -13,7 +15,7 @@ export default function AddCategoria({enviar}){
         enviar(nomeCat);
     }
 
-    return (
+    return acesso? (
         <form onSubmit={preEnviar}>
             <TextField 
             id="outlined-basic" 
@@ -27,5 +29,5 @@ export default function AddCategoria({enviar}){
                 Confirmar
             </Button>
         </form>
-    );
+    ) : <Redirect to="/login"/>;
 }
