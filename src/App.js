@@ -1,21 +1,14 @@
 import './App.css';
-// import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cabecalho from './componentes/Cabecalho';
-import CabecalhoAdm from './componentes/CabecalhoAdm';
 import Rodape from './componentes/Rodape';
 import Adm from './componentes/Adm';
 import Inicial from './paginas/Inicial';
 import Carrinho from './paginas/Carrinho';
-import AdmInicial from './paginas/AdmInicial';
 import AdmLogin from './paginas/AdmLogin';
-// import AddCategoria from './paginas/AddCategoria';
-// import AddProduto from './paginas/AddProduto';
 import CategoriaEsp from './paginas/CategoriaEsp';
 import ListaProvider from './context/carrinho';
 import ListaCatProvider from './context/categoria';
-import { acessoAdm } from './models/validacao';
-import { useAdmin } from './context/admin';
 import AdminProvider from './context/admin';
 
 /**

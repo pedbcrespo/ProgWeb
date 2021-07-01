@@ -30,8 +30,22 @@ function acessoAdm(validacao, pagina1, pagina2){
     return validacao ? pagina1 : pagina2;
 }
 
+function preValidaUsuario(usuario){
+    if(usuario.length <= 4){
+        return {valido:false, texto:"Minimo de 4 caracteres"}
+    }
+    return {valido:true, texto:""}
+}
 
+function preValidaSenha(senha){
+    if(senha.length <= 4){
+        return {valido:false, texto:"Senha invalida"}
+    }
+    return {valido: true, texto:""}
+}
 export {
+    preValidaUsuario,
+    preValidaSenha,
     validarUsuario,
     validarSenha,
     validarCep,
