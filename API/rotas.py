@@ -47,20 +47,24 @@ class Cliente(Resource, Conexao):
         pass
 
     def delete(self, id_cliente):
-        pass
+        complemento = f"id={id_cliente}"
+        return self.bd.deleteDado('cliente', complemento)
 
 class Carrinho(Resource, Conexao):
-    def get(self, id_carrinho):
-        dados = "carrinho.id, cliente.nome as cliente, carrinho.idCliente ,produto.nome as produto, carrinho.idProduto, produto.preco"
-        complemento = f"inner join cliente inner join produto where cliente.id = carrinho.idCliente and produto.id = carrinho.idProduto and carrinho.id = {id_carrinho}"
+    def get(self, id_cliente):
+        dados = "cliente.nome as cliente, carrinho.idCliente ,produto.nome as produto, carrinho.idProduto, produto.preco"
+        complemento = f"inner join cliente inner join produto where cliente.id = carrinho.idCliente and produto.id = carrinho.idProduto and carrinho.idCliente = {id_cliente}"
         lista_resposta = self.bd.getTabela("carrinho", dados, complemento)
         return lista_resposta[0]
 
-    def put(self, id_carrinho):
-        pass
+    def put(self, id_cliente):
+        complemento = f"finalizado = true where carrinho.idCliente = {id_cliente}"
+        return self.bd.putDado('carrinho', complemento)
 
-    def delete(self, id_carrinho):
-        comando = "DELETE FROM carrinho WHERE id={}".format(id_carrinho)
+class ProdtudoCarrinho(Resource, Conexao):
+    def delete(self, id_cliente, id_produto):
+        complemento = f"carrinho.idCliente = {id_cliente} and carrinho.idProduto = {id_produto}"
+        return self.bd.deleteDado('carrinho', complemento)
 
 # Classes com busca de todos os valores registrados 
 class Produtos(Resource, Conexao):

@@ -53,7 +53,7 @@ class BancoDados():
 
             return list(map(lambda x: self.__dic(colunas, x), lista_tupla))
         except:
-            return {"status": "Erro ao executar o comando"}
+            return {"status": 0}
 
     def postDado(self, tabela, dado):
         try:
@@ -61,33 +61,34 @@ class BancoDados():
             self.__cursor.execute(comando)
             self.__conexao.commit()
 
-            return {"status": "Operacao realizada com sucesso", "inserido": dado} 
+            return {"status": 1, "inserido": dado} 
         except:
-            return {"status": "Erro ao inserir o novo dado"}
+            return {"status": 0}
 
-    def deleteDado(self, tabela, id):
+    def deleteDado(self, tabela, complemento=""):
         try:
-            comando = "DELETE FROM {} WHERE id = {}".format(tabela, id)
+            comando = "DELETE FROM {} WHERE {}".format(tabela, complemento)
             self.__cursor.execute(comando)
             self.__conexao.commit()
 
-            return {"status": "Operacao realizada com sucesso", "removido": id} 
+            return {"status": 1, "removido": id} 
         except:
-            return {"status": "Erro ao remover dado"}
+            return {"status": 0}
 
-    def putDado(self, tabela, atributo, id, alteracao):
+    def putDado(self, tabela, complemento):
         try:
-            comando = f"UPDATE {tabela} SET {atributo} = {alteracao} WHERE id={id}"
+            comando = f"UPDATE {tabela} SET {complemento}"
             self.__cursor.execute(comando)
             self.__conexao.commit()
-            return {"status": "Dado atualizado com sucesso"}
+            return {"status": 1}
         except:
-            return {"status": "Erro alterar dado"}
+            return {"status": 0}
 
     
 
 if __name__ == '__main__':
     bd = BancoDados()
-    lista = bd.getTabela("produto", "*")
+    lista = bd.getTabela("carrinho", "*")
     for i in lista:
         print(i)
+

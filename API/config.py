@@ -2,8 +2,7 @@ import json
 from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS
-from rotas import Inicial, Produto, Produtos, Categoria, Categorias, Cliente, Clientes, Carrinho, Carrinhos
-
+from rotas import *
 # Arquivo onde é configurado as rotas declaradaos
 
 app = Flask(__name__)
@@ -19,3 +18,4 @@ api.add_resource(Produtos, "/produtos")
 api.add_resource(Categorias, "/categorias")
 api.add_resource(Clientes, "/clientes")
 api.add_resource(Carrinhos, "/carrinhos")
+api.add_resource(ProdtudoCarrinho, "/carrinho_del/<int:id_cliente>/<int:id_produto>")
