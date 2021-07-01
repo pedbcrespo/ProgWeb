@@ -2,11 +2,12 @@ import React from 'react';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
 import Formulario from '../../componentes/Formulario';
 import { useListaCarrinho } from '../../context/carrinho';
+import { rmv } from '../../models/prodCar';
 
 export default function Carrinho() {
     /**Ajeitar o CSS*/
     
-    const { lista } = useListaCarrinho() 
+    const { lista, setLista } = useListaCarrinho() 
 
     function precoTotal() {
         let total = 0;
@@ -32,6 +33,7 @@ export default function Carrinho() {
                                     nome={produto.nome}
                                     categoria={produto.categoria}
                                     preco={produto.preco}
+                                    funcao={rmv(setLista, lista)}
                                 />
                             </div>
                         );

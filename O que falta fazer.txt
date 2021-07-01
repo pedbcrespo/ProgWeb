@@ -14,12 +14,13 @@
 *Front:
     -Enviar os formularios
     -Remover itens do carrinho (Mais ou menos funcionando - Pesquisar mais sobre o useEffect)
-        -Botao x só funciona na pagina inicial
+        -Botao x só funciona na pagina inicial (Resolvido)
+        //Acredito que esse problema se resolva no momento que usar a Api de verdade//
     -Mostrar a imagem dos produtos
     -Melhorar o design da pagina
     -Colocar o painel do carrinho do lado do painel dos produtos
     -Resolver cadastro de produtos com Select de categorias
     -Resolver problema de login:
         Mesmo logando na primeira vez, se vai para a pagina inicial, quando volta precisa logar 
-        denovo
+        denovo (Resolvido)
     

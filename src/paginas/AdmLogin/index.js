@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import { TextField, Button} from '@material-ui/core';
 // import { validarUsuario, validarSenha } from '../../models/validacao';
 // import { Redirect } from 'react-router';

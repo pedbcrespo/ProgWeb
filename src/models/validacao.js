@@ -38,7 +38,7 @@ function preValidaUsuario(usuario){
 }
 
 function preValidaSenha(senha){
-    if(senha.length <= 4 && senha.length >0){
+    if(senha.length <= 4 && senha.length > 0){
         return {valido:false, texto:"Senha invalida"}
     }
     return {valido: true, texto:""}

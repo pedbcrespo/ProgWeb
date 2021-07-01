@@ -17,12 +17,13 @@ export default function Login(){
         event.preventDefault();
         setValUsuario(validarUsuario(usuario));
         setValSenha(validarSenha(senha));
-        setAcesso(valUsuario['valido'] && valSenha['valido']);
+        let efetuado = usuario === "admin" && senha === "admin"
+        setAcesso(efetuado);
         console.log(acesso)
     };
 
     return (
-        <form>
+        <form onSubmit={verificar}>
             <TextField
                 id="campUsuario"
                 label="Usuario"
@@ -31,6 +32,8 @@ export default function Login(){
                     setUsuario(event.target.value);
                 }}
                 fullWidth
+                margin="normal"
+                helperText={valUsuario['texto']}
                 error={!valUsuario['valido']}
                 onBlur={(event)=>{
                     setValUsuario(preValidaUsuario(usuario))
@@ -46,11 +49,13 @@ export default function Login(){
                     setSenha(event.target.value);
                 }} 
                 fullWidth
+                margin="normal"
+                helperText={valSenha['texto']}
                 error={!valSenha['valido']}
                 onBlur={(event)=>{
                     setValSenha(preValidaSenha(senha))
                 }}/>
-            <Button variant="contained" color="primary" type="submit" onClick={verificar}>
+            <Button variant="contained" color="primary" type="submit">
                 Entrar
             </Button>
         </form>
