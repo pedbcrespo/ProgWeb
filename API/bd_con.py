@@ -2,6 +2,8 @@ import pymysql
 import datetime
 import decimal
 
+# arquivo de comandos de requisição para o banco de dados
+
 class BancoDados():
     def __init__(self, hst="localhost", usr="root", pss="", dtb="progweb"):
         try:

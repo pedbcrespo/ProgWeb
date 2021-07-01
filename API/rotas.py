@@ -1,12 +1,9 @@
 import json
-from flask import Flask, request
-from flask_restful import Resource, Api
-from flask_cors import CORS
+from flask import request
+from flask_restful import Resource
 from bd_con import BancoDados
 
-app = Flask(__name__)
-api = Api(app)
-CORS(app)
+# arquivo de definição de rotas e implementação de metodos nas mesmas
 
 class Conexao:
     bd = BancoDados()
@@ -63,7 +60,7 @@ class Carrinho(Resource, Conexao):
         pass
 
     def delete(self, id_carrinho):
-        pass
+        comando = "DELETE FROM carrinho WHERE id={}".format(id_carrinho)
 
 # Classes com busca de todos os valores registrados 
 class Produtos(Resource, Conexao):
@@ -98,19 +95,3 @@ class Carrinhos(Resource, Conexao):
     def post(self):
         dado_request = json.loads(request.data)
         return self.bd.postDado("carrinho", dado_request)
-        
-api.add_resource(Inicial, "/")
-api.add_resource(Produto, "/produto/<int:id_produto>")
-api.add_resource(Categoria, "/categoria/<int:id_categoria>")
-api.add_resource(Cliente, "/cliente/<int:id_cliente>")
-api.add_resource(Carrinho, "/carrinho/<int:id_carrinho>")
-api.add_resource(Produtos, "/produtos")
-api.add_resource(Categorias, "/categorias")
-api.add_resource(Clientes, "/clientes")
-api.add_resource(Carrinhos, "/carrinhos")
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
-    
