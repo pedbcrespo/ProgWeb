@@ -1,15 +1,16 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Cabecalho from './componentes/Cabecalho';
 import CabecalhoAdm from './componentes/CabecalhoAdm';
 import Rodape from './componentes/Rodape';
+import Adm from './componentes/Adm';
 import Inicial from './paginas/Inicial';
 import Carrinho from './paginas/Carrinho';
 import AdmInicial from './paginas/AdmInicial';
 import AdmLogin from './paginas/AdmLogin';
-import AddCategoria from './paginas/AddCategoria';
-import AddProduto from './paginas/AddProduto';
+// import AddCategoria from './paginas/AddCategoria';
+// import AddProduto from './paginas/AddProduto';
 import CategoriaEsp from './paginas/CategoriaEsp';
 import ListaProvider from './context/carrinho';
 import ListaCatProvider from './context/categoria';
@@ -26,30 +27,13 @@ import AdminProvider from './context/admin';
 
 function App() {
 
-  const {acesso, setAcesso} = useAdmin();
-
-  function QualCabecalho() {
-    // return acesso ? <CabecalhoAdm setAcesso={setAcesso} /> : <Cabecalho />
-    return acessoAdm(acesso, <CabecalhoAdm/>, <Cabecalho/>)
-  }
-
-  function acessoInicialAdm() {
-    return acesso ? <AdmInicial /> : <Redirect to="/login" />
-  }
-
-  function efetuado(val) {
-    setAcesso(val)
-    console.log(val)
-    return <Redirect to="/adm_inicial" />
-  }
-
   return (
     <>
       <Router>
         <AdminProvider>
 
           <ListaCatProvider>
-            {QualCabecalho()}
+            <Cabecalho/>
             <ListaProvider>
               <Switch>
                 <Route exact path='/'>
@@ -60,18 +44,10 @@ function App() {
                 </Route>
                 <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
                 </Route>
-                <Route path="/adm_inicial">
-                  {acessoInicialAdm()}
-                </Route>
                 <Route path="/login">
-                  <AdmLogin valida={efetuado} />
+                  <AdmLogin />
                 </Route>
-                <Route path="/add_categoria">
-                  <AddCategoria />
-                </Route>
-                <Route path="/add_produto">
-                  <AddProduto />
-                </Route>
+                <Adm />
               </Switch>
               <Rodape />
             </ListaProvider>

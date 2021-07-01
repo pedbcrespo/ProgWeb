@@ -8,7 +8,7 @@ export default function AdminProvider({ children }) {
 
     useEffect(()=>{
         console.log(acesso)
-    }, []);
+    }, [acesso]);
 
     return (
         <AdminContext.Provider value={{ acesso, setAcesso, }}>

@@ -3,15 +3,18 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useListaCateg } from '../context/categoria';
 import { getCategorias } from '../server/api_sim';
+import CabecalhoAdm from './CabecalhoAdm';
+import { useAdmin } from '../context/admin';
 
 export default function Cabecalho() {
     const {listaCat, setListaCat} = useListaCateg();
+    const {acesso} = useAdmin();
 
     useEffect(()=>{
         getCategorias(setListaCat);
     },[setListaCat])
 
-    return (
+    return acesso? <CabecalhoAdm/> : (
         <>
             <header className="Cabecalho">
                 <h1>ProgWeb Commerce</h1>
