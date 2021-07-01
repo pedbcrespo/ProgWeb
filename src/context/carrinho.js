@@ -8,7 +8,7 @@ export default function ListaProvider({ children }) {
     const [lista, setLista] = useState([])
 
     useEffect(()=>{
-        getCarrinho(setLista)
+       // getCarrinho(setLista)
     }, [lista])
 
     return (
@@ -17,7 +17,6 @@ export default function ListaProvider({ children }) {
         </listaContext.Provider>
     );
 }
-
 
 function useListaCarrinho() {
     const context = useContext(listaContext);

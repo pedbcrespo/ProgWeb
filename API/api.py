@@ -11,6 +11,10 @@ CORS(app)
 class Conexao:
     bd = BancoDados()
 
+class Inicial(Resource):
+    def get(self):
+        return {"status": "Ok"}
+
 # Classes com busca de valor especifico
 class Produto(Resource, Conexao):
     def get(self, id_produto):
@@ -94,7 +98,8 @@ class Carrinhos(Resource, Conexao):
     def post(self):
         dado_request = json.loads(request.data)
         return self.bd.postDado("carrinho", dado_request)
-
+        
+api.add_resource(Inicial, "/")
 api.add_resource(Produto, "/produto/<int:id_produto>")
 api.add_resource(Categoria, "/categoria/<int:id_categoria>")
 api.add_resource(Cliente, "/cliente/<int:id_cliente>")
@@ -102,7 +107,8 @@ api.add_resource(Carrinho, "/carrinho/<int:id_carrinho>")
 api.add_resource(Produtos, "/produtos")
 api.add_resource(Categorias, "/categorias")
 api.add_resource(Clientes, "/clientes")
-api.add_resource(Produtos, "/produtos")
+api.add_resource(Carrinhos, "/carrinhos")
+
 
 
 if __name__ == '__main__':

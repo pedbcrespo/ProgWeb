@@ -1,5 +1,6 @@
 import pymysql
 import datetime
+import decimal
 
 class BancoDados():
     def __init__(self, hst="localhost", usr="root", pss="", dtb="progweb"):
@@ -17,13 +18,13 @@ class BancoDados():
         
     def __dic(self, colunas, dado):
         dicionario = {}
-
         for coluna in colunas:
             val = dado[colunas.index(coluna)]
             if type(val) == datetime.time:
                 val = str(val).split('-')
                 val.reverse()
-
+            if type(val) == decimal.Decimal:
+                val = float(val)
             dicionario[coluna] = val
         return dicionario    
 
@@ -72,13 +73,19 @@ class BancoDados():
         except:
             return {"status": "Erro ao remover dado"}
 
-    def putDado(self, tabela, id, alteracao):
+    def putDado(self, tabela, atributo, id, alteracao):
         try:
-            comando = ""
+            comando = f"UPDATE {tabela} SET {atributo} = {alteracao} WHERE id={id}"
+            self.__cursor.execute(comando)
+            self.__conexao.commit()
+            return {"status": "Dado atualizado com sucesso"}
         except:
             return {"status": "Erro alterar dado"}
 
+    
+
 if __name__ == '__main__':
     bd = BancoDados()
-    bd.getTabela("produto", "*")
-    
+    lista = bd.getTabela("produto", "*")
+    for i in lista:
+        print(i)
