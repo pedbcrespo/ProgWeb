@@ -4,10 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
-/'API Flask'/venv
-/'API php'
-/'API Express'
-/API/__pycache__
+/API Flask/venv
+/API php
+/API Express
+/API Flask/__pycache__
 # testing
 /coverage
 
