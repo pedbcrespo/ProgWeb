@@ -88,7 +88,10 @@ class BancoDados():
 
 if __name__ == '__main__':
     bd = BancoDados()
-    lista = bd.getTabela("carrinho", "*")
+    dados = "produto.id, produto.nome, categoria.nome, produto.categoriaProduto, produto.preco, produto.caminhoImagem"
+    complemento = "inner join categoria where produto.categoriaProduto = categoria.id"
+    colunas = ['id', 'nome', "categoria", "id_categoria", "preco", "caminhoImagem"]
+    lista = bd.getTabela("produto", dados, complemento, colunas)
     for i in lista:
         print(i)
 

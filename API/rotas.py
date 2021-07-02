@@ -69,7 +69,10 @@ class ProdtudoCarrinho(Resource, Conexao):
 # Classes com busca de todos os valores registrados 
 class Produtos(Resource, Conexao):
     def get(self):
-        return self.bd.getTabela("produto", "*")
+        dados = "produto.id, produto.nome, categoria.nome, produto.categoriaProduto, produto.preco, produto.caminhoImagem"
+        complemento = "inner join categoria where produto.categoriaProduto = categoria.id"
+        colunas = ['id', 'nome', "categoria", "id_categoria", "preco", "caminhoImagem"]
+        return self.bd.getTabela("produto", dados, complemento, colunas)
 
     def post(self):
         dado_request = json.loads(request.data)

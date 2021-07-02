@@ -8,7 +8,7 @@ import { useProdutos } from '../../context/produto';
 
 export default function CategoriaEsp(){
 
-    const { listaProdutos, setListaProduto } = useProdutos()
+    const { listaProdutos } = useProdutos()
     const { lista, setLista } = useListaCarrinho();
 
     const { categoria } = useParams();
