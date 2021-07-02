@@ -7,7 +7,6 @@ import { useAdmin } from '../context/admin';
 
 export default function Adm() {
     const { acesso } = useAdmin();
-    console.log("componente adm:", acesso)
     
     return acesso ? (
         <Switch>

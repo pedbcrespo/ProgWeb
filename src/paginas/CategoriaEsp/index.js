@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Produto from '../../componentes/Produto';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
-import { getProdutos } from '../../server/api_sim';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useParams } from 'react-router-dom';
+import { useProdutos } from '../../context/produto';
+
 
 export default function CategoriaEsp(){
-    const [listaProdutos, setListaProduto] = useState([])
+
+    const { listaProdutos, setListaProduto } = useProdutos()
     const { lista, setLista } = useListaCarrinho();
 
-    const {categoria} = useParams();
-
-    useEffect(() => {
-        getProdutos(setListaProduto);
-    }, []);
+    const { categoria } = useParams();
 
     function listaPorCategoria(){
         let lista_filtrada = listaProdutos.filter((prod)=>{

@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Produto from '../../componentes/Produto';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
-import { getProdutos } from '../../server/api_sim';
 import { useListaCarrinho } from '../../context/carrinho';
 import { rmv, add } from '../../models/prodCar';
 
+import { useProdutos } from '../../context/produto';
+
 export default function Inicial() {
 
-    const [listaProdutos, setListaProdutos] = useState([])
+    const { listaProdutos } = useProdutos()
     const { lista, setLista } = useListaCarrinho();
-
-    useEffect(() => {
-        getProdutos(setListaProdutos)
-    }, []);
 
     return (
         <section className="campInicial">
@@ -24,6 +21,7 @@ export default function Inicial() {
                                 id={prod.id}
                                 nome={prod.nome}
                                 categoria={prod.categoria}
+                                img={prod.caminhoImagem}
                                 preco={prod.preco}
                                 funcao={add(setLista, lista)} 
                                 />

@@ -15,21 +15,21 @@ export default function Formulario({ enviar }) {
     return (
         <form noValidate autoComplete="off" onSubmit={prepararEnviar}>
             <TextField
-                id="standard-basic"
+                id="Cartao"
                 label="Cartão"
                 onChange={(event) => {
                     setNumCartao(event.target.value);
                 }} 
                 fullWidth/>
             <TextField
-                id="standard-basic"
+                id="Endereco"
                 label="Endereço"
                 onChange={(event) => {
                     setEndereco(event.target.value)
                 }} 
                 fullWidth/>
             <TextField
-                id="standard-basic"
+                id="Cep"
                 label="Cep"
                 onChange={(event) => {
                     setCep(event.target.value)

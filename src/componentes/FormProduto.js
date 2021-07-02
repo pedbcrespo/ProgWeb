@@ -20,7 +20,7 @@ export default function FormProduto({ enviar, id }) {
     return (
         <form onSubmit={prepararEnviar}>
             <TextField
-                id="outlined-basic"
+                id="Nome"
                 label="Nome"
                 variant="outlined"
                 value={nome}
@@ -29,7 +29,7 @@ export default function FormProduto({ enviar, id }) {
                 }} />
 
             <TextField
-                id="outlined-basic"
+                id="Preco"
                 label="Preço"
                 variant="outlined"
                 value={preco}
@@ -38,10 +38,10 @@ export default function FormProduto({ enviar, id }) {
                 }} />
                 {/* consertar, a categoria nao é selecionada */}
             <FormControl variant="outlined" >
-                <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+                <InputLabel id="Categoria">Categoria</InputLabel>
                 <Select 
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    labelId="Categoria"
+                    id="Categoria-select"
                 >
                 
                     {listaCat.map((cat)=>{

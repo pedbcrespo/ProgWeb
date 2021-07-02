@@ -9,6 +9,7 @@ import AdmLogin from './paginas/AdmLogin';
 import CategoriaEsp from './paginas/CategoriaEsp';
 import ListaProvider from './context/carrinho';
 import ListaCatProvider from './context/categoria';
+import ProdutoProvider from './context/produto';
 import AdminProvider from './context/admin';
 
 /**
@@ -25,27 +26,31 @@ function App() {
       <Router>
         <AdminProvider>
 
-          <ListaCatProvider>
-            <Cabecalho/>
-            <ListaProvider>
-              <Switch>
-                <Route exact path='/'>
-                  <Inicial />
-                </Route>
-                <Route path='/carrinho'>
-                  <Carrinho />
-                </Route>
-                <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
-                </Route>
-                <Route path="/login">
-                  <AdmLogin />
-                </Route>
-                {/* <Route path="/adm/:caminho" children={<Adm/>}></Route> */}
-                <Adm/>
-              </Switch>
-              <Rodape />
-            </ListaProvider>
-          </ListaCatProvider>
+          <ProdutoProvider>
+
+            <ListaCatProvider>
+              <Cabecalho />
+              <ListaProvider>
+                <Switch>
+                  <Route exact path='/'>
+                    <Inicial />
+                  </Route>
+                  <Route path='/carrinho'>
+                    <Carrinho />
+                  </Route>
+                  <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
+                  </Route>
+                  <Route path="/login">
+                    <AdmLogin />
+                  </Route>
+                  {/* <Route path="/adm/:caminho" children={<Adm/>}></Route> */}
+                  <Adm />
+                </Switch>
+                <Rodape />
+              </ListaProvider>
+            </ListaCatProvider>
+            
+          </ProdutoProvider>
 
         </AdminProvider>
       </Router>

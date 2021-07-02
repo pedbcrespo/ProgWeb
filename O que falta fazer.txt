@@ -10,7 +10,8 @@
     -Implementar o metodo post, put e delete
     -Consumir dados da api de localização
     -Talvez tenha que criar uma api para as imagens dos produtos
-    
+    -Delete e Put nao funcionam
+
 *Front:
     -Enviar os formularios
     -Remover itens do carrinho (Mais ou menos funcionando - Pesquisar mais sobre o useEffect)
@@ -23,4 +24,6 @@
     -Resolver problema de login:
         Mesmo logando na primeira vez, se vai para a pagina inicial, quando volta precisa logar 
         denovo (Resolvido)
+    -Imagem dos produtos nao esta aparecendo
+        -Probema no caminhoImagem
     
