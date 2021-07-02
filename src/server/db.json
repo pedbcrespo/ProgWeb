@@ -6,7 +6,7 @@
             "categoria": "camisa",
             "id_categoria": 1,
             "preco": 20.00,
-            "img": "./bdimg/camisa1.jfif"
+            "img": "../img/camisa1.jpg"
         },
         {
             "id": 2,
@@ -14,7 +14,7 @@
             "categoria": "camisa",
             "id_categoria": 1,
             "preco": 21.00,
-            "img": "./bdimg/camisa2.jfif"
+            "img": "../img/camisa2.jpg"
         },
         {
             "id": 3,
@@ -22,7 +22,7 @@
             "categoria": "camisa",
             "id_categoria": 1,
             "preco": 25.00,
-            "img": "./bdimg/camisa3.jfif"
+            "img": "../img/camisa3.jpg"
         },
         {
             "id": 4,
@@ -30,7 +30,7 @@
             "categoria": "camisa",
             "id_categoria": 1,
             "preco": 17.00,
-            "img": "./bdimg/camisa4.jfif"
+            "img": "../img/camisa4.jpg"
         },
         {
             "id": 5,
@@ -38,7 +38,7 @@
             "categoria": "camisa",
             "id_categoria": 1,
             "preco": 15.00,
-            "img": "./bdimg/camisa5.jfif"
+            "img": "../img/camisa5.jpg"
         },
         {
             "id": 6,
@@ -46,7 +46,7 @@
             "categoria": "camisa",
             "id_categoria": 1,
             "preco": 20.50,
-            "img": "./bdimg/camisa6.jfif"
+            "img": "../img/caneca1.jpg"
         },
         {
             "id": 7,
@@ -54,7 +54,7 @@
             "categoria": "caneca",
             "id_categoria": 2,
             "preco": 17.89,
-            "img": "./bdimg/caneca1.jfif"
+            "img": "../img/caneca2.jpg"
         },
         {
             "id": 8,
@@ -62,7 +62,7 @@
             "categoria": "caneca",
             "id_categoria": 2,
             "preco": 20.00,
-            "img": "./bdimg/caneca2.jfif"
+            "img": "../img/caneca3.jpg"
         },
         {
             "id": 9,
@@ -70,7 +70,7 @@
             "categoria": "caneca",
             "id_categoria": 2,
             "preco": 15.00,
-            "img": "./bdimg/caneca3.jfif"
+            "img": "../img/caneca4.jpg"
         },
         {
             "id": 10,
@@ -78,23 +78,7 @@
             "categoria": "caneca",
             "id_categoria": 2,
             "preco": 12.50,
-            "img": "./bdimg/caneca4.jfif"
-        },
-        {
-            "id": 11,
-            "nome": "Caneca Estampa Profissao",
-            "categoria": "caneca",
-            "id_categoria": 2,
-            "preco": 20.00,
-            "img": "./bdimg/caneca5.jfif"
-        },
-        {
-            "id": 12,
-            "nome": "Caneca Estampa Fisica",
-            "categoria": "caneca",
-            "id_categoria": 2,
-            "preco": 15.50,
-            "img": "./bdimg/caneca6.jfif"
+            "img": "../img/caneca5.jpg"
         }
     ],
     "carrinho": [],

@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Produto from '../../componentes/Produto';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
 import { useListaCarrinho } from '../../context/carrinho';
 import { rmv, add } from '../../models/prodCar';
 
 import { useProdutos } from '../../context/produto';
+import { fetchProdutos } from '../../server/api';
 
 export default function Inicial() {
 
-    const { listaProdutos } = useProdutos()
+    const { listaProdutos, setListaProdutos } = useProdutos()
     const { lista, setLista } = useListaCarrinho();
 
     return (
