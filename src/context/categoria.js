@@ -9,8 +9,8 @@ export default function ListaCatProvider({ children }) {
     const [listaCat, setListaCat] = useState([])
 
     useEffect(()=>{
-        // fetchCategorias(setListaCat)
-        getCategorias(setListaCat)
+        fetchCategorias(setListaCat)
+        // getCategorias(setListaCat)
     }, []);
 
     return (

@@ -9,8 +9,8 @@ export default function ProdutoProvider({ children }) {
     const [listaProdutos, setListaProdutos] = useState([])
 
     useEffect(()=>{
-        // fetchProdutos(setListaProdutos)
-        getProdutos(setListaProdutos)
+        fetchProdutos(setListaProdutos)
+        // getProdutos(setListaProdutos)
     }, []);
 
     return (

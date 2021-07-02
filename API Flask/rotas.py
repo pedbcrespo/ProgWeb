@@ -69,10 +69,7 @@ class ProdtudoCarrinho(Resource, Conexao):
 # Classes com busca de todos os valores registrados 
 class Produtos(Resource, Conexao):
     def get(self):
-        dados = "id, nome, preco"
-        complemento = ""
-        colunas = ['id', 'nome', 'preco']
-        return self.bd.getTabela("produto", dados, complemento, colunas)
+        return self.bd.getTodosProdutos()
 
     def post(self):
         dado_request = json.loads(request.data)
@@ -81,7 +78,7 @@ class Produtos(Resource, Conexao):
 
 class Categorias(Resource, Conexao):
     def get(self):
-        return self.bd.getTabela("categoria", "*")
+        return self.bd.getTodasCategorias()
 
     def post(self):
         dado_request = json.loads(request.data)
@@ -89,7 +86,7 @@ class Categorias(Resource, Conexao):
 
 class Clientes(Resource, Conexao):
     def get(self):
-        return self.bd.getTabela("cliente", "*")
+        return self.bd.getTodosClientes()
 
     def post(self):
         dado_request = json.loads(request.data)
@@ -97,7 +94,7 @@ class Clientes(Resource, Conexao):
 
 class Carrinhos(Resource, Conexao):
     def get(self):
-        return self.bd.getTabela("carrinho", "*")
+        return self.bd.getTodasCompras()
 
     def post(self):
         dado_request = json.loads(request.data)

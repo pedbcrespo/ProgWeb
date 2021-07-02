@@ -56,8 +56,8 @@ class BancoDados():
 
  
     def getTodosProdutos(self):
-        comando = "select produto.id, produto.nome, categoria.nome  as categoria ,produto.preco, produto.caminhoImagem from produto inner join categoria where produto.categoriaProduto = categoria.id"
-        colunas = ['id', 'nome', 'categoria', 'preco', 'caminhoImagem']
+        comando = "select produto.id, produto.nome, categoria.nome  as categoria , produto.categoriaProduto as idCategoria, produto.preco, produto.caminhoImagem from produto inner join categoria where produto.categoriaProduto = categoria.id"
+        colunas = ['id', 'nome', 'categoria', 'idCategoria', 'preco', 'caminhoImagem']
         return self.getTabela(comando, colunas)
     
     def getTodasCategorias(self):
@@ -70,7 +70,7 @@ class BancoDados():
         colunas = ['id', 'nome', 'endereco', 'cep']
         return self.getTabela(comando, colunas)
 
-    def getTodosCarrinhos(self):
+    def getTodasCompras(self):
         select_parte = "select carrinho.idCliente as idCliente, cliente.nome as cliente, cliente.cep as cep, carrinho.idProduto as idProduto, produto.nome as produto, categoria.nome as categoria, produto.preco, carrinho.finalizado"
         from_parte = "from carrinho inner join cliente inner join produto inner join categoria"
         where_parte = "where carrinho.idCliente = cliente.id and carrinho.idProduto = produto.id and categoria.id = produto.categoriaProduto"
@@ -126,4 +126,4 @@ if __name__ == '__main__':
 
     # print(bd.getTodosProdutos())
     # print(bd.getTodosClientes())
-    print(bd.getTodosCarrinhos())
+    print(bd.getTodasCompras())
