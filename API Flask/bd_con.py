@@ -56,7 +56,7 @@ class BancoDados():
 
  
     def getTodosProdutos(self):
-        comando = "select produto.id, produto.nome, categoria.nome  as categoria , produto.categoriaProduto as idCategoria, produto.preco, produto.caminhoImagem from produto inner join categoria where produto.categoriaProduto = categoria.id"
+        comando = "select produto.id, produto.nome, categoria.nome  as categoria , produto.categoriaProduto as idCategoria, produto.preco, HEX(produto.caminhoImagem) as caminhoImagem from produto inner join categoria where produto.categoriaProduto = categoria.id"
         colunas = ['id', 'nome', 'categoria', 'idCategoria', 'preco', 'caminhoImagem']
         return self.getTabela(comando, colunas)
     
@@ -67,11 +67,11 @@ class BancoDados():
 
     def getTodosClientes(self):
         comando = "select * from cliente"
-        colunas = ['id', 'nome', 'endereco', 'cep']
+        colunas = ['id', 'email', 'endereco', 'cep']
         return self.getTabela(comando, colunas)
 
     def getTodasCompras(self):
-        select_parte = "select carrinho.idCliente as idCliente, cliente.nome as cliente, cliente.cep as cep, carrinho.idProduto as idProduto, produto.nome as produto, categoria.nome as categoria, produto.preco, carrinho.finalizado"
+        select_parte = "select carrinho.idCliente as idCliente, cliente.email as cliente, cliente.cep as cep, carrinho.idProduto as idProduto, produto.nome as produto, categoria.nome as categoria, produto.preco, carrinho.finalizado"
         from_parte = "from carrinho inner join cliente inner join produto inner join categoria"
         where_parte = "where carrinho.idCliente = cliente.id and carrinho.idProduto = produto.id and categoria.id = produto.categoriaProduto"
         comando = f"{select_parte} {from_parte} {where_parte}"
@@ -80,15 +80,33 @@ class BancoDados():
         return self.getTabela(comando, colunas)
 
 
-    def postDado(self, tabela, dado):
+    def postDado(self, comando):
         try:
-            comando = "INSERT INTO {} VALUES ({})".format(tabela, self.__formata(dado))
+            # comando = "INSERT INTO {} VALUES ({})".format(tabela, self.__formata(dado))
             self.__cursor.execute(comando)
             self.__conexao.commit()
 
-            return {"status": 1, "inserido": dado} 
+            return {"status": 1, "mensagem": "enviado com sucesso"} 
         except:
             return {"status": 0, "mensagem": "erro ao enviar dado"}
+
+
+    def postProduto(self, dado):
+        comando = "INSERT INTO produto (nome, categoriaProduto, preco, caminhoImagem) VALUES ({})".format(self.__formata(dado))
+        return self.postDado(comando)
+    
+    def postCategoria(self, dado):
+        comando = "INSERT INTO categoria (nome) VALUES ({})".format(self.__formata(dado))
+        return self.postDado(comando)
+
+    def postCliente(self, dado):
+        comando = "INSERT INTO cliente (nome, endereco, cep) VALUES ({})".format(self.__formata(dado))
+        return self.postDado(comando)
+
+    def postCarrinho(self, dado):
+        comando = "INSERT INTO carrinho (idCliente, idProduto) VALUES ({})".format(self.__formata(dado))
+        return self.postDado(comando)
+
 
     def deleteDado(self, tabela, complemento=""):
         try:
@@ -113,17 +131,6 @@ class BancoDados():
 
 if __name__ == '__main__':
     bd = BancoDados()
-    # dados = "produto.id, produto.nome, categoria.nome, produto.categoriaProduto, produto.preco, produto.caminhoImagem"
-    # complemento = "inner join categoria where produto.categoriaProduto = categoria.id"
-    # colunas = ['id', 'nome', "categoria", "id_categoria", "preco", "caminhoImagem"]
-    # lista = bd.getTabela("produto", dados, complemento, colunas)
-
-    # lista = bd.getTabela('produto', 'id, nome, preco')
-    # for i in lista:
-    #     print(i)
-
-    colunas = ['id', 'nome', 'preco']
-
-    # print(bd.getTodosProdutos())
+    print(bd.getTodosProdutos())
     # print(bd.getTodosClientes())
-    print(bd.getTodasCompras())
+    # print(bd.getTodasCompras())

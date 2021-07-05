@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext } from 'react';
 import { useEffect } from 'react';
 import { getCarrinho } from '../server/api_sim';
+import { fetchCarrinhos } from '../server/api';
 
 export const listaContext = createContext([]);
 

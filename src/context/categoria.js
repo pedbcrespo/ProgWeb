@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from 'react';
 import { useEffect } from 'react';
 import { fetchCategorias } from '../server/api';
-import { getCategorias } from '../server/api_sim';
+// import { getCategorias } from '../server/api_sim';
 
 export const ListaCatContext = createContext([]);
 

@@ -12,6 +12,10 @@ async function get_categoria(){
     return await api.get('/categorias').then(res=>res.data)
 }
 
+async function get_carrinho(){
+    return await api.get('/carrinhos').then(res=>res.data)
+}
+
 
 function fetchProdutos(setFunction){
     get_produtos().then(res=>{
@@ -27,5 +31,5 @@ function fetchCategorias(setFunction){
 
 export {
     fetchProdutos,
-    fetchCategorias,
+    fetchCategorias
 }

@@ -5,8 +5,7 @@
     -Usar imagens jpeg
 
 *Api:
-    -Conectar com o banco de dados
-    -Criar um context para todos as requisições
+    -Conectar com o banco de dados (Resolvido)
     -Implementar o metodo post, put e delete
     -Consumir dados da api de localização
     -Talvez tenha que criar uma api para as imagens dos produtos

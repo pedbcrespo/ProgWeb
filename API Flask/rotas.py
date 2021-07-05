@@ -98,4 +98,5 @@ class Carrinhos(Resource, Conexao):
 
     def post(self):
         dado_request = json.loads(request.data)
-        return self.bd.postDado("carrinho", dado_request)
+        # return dado_request
+        return self.bd.postCarrinho(dado_request)

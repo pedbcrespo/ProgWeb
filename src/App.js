@@ -19,7 +19,7 @@ import AdminProvider from './context/admin';
  * Preciso criar um Context para todos os dados, e nele colocar os dados das api's
  */
 
-function App() {
+export default function App() {
 
   return (
     <>
@@ -43,7 +43,6 @@ function App() {
                   <Route path="/login">
                     <AdmLogin />
                   </Route>
-                  {/* <Route path="/adm/:caminho" children={<Adm/>}></Route> */}
                   <Adm />
                 </Switch>
                 <Rodape />
@@ -58,4 +57,3 @@ function App() {
   );
 }
 
-export default App;
