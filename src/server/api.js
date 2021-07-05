@@ -43,7 +43,9 @@ async function putCliente(id_cliente, dado){
 
 
 //===================DELETE=====================//
-
+async function deleteProdutoCarrinho(id_cliente, id_produto){
+    return await api.delete(`/carrinho_del/${id_cliente}/${id_produto}`).then({"mensagem":"removido"})
+}
 
 //===================fetchFunctions==============//
 function fetchProdutos(setFunction){
@@ -67,7 +69,6 @@ function fetchProdutosCarrinho(setFunction, id_cliente){
 }
 
 
-
 export {
     fetchProdutos,
     fetchCategorias,
@@ -77,4 +78,5 @@ export {
     postCarrinho,
     postCliente,
     putCliente,
+    deleteProdutoCarrinho,
 }

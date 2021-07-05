@@ -60,8 +60,7 @@ class Carrinho(Resource, Conexao):
 
 class ProdtudoCarrinho(Resource, Conexao):
     def delete(self, id_cliente, id_produto):
-        complemento = f"carrinho.idCliente = {id_cliente} and carrinho.idProduto = {id_produto}"
-        return self.bd.deleteDado('carrinho', complemento)
+        return self.bd.deleteProdutoCarrinho(id_cliente, id_produto)
 
 # Classes com busca de todos os valores registrados 
 class Produtos(Resource, Conexao):

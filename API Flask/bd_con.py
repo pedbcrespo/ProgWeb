@@ -130,6 +130,10 @@ class BancoDados():
         except:
             return {"status": 0, "mensagem": "erro ao deletar dado"}
 
+    def deleteProdutoCarrinho(self, id_cliente, id_produto):
+        comando = f"delete from carrinho where idCliente={id_cliente} and idProduto={id_produto} limit 1"
+        return self.deleteDado(comando)
+
 # =================PUT=======================
     def putDado(self, comando):
         try:

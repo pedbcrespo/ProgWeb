@@ -8,7 +8,7 @@ import { useProdutos } from '../../context/produto';
 
 export default function Inicial() {
 
-    const { listaProdutos } = useProdutos()
+    const { listaProdutos } = useProdutos();
     const { lista, setLista } = useListaCarrinho();
 
     return (
