@@ -3,11 +3,15 @@ import ProdCarrinho from '../../componentes/ProdCarrinho';
 import Formulario from '../../componentes/Formulario';
 import { useListaCarrinho } from '../../context/carrinho';
 import { rmv } from '../../models/prodCar';
+import { useCliente } from '../../context/cliente';
+import { putCliente } from '../../server/api';
+import { novaSessao } from '../../models/dadosCliente';
 
 export default function Carrinho() {
     /**Ajeitar o CSS*/
     
     const { lista, setLista } = useListaCarrinho() 
+    const { cliente, setCliente } = useCliente();
 
     function precoTotal() {
         let total = 0;
@@ -17,8 +21,13 @@ export default function Carrinho() {
         return total;
     }
 
-    function enviar(dados){
-        console.log(dados);
+    function enviar(num_cartao){
+        console.log(num_cartao)
+        //atualiza os dados do cliente, finaliza a compra e salva no banco de dados
+        putCliente(cliente['id'], cliente)
+        //inicia uma nova sessao
+        setCliente(novaSessao())
+
     }
 
     return (

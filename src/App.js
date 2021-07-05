@@ -11,12 +11,11 @@ import ListaProvider from './context/carrinho';
 import ListaCatProvider from './context/categoria';
 import ProdutoProvider from './context/produto';
 import AdminProvider from './context/admin';
+import ClienteProvider from './context/cliente';
 
 /**
- * Problema persistente:
- *  Jogar os dados do carrinho no db.json
+ * Gerar um id para usuario que entrar no site
  * 
- * Preciso criar um Context para todos os dados, e nele colocar os dados das api's
  */
 
 export default function App() {
@@ -25,31 +24,34 @@ export default function App() {
     <>
       <Router>
         <AdminProvider>
+          <ClienteProvider>
 
-          <ProdutoProvider>
+            <ProdutoProvider>
 
-            <ListaCatProvider>
-              <Cabecalho />
-              <ListaProvider>
-                <Switch>
-                  <Route exact path='/'>
-                    <Inicial />
-                  </Route>
-                  <Route path='/carrinho'>
-                    <Carrinho />
-                  </Route>
-                  <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
-                  </Route>
-                  <Route path="/login">
-                    <AdmLogin />
-                  </Route>
-                  <Adm />
-                </Switch>
-                <Rodape />
-              </ListaProvider>
-            </ListaCatProvider>
-            
-          </ProdutoProvider>
+              <ListaCatProvider>
+                <Cabecalho />
+                <ListaProvider>
+                  <Switch>
+                    <Route exact path='/'>
+                      <Inicial />
+                    </Route>
+                    <Route path='/carrinho'>
+                      <Carrinho />
+                    </Route>
+                    <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
+                    </Route>
+                    <Route path="/login">
+                      <AdmLogin />
+                    </Route>
+                    <Adm />
+                  </Switch>
+                  <Rodape />
+                </ListaProvider>
+              </ListaCatProvider>
+
+            </ProdutoProvider>
+
+          </ClienteProvider>
 
         </AdminProvider>
       </Router>

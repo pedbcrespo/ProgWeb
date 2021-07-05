@@ -52,10 +52,7 @@ class Cliente(Resource, Conexao):
 
 class Carrinho(Resource, Conexao):
     def get(self, id_cliente):
-        dados = "cliente.nome as cliente, carrinho.idCliente ,produto.nome as produto, carrinho.idProduto, produto.preco"
-        complemento = f"inner join cliente inner join produto where cliente.id = carrinho.idCliente and produto.id = carrinho.idProduto and carrinho.idCliente = {id_cliente}"
-        lista_resposta = self.bd.getTabela("carrinho", dados, complemento)
-        return lista_resposta[0]
+        return self.bd.getProdutoCarrinho(id_cliente)
 
     def put(self, id_cliente):
         complemento = f"finalizado = true where carrinho.idCliente = {id_cliente}"
@@ -92,11 +89,19 @@ class Clientes(Resource, Conexao):
         dado_request = json.loads(request.data)
         return self.bd.postDado("cliente", dado_request)
 
-class Carrinhos(Resource, Conexao):
+class IdClientes(Resource, Conexao):
     def get(self):
-        return self.bd.getTodasCompras()
+        return self.bd.getIdCliente()
+
+class Carrinhos(Resource, Conexao):
+    # def get(self):
+        # return self.bd.getProdutoCarrinho()
 
     def post(self):
         dado_request = json.loads(request.data)
         # return dado_request
         return self.bd.postCarrinho(dado_request)
+
+class TodasCompras(Resource, Conexao):
+    def get(self):
+        return self.bd.getTodasCompras()

@@ -26,6 +26,13 @@ function validarCartao(cartao){
     return {valido: true, texto:""}
 }
 
+function validarEmail(email){
+    if(email.indexOf('@') === -1 || email.length < 4){
+        return {valido:false, texto:"email incorreto"}
+    }
+    return {valido:true, texto:""}
+}
+
 function acessoAdm(validacao, pagina1, pagina2){
     return validacao ? pagina1 : pagina2;
 }
@@ -50,5 +57,6 @@ export {
     validarSenha,
     validarCep,
     validarCartao,
+    validarEmail,
     acessoAdm
 }

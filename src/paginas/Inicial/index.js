@@ -5,11 +5,10 @@ import { useListaCarrinho } from '../../context/carrinho';
 import { rmv, add } from '../../models/prodCar';
 
 import { useProdutos } from '../../context/produto';
-import { fetchProdutos } from '../../server/api';
 
 export default function Inicial() {
 
-    const { listaProdutos, setListaProdutos } = useProdutos()
+    const { listaProdutos } = useProdutos()
     const { lista, setLista } = useListaCarrinho();
 
     return (
@@ -22,7 +21,7 @@ export default function Inicial() {
                                 id={prod.id}
                                 nome={prod.nome}
                                 categoria={prod.categoria}
-                                img={prod.caminhoImagem}
+                                // img={prod.caminhoImagem}
                                 preco={prod.preco}
                                 funcao={add(setLista, lista)} 
                                 />

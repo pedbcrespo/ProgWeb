@@ -44,7 +44,7 @@ class BancoDados():
 
 
 
-
+# =================GET=======================
     def getTabela(self, comando, colunas):
         try:
             self.__cursor.execute(comando)
@@ -55,6 +55,7 @@ class BancoDados():
             return []
 
  
+
     def getTodosProdutos(self):
         comando = "select produto.id, produto.nome, categoria.nome  as categoria , produto.categoriaProduto as idCategoria, produto.preco, HEX(produto.caminhoImagem) as caminhoImagem from produto inner join categoria where produto.categoriaProduto = categoria.id"
         colunas = ['id', 'nome', 'categoria', 'idCategoria', 'preco', 'caminhoImagem']
@@ -70,6 +71,11 @@ class BancoDados():
         colunas = ['id', 'email', 'endereco', 'cep']
         return self.getTabela(comando, colunas)
 
+    def getIdCliente(self):
+        comando = "select id from cliente"
+        colunas = ['id']
+        return self.getTabela(comando, colunas)
+
     def getTodasCompras(self):
         select_parte = "select carrinho.idCliente as idCliente, cliente.email as cliente, cliente.cep as cep, carrinho.idProduto as idProduto, produto.nome as produto, categoria.nome as categoria, produto.preco, carrinho.finalizado"
         from_parte = "from carrinho inner join cliente inner join produto inner join categoria"
@@ -79,7 +85,14 @@ class BancoDados():
         
         return self.getTabela(comando, colunas)
 
+    def getProdutoCarrinho(self, id_cliente):
+        select_parte = "select carrinho.idProduto as id, produto.nome as nome, categoria.nome as categoria, produto.preco from carrinho"
+        inner_parte = "inner join produto inner join categoria where carrinho.idProduto = produto.id and produto.categoriaProduto = categoria.id and carrinho.finalizado = 0 and carrinho.idCliente = {}".format(id_cliente)
+        comando = f"{select_parte} {inner_parte}"
+        return self.getTabela(comando, ['id', 'nome', 'categoria', 'preco'])
 
+
+# =================POST=======================
     def postDado(self, comando):
         try:
             # comando = "INSERT INTO {} VALUES ({})".format(tabela, self.__formata(dado))
@@ -107,30 +120,35 @@ class BancoDados():
         comando = "INSERT INTO carrinho (idCliente, idProduto) VALUES ({})".format(self.__formata(dado))
         return self.postDado(comando)
 
-
-    def deleteDado(self, tabela, complemento=""):
+# =================DELETE=======================
+    def deleteDado(self, comando):
         try:
-            comando = "DELETE FROM {} WHERE {}".format(tabela, complemento)
             self.__cursor.execute(comando)
             self.__conexao.commit()
 
-            return {"status": 1, "removido": id} 
+            return {"status": 1} 
         except:
             return {"status": 0, "mensagem": "erro ao deletar dado"}
 
-    def putDado(self, tabela, complemento):
+# =================PUT=======================
+    def putDado(self, comando):
         try:
-            comando = f"UPDATE {tabela} SET {complemento}"
             self.__cursor.execute(comando)
             self.__conexao.commit()
             return {"status": 1}
         except:
             return {"status": 0, "mensagem": "erro ao atualizar dado"}
 
-    
+
+    def putCliente(self, id_cliente, dado):
+        comando = f"update cliente set email='{dado['email']}', endereco='{dado['endereco']}', cep='{dado['cep']}' where id={id_cliente}"
+        return self.putDado(comando)
+
 
 if __name__ == '__main__':
     bd = BancoDados()
-    print(bd.getTodosProdutos())
+    # print(bd.getTodosProdutos())
     # print(bd.getTodosClientes())
     # print(bd.getTodasCompras())
+    # print(bd.getProdutoCarrinho())
+    print(bd.getIdCliente())

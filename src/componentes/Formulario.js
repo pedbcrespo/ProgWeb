@@ -1,24 +1,51 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
-// import { validarCartao, validarCep } from '../models/validacao';
+import { useCliente } from '../context/cliente';
+import { validarCartao, validarCep, validarEmail } from '../models/validacao';
+
 export default function Formulario({ enviar }) {
 
+    const [email, setEmail] = useState('')
     const [numCartao, setNumCartao] = useState('');
-    const [endereco, setEndereco] = useState('');
-    const [cep, setCep] = useState('');
-    
+    const [cep, setCep] = useState('')
+    const [endereco, setEndereco] = useState('')
+    const [erroCartao, setErroCartao] = useState({valido:true, texto:""})
+    const [erroCep, setErroCep] = useState({valido:true, texto:""})
+    const [erroEmail, setErroEmail] = useState({valido:true, texto:""})
+
+
+    const {cliente, setCliente} = useCliente()
+
+
     function prepararEnviar(event) {
         event.preventDefault();//lembrar de apagar dps
-        enviar({ endereco, cep, numCartao });
+        console.log(numCartao)
+        setCliente({id:cliente['id'], email:email, cep:cep, endereco:endereco, finalizado:true });
+        enviar(true)
     }
 
     return (
         <form noValidate autoComplete="off" onSubmit={prepararEnviar}>
             <TextField
+                id="Email"
+                label="Email"
+                onChange={(event) => {
+                    setEmail(event.target.value);
+                }}
+                error={!erroEmail['valido']}
+                onBlur={()=>{
+                    setErroCartao(validarEmail(email))
+                }} 
+                fullWidth/>
+            <TextField
                 id="Cartao"
                 label="Cartão"
                 onChange={(event) => {
                     setNumCartao(event.target.value);
+                }}
+                error={!erroCartao['valido']}
+                onBlur={()=>{
+                    setErroCartao(validarCartao(numCartao))
                 }} 
                 fullWidth/>
             <TextField
@@ -32,7 +59,11 @@ export default function Formulario({ enviar }) {
                 id="Cep"
                 label="Cep"
                 onChange={(event) => {
-                    setCep(event.target.value)
+                    setCep( event.target.value);
+                }}
+                error={!erroCep['valido']}
+                onBlur={()=>{
+                    setErroCep(validarCep(cliente.cep))
                 }} 
                 fullWidth/>
             <br></br>
