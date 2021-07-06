@@ -6,14 +6,13 @@ export const ClienteContext = createContext([]);
 
 export default function ClienteProvider({ children }) {
     const [cliente, setCliente] = useState({id:geradorId() , email:'', endereco:'', cep:''});
-    const [sessao, setSessao] = useState(false);
     
     useEffect(()=>{
         console.log(`context cliente: ${cliente['id']}`)
     }, []);
 
     return (
-        <ClienteContext.Provider value={{cliente, setCliente, sessao, setSessao}}>
+        <ClienteContext.Provider value={{cliente, setCliente}}>
             {children}
         </ClienteContext.Provider>
     );
@@ -25,13 +24,7 @@ function useCliente() {
     return { cliente, setCliente };
 }
 
-function useSessao(){
-    const context = useContext(ClienteContext);
-    const {sessao, setSessao} = context;
-    return {sessao, setSessao};
-}
-
 export {
     useCliente,
-    useSessao,
+
 };

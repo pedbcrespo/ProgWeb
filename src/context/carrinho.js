@@ -13,7 +13,7 @@ export default function ListaProvider({ children }) {
 
     useEffect(()=>{
         fetchProdutosCarrinho(setLista, cliente['id']);
-    }, [lista])
+    }, [])
 
     return (
         <listaContext.Provider value={{ lista, setLista}}>

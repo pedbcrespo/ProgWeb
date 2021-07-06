@@ -42,7 +42,7 @@ export default function Carrinho() {
                                     nome={produto.nome}
                                     categoria={produto.categoria}
                                     preco={produto.preco}
-                                    funcao={rmv(setLista, lista)}
+                                    funcao={rmv(setLista, lista, cliente['id'])}
                                 />
                             </div>
                         );

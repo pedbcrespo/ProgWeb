@@ -1,13 +1,13 @@
 // import { postCarrinho, deleteCarrinho } from '../server/api_sim'; 
-import { postCarrinho } from '../server/api';
+import { postCarrinho, deleteProdutoCarrinho } from '../server/api';
 
-function rmv(setFuncao, lista){
+function rmv(setFuncao, lista, id_cliente){
     return (indice)=>{
-        //pedir o parametro id_produto
         let nova_lista = lista;
+        let id_produto = lista[indice]['id'];
         nova_lista.splice(indice, 1);
         setFuncao(nova_lista);//quando usar a api, essa funçao sera desnecessaria
-        // deleteCarrinho(lista[indice].id)
+        deleteProdutoCarrinho(id_cliente, id_produto);
     }
 }
 
