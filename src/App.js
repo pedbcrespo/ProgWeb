@@ -8,13 +8,14 @@ import Carrinho from './paginas/Carrinho';
 import AdmLogin from './paginas/AdmLogin';
 import CategoriaEsp from './paginas/CategoriaEsp';
 import { useCliente } from './context/cliente';
-// import { inicializaSessao } from './models/dadosCliente';
+import { useSessao } from './context/sessao';
+import { inicializaSessao } from './models/dadosCliente';
 import Providers from './componentes/Providers';
 
 export default function App() {
 
-  // const [sessao, setSessao] = useSessao();
-  // const { cliente } = useCliente();
+  const [sessao, setSessao] = useSessao();
+  const { cliente } = useCliente();
 
   return (
     <>
@@ -25,7 +26,7 @@ export default function App() {
                * do cliente vazios, apenas com o id. Apos o final da compra, a sessao é finalizada
                * e o id da nova sessao é gerado.
                */}
-          {/* {inicializaSessao(setSessao, cliente, sessao)} */}
+          {inicializaSessao(setSessao, cliente, sessao)}
 
           <Cabecalho />
 
