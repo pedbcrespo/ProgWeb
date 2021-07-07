@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from 'react';
 import { useEffect } from 'react';
 import { useCliente } from './cliente';
-import { fetchProdutosCarrinho } from '../server/api';
+import { getCarrinho } from '../server/api';
 
 //Estou usando o context do cliente aqui!
 
@@ -12,7 +12,7 @@ export default function ListaProvider({ children }) {
     const [lista, setLista] = useState([])
 
     useEffect(()=>{
-        fetchProdutosCarrinho(setLista, cliente['id']);
+        getCarrinho(setLista, cliente['id']);
     }, [])
 
     return (

@@ -10,26 +10,22 @@ import CategoriaEsp from './paginas/CategoriaEsp';
 import { useCliente } from './context/cliente';
 import { useSessao } from './context/sessao';
 import { inicializaSessao } from './models/dadosCliente';
-import Providers from './componentes/Providers';
+import { useEffect } from 'react';
 
 export default function App() {
 
-  const [sessao, setSessao] = useSessao();
-  const { cliente } = useCliente();
+  const {cliente} = useCliente();
+  const {sessao, setSessao} = useSessao();
+
+  useEffect(()=>{
+    inicializaSessao(setSessao, cliente, sessao);
+  }, [])
 
   return (
     <>
       <Router>
-        <Providers>
-
-          {/**A ideia é que, na primeira vez que rode, da um post, enviando os dados
-               * do cliente vazios, apenas com o id. Apos o final da compra, a sessao é finalizada
-               * e o id da nova sessao é gerado.
-               */}
-          {inicializaSessao(setSessao, cliente, sessao)}
 
           <Cabecalho />
-
 
           <Switch>
             <Route exact path='/'>
@@ -47,7 +43,6 @@ export default function App() {
           </Switch>
           <Rodape />
 
-        </Providers>
       </Router>
     </>
   );

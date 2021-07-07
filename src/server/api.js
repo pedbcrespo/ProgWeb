@@ -4,26 +4,40 @@ const api = axios.create({
     baseURL: 'http://127.0.0.1:5000'
 })
 //===================GET======================//
-async function get_produtos(){
-    return await api.get('/produtos').then(res=>res.data)
+function getProdutos(setFunction) {
+    fetch('http://localhost:5000/produtos')
+        .then(res => res.json())
+        .then((data) => {
+            setFunction(data);
+        })
 }
 
-async function get_categoria(){
-    return await api.get('/categorias').then(res=>res.data)
+function getProduto(ident, setFunction) {
+    fetch(`http://localhost:5000/produto/${ident}`)
+        .then(res => res.json)
+        .then(data => {
+            setFunction(data)
+        })
 }
 
-async function get_carrinho(){
-    return await api.get('/carrinhos').then(res=>res.data)
+function getCategorias(setFunction) {
+    fetch(`http://localhost:5000/categorias`)
+        .then(res => res.json())
+        .then(data => {
+            setFunction(data)
+        })
 }
 
-async function get_produtos_carrinho(id_cliente){
-    return await api.get(`/carrinho/${id_cliente}`).then(res=>res.data)
+function getTodasCompras(setFunction) {
+    fetch('http://localhost:5000/todas_compras')
+        .then(res => res.json())
+        .then((data) => {
+            setFunction(data)
+        })
 }
 
-async function get_id_cliente(setFunction){
-    return await api.get('/id_clientes')
-    .then(res=>res.data)
-    .then(setFunction)
+function getCarrinho(setFunction, id_cliente){
+    fetch(`http://localhost:5000/carrinho/${id_cliente}`)
 }
 
 //===================POST========================//
@@ -48,35 +62,18 @@ async function deleteProdutoCarrinho(id_cliente, id_produto){
 }
 
 //===================fetchFunctions==============//
-function fetchProdutos(setFunction){
-    get_produtos().then(res=>{
-        setFunction(res)
-    })
-}
-
-function fetchCategorias(setFunction){
-    get_categoria().then(res=>{
-        setFunction(res)
-    })
-}
-
-function fetchCarrinho(setFunction){
-    get_carrinho().then(setFunction)
-}
-
-function fetchProdutosCarrinho(setFunction, id_cliente){
-    get_produtos_carrinho(id_cliente).then(setFunction)
-}
-
 
 export {
-    fetchProdutos,
-    fetchCategorias,
-    fetchCarrinho,
-    fetchProdutosCarrinho,
-    get_id_cliente,
+    getProdutos,
+    getProduto,
+    getTodasCompras,
+    getCategorias,
+    getCarrinho,
+    
     postCarrinho,
     postCliente,
+
     putCliente,
+
     deleteProdutoCarrinho,
 }

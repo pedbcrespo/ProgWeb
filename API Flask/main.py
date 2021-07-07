@@ -1,4 +1,4 @@
-from config import app
+from rotas import app
 
 # arquivo que sobe o servidor
 

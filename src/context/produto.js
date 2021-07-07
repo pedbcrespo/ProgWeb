@@ -1,7 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import { useEffect } from 'react';
-import { fetchProdutos } from '../server/api';
-// import { getProdutos} from '../server/api_sim';
+import { getProdutos} from '../server/api';
 
 export const ProdutoContext = createContext([]);
 
@@ -9,10 +8,9 @@ export default function ProdutoProvider({ children }) {
     const [listaProdutos, setListaProdutos] = useState([])
 
     useEffect(()=>{
-        fetchProdutos(setListaProdutos)
-        // getProdutos(setListaProdutos)
+        getProdutos(setListaProdutos)
     }, []);
-
+    
     return (
         <ProdutoContext.Provider value={{ listaProdutos, setListaProdutos, }}>
             {children}

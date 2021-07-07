@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { postCliente } from '../server/api';
 
 function geradorId(lista) {
@@ -20,9 +19,9 @@ function novaSessao(setFunction){
     return novo_cliente;
 }
 
-function inicializaSessao(setFunction, cliente, validacao){
+function inicializaSessao(setFunctionValidacao, cliente, validacao){
     if(!validacao){
-        setFunction(true);
+        setFunctionValidacao(true);
         postCliente(cliente);
     }
 }

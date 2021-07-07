@@ -1,5 +1,5 @@
 // import { postCarrinho, deleteCarrinho } from '../server/api_sim'; 
-import { postCarrinho, deleteProdutoCarrinho } from '../server/api';
+import { postCarrinho, deleteProdutoCarrinho } from '../server/api2';
 
 function rmv(setFuncao, lista, id_cliente){
     return (indice)=>{
