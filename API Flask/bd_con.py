@@ -45,11 +45,13 @@ class BancoDados():
 
 # =================GET=======================
     def getTabela(self, comando, colunas):
-        self.__cursor.execute(comando)
-        lista_tupla = [tupla for tupla in self.__cursor]            
-        lista = list(map(lambda tup : self.__dic(colunas, tup), lista_tupla))
-        return lista
-
+        try:
+            self.__cursor.execute(comando)
+            lista_tupla = [tupla for tupla in self.__cursor]            
+            lista = list(map(lambda tup : self.__dic(colunas, tup), lista_tupla))
+            return lista
+        except:
+            return []
 
     def getTodosProdutos(self):
         comando = "select produto.id, produto.nome, categoria.nome  as categoria , produto.categoriaProduto as idCategoria, produto.preco, HEX(produto.caminhoImagem) as caminhoImagem from produto inner join categoria on produto.categoriaProduto = categoria.id"
@@ -157,8 +159,7 @@ class BancoDados():
 
 if __name__ == '__main__':
     bd = BancoDados()
-    print(bd.getTodosProdutos())
-    # print(bd.getTodosClientes())
+    # print(bd.getTodosProdutos())
+    print(bd.getTodosClientes())
     # print(bd.getTodasCompras())
     # print(bd.getProdutoCarrinho())
-    # print(bd.getIdCliente())

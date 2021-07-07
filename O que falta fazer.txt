@@ -1,14 +1,13 @@
 *Banco de dados:
-    -Implementar os metodos put e delete
-    -Implementar o metodo de update do BD
-    -Alimentar o banco
-    -Usar imagens jpeg
+    -Implementar os metodos put e delete (Resolvido)
+    -Implementar o metodo de update do BD (Resolvido)
+    -Alimentar o banco (Resolvido)
+    -Usar imagens jpeg (Resolvido)
 
 *Api:
     -Conectar com o banco de dados (Resolvido)
-    -Implementar o metodo post, put e delete
+    -Implementar o metodo post, put e delete (Resolvido)
     -Consumir dados da api de localização
-    -Talvez tenha que criar uma api para as imagens dos produtos
     -Delete e Put nao funcionam
 
 *Front:
@@ -20,7 +19,7 @@
     -Melhorar o design da pagina
     -Colocar o painel do carrinho do lado do painel dos produtos
     -Resolver cadastro de produtos com Select de categorias
-    -Resolver problema de login:
+    -Resolver problema de login: (Resolvido)
         Mesmo logando na primeira vez, se vai para a pagina inicial, quando volta precisa logar 
         denovo (Resolvido)
     -Imagem dos produtos nao esta aparecendo

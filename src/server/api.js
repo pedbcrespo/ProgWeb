@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:5000'
+    baseURL: 'http://127.0.0.1:5000',
+    
 })
 //===================GET======================//
 function getProdutos(setFunction) {
@@ -38,6 +39,8 @@ function getTodasCompras(setFunction) {
 
 function getCarrinho(setFunction, id_cliente){
     fetch(`http://localhost:5000/carrinho/${id_cliente}`)
+    .then(res=>res.json())
+    .then(setFunction)
 }
 
 //===================POST========================//
@@ -46,9 +49,11 @@ async function postCarrinho(dado){
 }
 
 async function postCliente(dado){
-    //dado precisa ter nome, endereco e cep
-    return await api.post('/clientes'. dado).then({"mensagem":"enviado com sucesso"})
+    return await api.post('/clientes', dado).then(res=>{
+        console.log(`${dado} => enviado`)
+    })
 }
+
 
 //===================PUT========================//
 async function putCliente(id_cliente, dado){
