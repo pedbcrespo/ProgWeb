@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Produto from '../../componentes/Produto';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
 import { useListaCarrinho } from '../../context/carrinho';
+import { useCliente } from '../../context/cliente';
 import { rmv, add } from '../../models/prodCar';
 
 import { useProdutos } from '../../context/produto';
@@ -10,6 +11,7 @@ export default function Inicial() {
 
     const { listaProdutos } = useProdutos();
     const { lista, setLista } = useListaCarrinho();
+    const { cliente } = useCliente();
 
     return (
         <section className="campInicial">
@@ -23,7 +25,7 @@ export default function Inicial() {
                                 categoria={prod.categoria}
                                 // img={prod.caminhoImagem}
                                 preco={prod.preco}
-                                funcao={add(setLista, lista)} 
+                                funcao={add(setLista, lista, cliente.id)} 
                                 />
                         </div>
                     )
@@ -43,7 +45,7 @@ export default function Inicial() {
                                 nome={prod.nome}
                                 categoria={prod.categoria}
                                 preco={prod.preco}
-                                funcao={rmv(setLista, lista)}
+                                funcao={rmv(setLista, lista, cliente.id)}
                             />
                         </li>
                     })}

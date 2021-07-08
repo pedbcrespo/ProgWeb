@@ -9,7 +9,7 @@ export default function ProdCarrinho({id, indice, nome, categoria, preco, funcao
                     type="button"
                     className="btn btn-outline-dark"
                     onClick={(event)=>{
-                        funcao(indice)
+                        funcao(indice, id)
                     }}>
                    X
                 </button>
