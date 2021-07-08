@@ -38,7 +38,6 @@ class BancoDados():
                 lista.append(f"'{dado[key]}'")
             else:
                 lista.append(str(dado[key]))
-        print(lista)
         return ",".join(lista)
 
 
@@ -112,7 +111,8 @@ class BancoDados():
         return self.postDado(comando)
 
     def postCliente(self, dado):
-        comando = "INSERT INTO cliente (id, nome, endereco, cep) VALUES ({})".format(self.__formata(dado))
+        comando = "INSERT INTO cliente (id, email, endereco, cep) VALUES ({})".format(self.__formata(dado))
+        print(comando)
         return self.postDado(comando)
 
     def postCarrinho(self, dado):
@@ -160,6 +160,12 @@ class BancoDados():
 if __name__ == '__main__':
     bd = BancoDados()
     # print(bd.getTodosProdutos())
-    print(bd.getTodosClientes())
+    # print(bd.getTodosClientes())
     # print(bd.getTodasCompras())
     # print(bd.getProdutoCarrinho())
+    print(bd.postCliente({
+    "id":3,
+    "email":"ped-crespo@hotmail.com",
+    "endereco":"Cabo Frio, Rio de Janeiro",
+    "cep":"28999123"
+}))

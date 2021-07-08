@@ -1,4 +1,3 @@
-// import { postCarrinho, deleteCarrinho } from '../server/api_sim'; 
 import { postCarrinho, deleteProdutoCarrinho } from '../server/api';
 
 function rmv(setFuncao, lista, id_cliente){
@@ -15,7 +14,6 @@ function add(setFunction, lista){
     return (dado)=>{
         const nova_lista = [...lista, dado];
         setFunction(nova_lista);
-        // o problema pode estar aqui:
         postCarrinho(dado);
     }
 }

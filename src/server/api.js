@@ -5,6 +5,7 @@ const api = axios.create({
     
 })
 //===================GET======================//
+//Busca todos os produtos
 function getProdutos(setFunction) {
     fetch('http://localhost:5000/produtos')
         .then(res => res.json())
@@ -12,7 +13,7 @@ function getProdutos(setFunction) {
             setFunction(data);
         })
 }
-
+//Busca um produto em especifico
 function getProduto(ident, setFunction) {
     fetch(`http://localhost:5000/produto/${ident}`)
         .then(res => res.json)
@@ -20,7 +21,7 @@ function getProduto(ident, setFunction) {
             setFunction(data)
         })
 }
-
+//Busca todas as categorias
 function getCategorias(setFunction) {
     fetch(`http://localhost:5000/categorias`)
         .then(res => res.json())
@@ -28,7 +29,7 @@ function getCategorias(setFunction) {
             setFunction(data)
         })
 }
-
+//mostra todas as compras registradas
 function getTodasCompras(setFunction) {
     fetch('http://localhost:5000/todas_compras')
         .then(res => res.json())
@@ -36,7 +37,7 @@ function getTodasCompras(setFunction) {
             setFunction(data)
         })
 }
-
+//Busca o carrinho de um determinado cliente
 function getCarrinho(setFunction, id_cliente){
     fetch(`http://localhost:5000/carrinho/${id_cliente}`)
     .then(res=>res.json())
@@ -44,10 +45,11 @@ function getCarrinho(setFunction, id_cliente){
 }
 
 //===================POST========================//
+//Envia dados de um novo carrinho
 async function postCarrinho(dado){
     return await api.post('/carrinhos', dado).then({'mensagem': "enviado"})
 }
-
+//Envia dados de um novo cliente
 async function postCliente(dado){
     return await api.post('/clientes', dado).then(res=>{
         console.log(`${dado} => enviado`)
@@ -56,12 +58,14 @@ async function postCliente(dado){
 
 
 //===================PUT========================//
+//Altera dados do cliente
 async function putCliente(id_cliente, dado){
     return await api.put(`/cliente/${id_cliente}`, dado).then({"mensagem":"atualizado"})
 }
 
 
 //===================DELETE=====================//
+//Deleta um produto de um determinado carrinho
 async function deleteProdutoCarrinho(id_cliente, id_produto){
     return await api.delete(`/carrinho_del/${id_cliente}/${id_produto}`).then({"mensagem":"removido"})
 }

@@ -26,5 +26,4 @@ function useCliente() {
 
 export {
     useCliente,
-
 };
