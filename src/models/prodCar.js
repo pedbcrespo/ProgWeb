@@ -1,7 +1,7 @@
 import { postCarrinho, deleteProdutoCarrinho } from '../server/api';
 
 //So esta salvando no banco de dados, mas nao esta renderizando
-//precisa mexer no context produto
+//precisa mexer no context carrinho
 
 function rmv(setFuncao, lista, id_cliente){
     return (indice, id_produto)=>{
