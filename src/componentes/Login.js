@@ -6,7 +6,7 @@ import { useAdmin } from '../context/admin';
 
 export default function Login(){
     
-    const {acesso, setAcesso} = useAdmin();
+    const {setAcesso} = useAdmin();
     const [usuario, setUsuario] = useState('');
     const [senha, setSenha] = useState('');
     // usar para mostrar erros de cadastro

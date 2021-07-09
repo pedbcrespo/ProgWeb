@@ -1,24 +1,28 @@
-import { postCarrinho, deleteProdutoCarrinho } from '../server/api';
+import { postCarrinho, deleteProdutoCarrinho, getCarrinho } from '../server/api';
 
 //So esta salvando no banco de dados, mas nao esta renderizando
 //precisa mexer no context carrinho
 
+function atualizaCarrinho(setFunction, id_cliente){
+    getCarrinho(setFunction, id_cliente)
+}
+
 function rmv(setFuncao, lista, id_cliente){
     return (indice, id_produto)=>{
-        // let nova_lista = lista;
-        // let id_produto = lista[indice]['id'];
-        // nova_lista.splice(indice, 1);
-        // setFuncao(nova_lista);
+        let nova_lista = lista.filter((elem)=>{return elem.indice !== indice});
+        setFuncao(nova_lista);
         deleteProdutoCarrinho(id_cliente, id_produto);
+        // getCarrinho(setFuncao, id_cliente);
     }
 }
 
-function add(setFunction, lista, id_cliente){
+function add(setFuncao, lista, id_cliente){
     return (dado)=>{
-        // const nova_lista = [...lista, dado];
+        const nova_lista = [...lista, dado];
         let id_produto = dado.id;
-        // setFunction(nova_lista);
+        setFuncao(nova_lista);
         postCarrinho({"idCliente":id_cliente, "idProduto":id_produto});
+        // getCarrinho(setFuncao, id_cliente);
     }
 }
 

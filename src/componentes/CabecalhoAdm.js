@@ -34,6 +34,7 @@ export default function CabecalhoAdm(){
                             <li className="nav-item">
                                 <Link className="nav-link active" aria-current="page" to="/" onClick={(event)=>{
                                     setAcesso(false);
+                                    console.log(acesso);
                                 }}>Sair</Link>
                             </li>
                         </ul>

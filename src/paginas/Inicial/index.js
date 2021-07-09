@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Produto from '../../componentes/Produto';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
 import { useListaCarrinho } from '../../context/carrinho';

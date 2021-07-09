@@ -112,7 +112,6 @@ class BancoDados():
 
     def postCliente(self, dado):
         comando = "INSERT INTO cliente (id, email, endereco, cep) VALUES ({})".format(self.__formata(dado))
-        print(comando)
         return self.postDado(comando)
 
     def postCarrinho(self, dado):

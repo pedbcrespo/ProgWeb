@@ -34,7 +34,7 @@ export default function Formulario({ enviar }) {
                 }}
                 error={!erroEmail['valido']}
                 onBlur={()=>{
-                    setErroCartao(validarEmail(email))
+                    setErroEmail(validarEmail(email))
                 }} 
                 fullWidth/>
             <TextField

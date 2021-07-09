@@ -11,9 +11,16 @@ export default function ListaProvider({ children }) {
     const {cliente} = useCliente();
     const [lista, setLista] = useState([])
 
+    // function atualiza(){
+    //     getCarrinho(setLista, cliente['id']);
+    //     console.log(lista)
+    // }
+
     useEffect(()=>{
-        getCarrinho(setLista, cliente['id']);
-    }, [])
+        console.log(lista);
+    }, [lista])
+
+
 
     return (
         <listaContext.Provider value={{ lista, setLista}}>
