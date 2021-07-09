@@ -44,6 +44,7 @@ function getCarrinho(setFunction, id_cliente){
     .then(setFunction)
 }
 
+
 //===================POST========================//
 //Envia dados de um novo carrinho
 async function postCarrinho(dado){
@@ -78,7 +79,7 @@ export {
     getTodasCompras,
     getCategorias,
     getCarrinho,
-    
+
     postCarrinho,
     postCliente,
 
