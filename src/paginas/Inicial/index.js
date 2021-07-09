@@ -45,7 +45,7 @@ export default function Inicial() {
                                 nome={prod.nome}
                                 categoria={prod.categoria}
                                 preco={prod.preco}
-                                funcao={rmv(setLista, lista, cliente.id)}
+                                funcao={rmv(setLista, lista, cliente['id'])}
                             />
                         </li>
                     })}
