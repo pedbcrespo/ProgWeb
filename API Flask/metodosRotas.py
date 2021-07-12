@@ -15,11 +15,7 @@ class Inicial(Resource):
 # =====================Produto===================
 class Produto(Resource, Conexao):
     def get(self, id_produto):
-        dados = "produto.id, produto.nome as produto, categoria.nome  as categoria, produto.categoriaProduto as id_categoria ,produto.preco, produto.caminhoImagem as img"
-        complemento = f"inner join categoria where produto.categoriaProduto = categoria.id and produto.id = {id_produto}"
-        colunas = ["id", "produto", "categoria", "id_categoria", "preco", "img"]
-        lista_resposta = self.bd.getTabela("produto", dados, complemento, colunas)
-        return lista_resposta[0]
+        return self.bd.getProduto(id_produto)
 
     def put(self, id_produto):
         pass

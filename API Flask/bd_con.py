@@ -57,6 +57,11 @@ class BancoDados():
         colunas = ['id', 'nome', 'categoria', 'idCategoria', 'preco', 'caminhoImagem']
         return self.getTabela(comando, colunas)
     
+    def getProduto(self, id_produto):
+        comando = f"select produto.id, produto.nome, categoria.nome  as categoria , produto.categoriaProduto as idCategoria, produto.preco, HEX(produto.caminhoImagem) as caminhoImagem from produto inner join categoria on produto.categoriaProduto = categoria.id where produto.id = {id_produto}"
+        colunas = ['id', 'nome', 'categoria', 'idCategoria', 'preco', 'caminhoImagem']
+        return self.getTabela(comando, colunas)[0]
+
     def getTodasCategorias(self):
         comando = "select * from categoria"
         colunas = ['id', 'nome']

@@ -13,9 +13,8 @@
 *Front:
     -Enviar os formularios
     -Remover itens do carrinho (Mais ou menos funcionando - Pesquisar mais sobre o useEffect)
-        -Botao x só funciona na pagina inicial (Resolvido +/- agora inverteu)
-        -Botao exclui todo mundo quando deveria excluir só o selecionado
-        //Acredito que esse problema se resolva no momento que usar a Api de verdade//
+        -Botao x só funciona na pagina inicial (Resolvido)
+        -Botao exclui todo mundo quando deveria excluir só o selecionado (Resolvido)
     -Mostrar a imagem dos produtos
     -Melhorar o design da pagina
     -Colocar o painel do carrinho do lado do painel dos produtos

@@ -1,4 +1,4 @@
-import { postCarrinho, deleteProdutoCarrinho, getCarrinho } from '../server/api';
+import { postCarrinho, deleteProdutoCarrinho } from '../server/api';
 
 //So esta salvando no banco de dados, mas nao esta renderizando
 //precisa mexer no context carrinho
@@ -10,7 +10,6 @@ function rmv(setFuncao, lista, id_cliente, indice){
         copia_lista.splice(indice, 1);
         setFuncao(copia_lista);
         deleteProdutoCarrinho(id_cliente, id_produto);
-        // getCarrinho(setFuncao, id_cliente);
     }
 }
 
@@ -20,7 +19,6 @@ function add(setFuncao, lista, id_cliente){
         let id_produto = dado.id;
         postCarrinho({"idCliente":id_cliente, "idProduto":id_produto});
         setFuncao(nova_lista);
-        // getCarrinho(setFuncao, id_cliente);
     }
 }
 
