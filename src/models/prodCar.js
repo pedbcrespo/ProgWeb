@@ -4,17 +4,11 @@ import { postCarrinho, deleteProdutoCarrinho, getCarrinho } from '../server/api'
 //precisa mexer no context carrinho
 
 
-function rmv(setFuncao, lista, id_cliente){
+function rmv(setFuncao, lista, id_cliente, indice){
     return (id_produto)=>{
-        let indice = 0;
-        for(let i in lista){
-            if(lista[i]['id'] === id_produto){
-                indice = i;
-                break;
-            }
-        }
-        lista.splice(indice, 1);
-        setFuncao(lista);
+        const copia_lista = Array.from(lista);
+        copia_lista.splice(indice, 1);
+        setFuncao(copia_lista);
         deleteProdutoCarrinho(id_cliente, id_produto);
         // getCarrinho(setFuncao, id_cliente);
     }

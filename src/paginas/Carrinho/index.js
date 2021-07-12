@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
 import Formulario from '../../componentes/Formulario';
 import { useListaCarrinho } from '../../context/carrinho';
@@ -18,7 +18,7 @@ export default function Carrinho() {
         for(let i in lista){
             total += lista[i].preco;
         }
-        return total;
+        return total.toFixed(2);
     }
 
     function enviar(num_cartao){
@@ -34,15 +34,15 @@ export default function Carrinho() {
 
             <section className="Carrinho-section">
                 <section className="campoProduto">
-                    {lista.map((produto) => {
+                    {lista.map((produto, indice) => {
                         return (
-                            <div key={produto.id}>
+                            <div key={indice}>
                                 <ProdCarrinho
                                     id={produto.id}
                                     nome={produto.nome}
                                     categoria={produto.categoria}
                                     preco={produto.preco}
-                                    funcao={rmv(setLista, lista, cliente['id'])}
+                                    funcao={rmv(setLista, lista, cliente['id'], indice)}
                                 />
                             </div>
                         );

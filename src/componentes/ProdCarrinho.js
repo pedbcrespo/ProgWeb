@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ProdCarrinho({id, indice, nome, categoria, preco, funcao}){
+export default function ProdCarrinho({id, nome, categoria, preco, funcao}){
 
     return (
         <div className="miniCarrinho">
@@ -8,8 +8,8 @@ export default function ProdCarrinho({id, indice, nome, categoria, preco, funcao
             <button
                     type="button"
                     className="btn btn-outline-dark"
-                    onClick={(event)=>{
-                        funcao(id)
+                    onClick={()=>{
+                        funcao(id);
                     }}>
                    X
                 </button>
