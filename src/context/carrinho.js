@@ -8,7 +8,7 @@ import { getCarrinho } from '../server/api';
 export const listaContext = createContext([]);
 
 export default function ListaProvider({ children }) {
-    const {cliente} = useCliente();
+    // const {cliente} = useCliente();
     const [lista, setLista] = useState([])
 
     // function atualiza(){

@@ -44,6 +44,14 @@ function getCarrinho(setFunction, id_cliente){
     .then(setFunction)
 }
 
+function getEndereco(setFunction, cep){
+    fetch(`https://viacep.com.br/ws/${cep}/json`)
+    .then(res=>res.json())
+    .then(res=>{
+        let endereco = `${res['logradouro']},${res['bairro']},${res['localidade']},${res['uf']}`
+        setFunction(endereco)
+    })
+}
 
 //===================POST========================//
 //Envia dados de um novo carrinho
@@ -79,6 +87,7 @@ export {
     getTodasCompras,
     getCategorias,
     getCarrinho,
+    getEndereco,
 
     postCarrinho,
     postCliente,

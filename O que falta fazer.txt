@@ -8,12 +8,13 @@
     -Conectar com o banco de dados (Resolvido)
     -Implementar o metodo post, put e delete (Resolvido)
     -Consumir dados da api de localização
-    -Delete e Put nao funcionam
+    -Delete e Put nao funcionam (Resolvido +/-)
 
 *Front:
     -Enviar os formularios
     -Remover itens do carrinho (Mais ou menos funcionando - Pesquisar mais sobre o useEffect)
-        -Botao x só funciona na pagina inicial (Resolvido)
+        -Botao x só funciona na pagina inicial (Resolvido +/- agora inverteu)
+        -Botao exclui todo mundo quando deveria excluir só o selecionado
         //Acredito que esse problema se resolva no momento que usar a Api de verdade//
     -Mostrar a imagem dos produtos
     -Melhorar o design da pagina

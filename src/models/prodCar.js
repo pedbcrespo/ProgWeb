@@ -5,10 +5,17 @@ import { postCarrinho, deleteProdutoCarrinho, getCarrinho } from '../server/api'
 
 
 function rmv(setFuncao, lista, id_cliente){
-    return (indice, id_produto)=>{
-        let nova_lista = lista.filter((elem)=>{return elem.indice !== indice});
+    return (id_produto)=>{
+        let indice = 0;
+        for(let i in lista){
+            if(lista[i]['id'] === id_produto){
+                indice = i;
+                break;
+            }
+        }
+        lista.splice(indice, 1);
+        setFuncao(lista);
         deleteProdutoCarrinho(id_cliente, id_produto);
-        setFuncao(nova_lista);
         // getCarrinho(setFuncao, id_cliente);
     }
 }

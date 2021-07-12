@@ -1,7 +1,7 @@
 import pymysql
 import datetime
 import decimal
-import json
+# import json
 
 # arquivo de comandos de requisição para o banco de dados
 
@@ -89,7 +89,6 @@ class BancoDados():
         comando = f"{select_parte} {inner_parte}"
         return self.getTabela(comando, ['id', 'nome', 'categoria', 'preco'])
 
-
 # =================POST=======================
     def postDado(self, comando):
         try:
@@ -100,7 +99,6 @@ class BancoDados():
             return {"status": 1, "mensagem": "enviado com sucesso"} 
         except:
             return {"status": 0, "mensagem": "erro ao enviar dado"}
-
 
     def postProduto(self, dado):
         comando = "INSERT INTO produto (nome, categoriaProduto, preco, caminhoImagem) VALUES ({})".format(self.__formata(dado))
@@ -152,9 +150,15 @@ class BancoDados():
 
 
     def putCliente(self, id_cliente, dado):
-        comando = f"update cliente set email='{dado['email']}', endereco='{dado['endereco']}', cep='{dado['cep']}' where id={id_cliente}"
+        email = dado['email']
+        endereco = dado['endereco']
+        cep = dado['cep']
+        comando = f"update cliente set email='{email}', endereco='{endereco}', cep='{cep}' where id={id_cliente}"
         return self.putDado(comando)
 
+    def putCompras(self, id_cliente):
+        comando = f"update carrinho set finalizado = true where idCliente={id_cliente}"
+        return self.putDado(comando)
 
 if __name__ == '__main__':
     bd = BancoDados()
@@ -163,8 +167,8 @@ if __name__ == '__main__':
     # print(bd.getTodasCompras())
     # print(bd.getProdutoCarrinho())
     print(bd.postCliente({
-    "id":3,
-    "email":"ped-crespo@hotmail.com",
-    "endereco":"Cabo Frio, Rio de Janeiro",
-    "cep":"28999123"
-}))
+        "id":3,
+        "email":"ped-crespo@hotmail.com",
+        "endereco":"Cabo Frio, Rio de Janeiro",
+        "cep":"28999123"
+    }))

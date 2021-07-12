@@ -7,8 +7,7 @@ from metodosRotas import *
 app = Flask('main')
 api = Api(app)
 CORS(app)
-        
-    
+
 api.add_resource(Inicial, "/")
 api.add_resource(Produto, "/produto/<int:id_produto>")
 api.add_resource(Categoria, "/categoria/<int:id_categoria>")

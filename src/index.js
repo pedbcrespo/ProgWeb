@@ -10,4 +10,3 @@ ReactDOM.render(
   </Providers>,
   document.getElementById('root')
 );
-

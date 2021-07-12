@@ -1,10 +1,9 @@
 import React from 'react';
 import Produto from '../../componentes/Produto';
-import ProdCarrinho from '../../componentes/ProdCarrinho';
+// import ProdCarrinho from '../../componentes/ProdCarrinho';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
 import { rmv, add } from '../../models/prodCar';
-
 import { useProdutos } from '../../context/produto';
 
 export default function Inicial() {
@@ -33,7 +32,7 @@ export default function Inicial() {
             </section>
 
 
-            <aside className="campCarrinho">
+            {/* <aside className="campCarrinho">
                 <h3>Pré visualização carrinho</h3>
                 <ul>
 
@@ -51,7 +50,7 @@ export default function Inicial() {
                     })}
                 </ul>
 
-            </aside>
+            </aside> */}
         </section>
     )
 }
