@@ -14,14 +14,12 @@ export default function Formulario({ enviar }) {
     const [erroEmail, setErroEmail] = useState({valido:true, texto:""})
 
 
-    const {cliente, setCliente} = useCliente()
+    const {idCliente} = useCliente()
 
 
     function prepararEnviar(event) {
         event.preventDefault();//lembrar de apagar dps
-        console.log(numCartao)
-        setCliente({id:cliente['id'], email:email, cep:cep, endereco:endereco, finalizado:true });
-        enviar(true)
+        enviar(numCartao, {id:idCliente, email:email, endereco:endereco, cep:cep})
     }
 
     return (

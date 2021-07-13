@@ -62,11 +62,11 @@ class Cliente(Resource, Conexao):
         return lista_resposta[0]
 
     def put(self, id_cliente):
-        pass
+        dado_request = json.loads(request.data)
+        return self.bd.putCliente(id_cliente, dado_request)
 
     def delete(self, id_cliente):
-        complemento = f"id={id_cliente}"
-        return self.bd.deleteDado('cliente', complemento)
+        return self.bd.deleteCliente(id_cliente)
 
 class Clientes(Resource, Conexao):
     def get(self):
@@ -75,6 +75,11 @@ class Clientes(Resource, Conexao):
     def post(self):
         dado_request = json.loads(request.data)
         return self.bd.postCliente(dado_request)
+
+class InfoCliente(Resource, Conexao):
+    def post(self):
+        dado_request = json.loads(request.data)
+        return self.bd.postInfoCliente(dado_request)
 
 # =====================Carrinho===================
 class Carrinhos(Resource, Conexao):
@@ -88,8 +93,7 @@ class Carrinho(Resource, Conexao):
         return self.bd.getProdutoCarrinho(id_cliente)
 
     def put(self, id_cliente):
-        complemento = f"finalizado = true where carrinho.idCliente = {id_cliente}"
-        return self.bd.putDado('carrinho', complemento)
+        return self.bd.putCompras(id_cliente)
 
 class TodasCompras(Resource, Conexao):
     def get(self):

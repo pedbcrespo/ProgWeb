@@ -5,14 +5,13 @@ import { geradorId } from '../models/dadosCliente';
 export const ClienteContext = createContext([]);
 
 export default function ClienteProvider({ children }) {
-    const [cliente, setCliente] = useState({id:geradorId() , email:'', endereco:'', cep:''});
+    const [idCliente, setCliente] = useState(geradorId());
     
     useEffect(()=>{
-        console.log(`context cliente: ${cliente['id']}`)
-    }, []);
+    }, [idCliente]);
 
     return (
-        <ClienteContext.Provider value={{cliente, setCliente}}>
+        <ClienteContext.Provider value={{idCliente, setCliente}}>
             {children}
         </ClienteContext.Provider>
     );
@@ -20,8 +19,8 @@ export default function ClienteProvider({ children }) {
 
 function useCliente() {
     const context = useContext(ClienteContext);
-    const { cliente, setCliente } = context;
-    return { cliente, setCliente };
+    const { idCliente, setCliente } = context;
+    return { idCliente, setCliente };
 }
 
 export {

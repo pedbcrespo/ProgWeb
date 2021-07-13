@@ -68,18 +68,18 @@ class BancoDados():
         return self.getTabela(comando, colunas)
 
     def getTodosClientes(self):
-        comando = "select * from cliente"
+        comando = "select cliente.id, info_cliente.email, info_cliente.endereco, info_cliente.cep from cliente inner join info_cliente on cliente.id = info_cliente.id"
         colunas = ['id', 'email', 'endereco', 'cep']
         return self.getTabela(comando, colunas)
 
     def getIdCliente(self):
-        comando = "select id from cliente"
+        comando = "select * from cliente"
         colunas = ['id']
         return self.getTabela(comando, colunas)
 
     def getTodasCompras(self):
-        parte_1 = "select carrinho.idCliente as idCliente, cliente.email as cliente, cliente.cep as cep, carrinho.idProduto as idProduto, produto.nome as produto, categoria.nome as categoria, produto.preco, carrinho.finalizado from carrinho"
-        parte_2 = "inner join cliente on carrinho.idCliente = cliente.id"
+        parte_1 = "select carrinho.idCliente as idCliente, info_cliente.email as cliente, info_cliente.cep as cep, carrinho.idProduto as idProduto, produto.nome as produto, categoria.nome as categoria, produto.preco, carrinho.finalizado from carrinho"
+        parte_2 = "inner join info_cliente on carrinho.idCliente = info_cliente.id"
         parte_3 = "inner join produto on carrinho.idProduto = produto.id"
         parte_4 = "inner join categoria on produto.categoriaProduto = categoria.id"
 
@@ -114,7 +114,11 @@ class BancoDados():
         return self.postDado(comando)
 
     def postCliente(self, dado):
-        comando = "INSERT INTO cliente (id, email, endereco, cep) VALUES ({})".format(self.__formata(dado))
+        comando = "insert into cliente value ({})".format(self.__formata(dado))
+        return self.postDado(comando)
+
+    def postInfoCliente(self, dado):
+        comando = "insert into info_cliente value ({})".format(self.__formata(dado))
         return self.postDado(comando)
 
     def postCarrinho(self, dado):
@@ -139,10 +143,16 @@ class BancoDados():
         comando = f"delete from carrinho where idCliente={id_cliente}"
         return self.deleteDado(comando)
     
+    def deleteInfoCliente(self, id_cliente):
+        comando = f"delete form info_cliente where id={id_cliente}"
+        return self.deleteDado(comando)
+
     def deleteCliente(self, id_cliente):
         self.deleteCarrinho(id_cliente)
+        self.deleteInfoCliente(id_cliente)
         comando = f"delete from cliente where id = {id_cliente}"
         return self.deleteDado(comando)
+    
 
 # =================PUT=======================
     def putDado(self, comando):
@@ -158,7 +168,7 @@ class BancoDados():
         email = dado['email']
         endereco = dado['endereco']
         cep = dado['cep']
-        comando = f"update cliente set email='{email}', endereco='{endereco}', cep='{cep}' where id={id_cliente}"
+        comando = 'update cliente set email="{}", endereco="{}", cep="{}" where id={}'.format(email, endereco, cep, id_cliente)
         return self.putDado(comando)
 
     def putCompras(self, id_cliente):

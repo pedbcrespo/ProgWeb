@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ProdCarrinho from '../../componentes/ProdCarrinho';
 import Formulario from '../../componentes/Formulario';
 import { useListaCarrinho } from '../../context/carrinho';
-import { rmv } from '../../models/prodCar';
 import { useCliente } from '../../context/cliente';
-import { putCliente } from '../../server/api';
-import { novaSessao } from '../../models/dadosCliente';
+import { useUrlNome } from '../../context/urlNome';
+import { rmv } from '../../models/prodCar';
+import { postInfoCliente, putCompras } from '../../server/api';
 
 export default function Carrinho() {
     /**Ajeitar o CSS*/
     
+    const { urlNome } = useUrlNome();
     const { lista, setLista } = useListaCarrinho() 
-    const { cliente, setCliente } = useCliente();
+    const { idCliente } = useCliente();
 
     function precoTotal() {
         let total = 0;
@@ -21,13 +22,13 @@ export default function Carrinho() {
         return total.toFixed(2);
     }
 
-    function enviar(num_cartao){
-        console.log(num_cartao)
+    function enviar(num_cartao, dados){
         //atualiza os dados do cliente, finaliza a compra e salva no banco de dados
-        putCliente(cliente['id'], cliente)
-        //inicia uma nova sessao
-        setCliente(novaSessao())
-
+        console.log(`cliente: ${dados}`)
+        postInfoCliente(dados);
+        putCompras(idCliente);
+        
+        window.location.href=`${urlNome}/`
     }
 
     return (
@@ -42,7 +43,7 @@ export default function Carrinho() {
                                     nome={produto.nome}
                                     categoria={produto.categoria}
                                     preco={produto.preco}
-                                    funcao={rmv(setLista, lista, cliente['id'], indice)}
+                                    funcao={rmv(setLista, lista, idCliente, indice)}
                                 />
                             </div>
                         );

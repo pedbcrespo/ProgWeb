@@ -47,27 +47,6 @@ export default function CategoriaEsp(){
                     )
                 })}
             </section>
-
-
-            <aside className="campCarrinho">
-                <h3>Pré visualização carrinho</h3>
-                <ul>
-
-                    {lista.map((prod, indice) => {
-                        return <li key={indice} className="prodCarrinho">
-                            <ProdCarrinho
-                                indice={indice}
-                                id={prod.id}
-                                nome={prod.nome}
-                                categoria={prod.categoria}
-                                preco={prod.preco}
-                                funcao={rmv}
-                            />
-                        </li>
-                    })}
-                </ul>
-
-            </aside>
         </section>
     );
 }

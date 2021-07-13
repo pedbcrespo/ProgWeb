@@ -58,13 +58,18 @@ function getEndereco(setFunction, cep){
 async function postCarrinho(dado){
     return await api.post('/carrinhos', dado).then({'mensagem': "enviado"})
 }
-//Envia dados de um novo cliente
+//Envia dados de um novo cliente, só o id
 async function postCliente(dado){
     return await api.post('/clientes', dado).then(res=>{
         console.log(`${dado} => enviado`)
     })
 }
-
+//Envia os dados mais detalhados do cliente, como o email e o endereço
+async function postInfoCliente(dado){
+    return await api.post(`/info_cliente`, dado).then(res=>{
+        console.log(`${dado} => enviado`)
+    })
+}
 
 //===================PUT========================//
 //Altera dados do cliente
@@ -72,6 +77,12 @@ async function putCliente(id_cliente, dado){
     return await api.put(`/cliente/${id_cliente}`, dado).then({"mensagem":"atualizado"})
 }
 
+async function putCompras(id_cliente){
+    //nesse caso, tanto faz o que vou enviar, nao vou usar porque a unica coisa que vai mudar é o status de finalizado
+    //que no caso, ou fica false ou true, entao só há uma unica possibilidade de mudança.
+    //portanto, tanto faz o dado que ta sendo enviado.
+    return await api.put(`/carrinho/${id_cliente}`, {"finalizado":true}).then({"mensagem":"atualizado"})
+}
 
 //===================DELETE=====================//
 //Deleta um produto de um determinado carrinho
@@ -79,6 +90,9 @@ async function deleteProdutoCarrinho(id_cliente, id_produto){
     return await api.delete(`/carrinho_del/${id_cliente}/${id_produto}`).then({"mensagem":"removido"})
 }
 
+async function deleteCliente(id_cliente){
+    return await api.delete(`/cliente/${id_cliente}`).then({"mensagem":"excluido"})
+}
 //===================fetchFunctions==============//
 
 export {
@@ -91,8 +105,11 @@ export {
 
     postCarrinho,
     postCliente,
+    postInfoCliente,
 
     putCliente,
+    putCompras,
 
     deleteProdutoCarrinho,
+    deleteCliente,
 }

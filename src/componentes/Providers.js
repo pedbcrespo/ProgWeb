@@ -5,22 +5,25 @@ import AdminProvider from '../context/admin';
 import ProdutoProvider from '../context/produto';
 import ListaCatProvider from '../context/categoria';
 import ListaProvider from '../context/carrinho';
+import UrlProvider from '../context/urlNome';
 
-export default function Providers(props){
+export default function Providers(props) {
     return (
-        <AdminProvider>
-            <ClienteProvider>
-                <SessaoProvider>
-                    <ProdutoProvider>
-                        <ListaCatProvider>
-                            <ListaProvider>
-                                {props.children}
-                            </ListaProvider>
-                        </ListaCatProvider>
-                    </ProdutoProvider>
-                </SessaoProvider>
-            </ClienteProvider>
-        </AdminProvider>
+        <UrlProvider>
+            <AdminProvider>
+                <ClienteProvider>
+                    <SessaoProvider>
+                        <ProdutoProvider>
+                            <ListaCatProvider>
+                                <ListaProvider>
+                                    {props.children}
+                                </ListaProvider>
+                            </ListaCatProvider>
+                        </ProdutoProvider>
+                    </SessaoProvider>
+                </ClienteProvider>
+            </AdminProvider>
+        </UrlProvider>
     );
 
 }

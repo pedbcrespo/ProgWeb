@@ -9,21 +9,20 @@ function geradorId(lista) {
     return id;
 }
 
-function novaSessao(setFunction){
+function novaSessao(){
     const novo_cliente = {
         id: geradorId(),
         email:'',
         cep:'',
         endereco:''
     };
-    setFunction(false);
     return novo_cliente;
 }
 
 function inicializaSessao(setFunctionValidacao, cliente, validacao){
     if(!validacao){
         setFunctionValidacao(true);
-        postCliente(cliente);
+        postCliente({id:cliente.id});
     }
 }
 
