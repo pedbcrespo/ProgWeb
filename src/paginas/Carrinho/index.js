@@ -4,8 +4,7 @@ import Formulario from '../../componentes/Formulario';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
 import { useUrlNome } from '../../context/urlNome';
-import { rmv } from '../../models/prodCar';
-import { postInfoCliente, putCompras } from '../../server/api';
+import { rmv, enviar } from '../../models/prodCar';
 
 export default function Carrinho() {
     /**Ajeitar o CSS*/
@@ -20,15 +19,6 @@ export default function Carrinho() {
             total += lista[i].preco;
         }
         return total.toFixed(2);
-    }
-
-    function enviar(num_cartao, dados){
-        //atualiza os dados do cliente, finaliza a compra e salva no banco de dados
-        console.log(`cliente: ${dados}`)
-        postInfoCliente(dados);
-        putCompras(idCliente);
-        
-        window.location.href=`${urlNome}/`
     }
 
     return (
@@ -51,7 +41,7 @@ export default function Carrinho() {
                     <h3>Total: R$ {precoTotal()}</h3>
                 </section>
                 <div className="campFormulario">
-                    <Formulario enviar={enviar}/>
+                    <Formulario enviar={enviar(lista, urlNome, idCliente)}/>
                 </div>
             </section>
 

@@ -14,11 +14,11 @@ import { useEffect } from 'react';
 
 export default function App() {
 
-  const {cliente} = useCliente();
+  const {idCliente} = useCliente();
   const {sessao, setSessao} = useSessao();
 
   useEffect(()=>{
-    inicializaSessao(setSessao, cliente, sessao);
+    inicializaSessao(setSessao, idCliente, sessao);
   }, [])
 
   return (

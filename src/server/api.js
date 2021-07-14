@@ -61,13 +61,13 @@ async function postCarrinho(dado){
 //Envia dados de um novo cliente, só o id
 async function postCliente(dado){
     return await api.post('/clientes', dado).then(res=>{
-        console.log(`${dado} => enviado`)
+        console.log(res.data)
     })
 }
 //Envia os dados mais detalhados do cliente, como o email e o endereço
-async function postInfoCliente(dado){
-    return await api.post(`/info_cliente`, dado).then(res=>{
-        console.log(`${dado} => enviado`)
+async function postInfoCliente({id, email, endereco, cep}){
+    return await api.post('/info_cliente', {id, email, endereco, cep}).then(res=>{
+        console.log(res.data)
     })
 }
 
@@ -84,6 +84,9 @@ async function putCompras(id_cliente){
     return await api.put(`/carrinho/${id_cliente}`, {"finalizado":true}).then({"mensagem":"atualizado"})
 }
 
+async function putEstoque(id_produto){
+    return await api.put(`/estoque/${id_produto}`, {"quantidade":0}).then({"mensagem":"atualizado"})
+}
 //===================DELETE=====================//
 //Deleta um produto de um determinado carrinho
 async function deleteProdutoCarrinho(id_cliente, id_produto){
@@ -109,6 +112,7 @@ export {
 
     putCliente,
     putCompras,
+    putEstoque,
 
     deleteProdutoCarrinho,
     deleteCliente,

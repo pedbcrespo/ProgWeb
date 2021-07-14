@@ -19,6 +19,7 @@ export default function Formulario({ enviar }) {
 
     function prepararEnviar(event) {
         event.preventDefault();//lembrar de apagar dps
+        console.log({id:idCliente, email:email, endereco:endereco, cep:cep})
         enviar(numCartao, {id:idCliente, email:email, endereco:endereco, cep:cep})
     }
 
@@ -61,7 +62,7 @@ export default function Formulario({ enviar }) {
                 }}
                 error={!erroCep['valido']}
                 onBlur={()=>{
-                    setErroCep(validarCep(cliente.cep))
+                    setErroCep(validarCep(cep))
                 }} 
                 fullWidth/>
             <br></br>

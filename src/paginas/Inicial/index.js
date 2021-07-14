@@ -10,7 +10,7 @@ export default function Inicial() {
 
     const { listaProdutos } = useProdutos();
     const { lista, setLista } = useListaCarrinho();
-    const { cliente } = useCliente();
+    const { idCliente } = useCliente();
 
     return (
         <section className="campInicial">
@@ -24,7 +24,7 @@ export default function Inicial() {
                                 categoria={prod.categoria}
                                 // img={prod.caminhoImagem}
                                 preco={prod.preco}
-                                funcao={add(setLista, lista, cliente.id)} 
+                                funcao={add(setLista, lista, idCliente)} 
                                 />
                         </div>
                     )

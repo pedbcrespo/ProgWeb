@@ -72,7 +72,7 @@ class BancoDados():
         colunas = ['id', 'email', 'endereco', 'cep']
         return self.getTabela(comando, colunas)
 
-    def getIdCliente(self):
+    def getIdClientes(self):
         comando = "select * from cliente"
         colunas = ['id']
         return self.getTabela(comando, colunas)
@@ -93,6 +93,11 @@ class BancoDados():
         inner_parte = "inner join produto inner join categoria where carrinho.idProduto = produto.id and produto.categoriaProduto = categoria.id and carrinho.finalizado = 0 and carrinho.idCliente = {}".format(id_cliente)
         comando = f"{select_parte} {inner_parte}"
         return self.getTabela(comando, ['id', 'nome', 'categoria', 'preco'])
+
+    def getProdutoEstoque(self, id_produto):
+        comando = f"select * from estoque where id = {id_produto}"
+        colunas = ["id", "quantidade"]
+        return self.getTabela(comando, colunas)[0]
 
 # =================POST=======================
     def postDado(self, comando):
@@ -117,12 +122,12 @@ class BancoDados():
         comando = "insert into cliente value ({})".format(self.__formata(dado))
         return self.postDado(comando)
 
-    def postInfoCliente(self, dado):
-        comando = "insert into info_cliente value ({})".format(self.__formata(dado))
-        return self.postDado(comando)
-
     def postCarrinho(self, dado):
         comando = "INSERT INTO carrinho (idCliente, idProduto) VALUES ({})".format(self.__formata(dado))
+        return self.postDado(comando)
+
+    def postInfoCliente(self, dado):
+        comando = "insert into info_cliente (id, email, endereco, cep) values ({})".format(self.__formata(dado))
         return self.postDado(comando)
 
 # =================DELETE=======================
@@ -168,11 +173,16 @@ class BancoDados():
         email = dado['email']
         endereco = dado['endereco']
         cep = dado['cep']
-        comando = 'update cliente set email="{}", endereco="{}", cep="{}" where id={}'.format(email, endereco, cep, id_cliente)
+        comando = 'update info_cliente set email="{}", endereco="{}", cep="{}" where id={}'.format(email, endereco, cep, id_cliente)
         return self.putDado(comando)
 
     def putCompras(self, id_cliente):
-        comando = f"update carrinho set finalizado = true where idCliente={id_cliente}"
+        comando = f"update carrinho set finalizado=true where idCliente={id_cliente}"
+        return self.putDado(comando)
+
+    def putEstoque(self, id_produto):
+        quantidade = self.getProdutoEstoque(id_produto)['quantidade'] - 1
+        comando = f"update estoque set quantidade={quantidade} where id={id_produto}"
         return self.putDado(comando)
 
 if __name__ == '__main__':
@@ -181,9 +191,4 @@ if __name__ == '__main__':
     # print(bd.getTodosClientes())
     # print(bd.getTodasCompras())
     # print(bd.getProdutoCarrinho())
-    print(bd.postCliente({
-        "id":3,
-        "email":"ped-crespo@hotmail.com",
-        "endereco":"Cabo Frio, Rio de Janeiro",
-        "cep":"28999123"
-    }))
+    print(bd.postInfoCliente({"id":4267, "email": "p-crespo@hotmail.com", "endereco": "Cabo Frio", "cep":"22999000"}))

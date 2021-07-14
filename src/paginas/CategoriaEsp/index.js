@@ -1,13 +1,15 @@
 import React from 'react';
 import Produto from '../../componentes/Produto';
-import ProdCarrinho from '../../componentes/ProdCarrinho';
+// import ProdCarrinho from '../../componentes/ProdCarrinho';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useParams } from 'react-router-dom';
 import { useProdutos } from '../../context/produto';
-
+import { useCliente } from '../../context/cliente';
+import { add } from '../../models/prodCar'
 
 export default function CategoriaEsp(){
 
+    const { idCliente } = useCliente();
     const { listaProdutos } = useProdutos()
     const { lista, setLista } = useListaCarrinho();
 
@@ -20,15 +22,6 @@ export default function CategoriaEsp(){
         return lista_filtrada
     }
 
-    function add(dado) {
-        setLista([...lista, dado]);
-        console.log(lista)
-    }
-
-    function rmv(indice){
-        lista.splice(indice, 1);
-        setLista(lista);
-    }
 
     return (
         <section className="campInicial">
@@ -41,7 +34,7 @@ export default function CategoriaEsp(){
                                 nome={prod.nome}
                                 categoria={prod.categoria}
                                 preco={prod.preco}
-                                funcao={add} 
+                                funcao={add(setLista, lista, idCliente)} 
                                 />
                         </div>
                     )

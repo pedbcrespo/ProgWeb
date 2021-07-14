@@ -70,7 +70,7 @@ class Cliente(Resource, Conexao):
 
 class Clientes(Resource, Conexao):
     def get(self):
-        return self.bd.getTodosClientes()
+        return self.bd.getIdClientes()
 
     def post(self):
         dado_request = json.loads(request.data)
