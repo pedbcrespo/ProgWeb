@@ -1,7 +1,6 @@
 import pymysql
 import datetime
 import decimal
-# import json
 
 # arquivo de comandos de requisição para o banco de dados
 
@@ -99,6 +98,15 @@ class BancoDados():
         colunas = ["id", "quantidade"]
         return self.getTabela(comando, colunas)[0]
 
+    def getEstoque(self):
+        comando_parte_1 = "select produto.id, produto.nome, categoria.nome, estoque.quantidade from produto"
+        comando_parte_2 = "inner join categoria on produto.categoriaProduto = categoria.id"
+        comando_parte_3 = "inner join  estoque on estoque.id = produto.id"
+        comando = f"{comando_parte_1} {comando_parte_2} {comando_parte_3}"
+        colunas = ['id', 'nome', 'categoria', 'quantidade']
+        return self.getTabela(comando, colunas)
+
+
 # =================POST=======================
     def postDado(self, comando):
         try:
@@ -130,6 +138,8 @@ class BancoDados():
         comando = "insert into info_cliente (id, email, endereco, cep) values ({})".format(self.__formata(dado))
         return self.postDado(comando)
 
+
+
 # =================DELETE=======================
     def deleteDado(self, comando):
         try:
@@ -159,6 +169,7 @@ class BancoDados():
         return self.deleteDado(comando)
     
 
+
 # =================PUT=======================
     def putDado(self, comando):
         try:
@@ -168,7 +179,6 @@ class BancoDados():
         except:
             return {"status": 0, "mensagem": "erro ao atualizar dado"}
 
-
     def putCliente(self, id_cliente, dado):
         email = dado['email']
         endereco = dado['endereco']
@@ -177,7 +187,7 @@ class BancoDados():
         return self.putDado(comando)
 
     def putCompras(self, id_cliente):
-        comando = f"update carrinho set finalizado=true where idCliente={id_cliente}"
+        comando = f"update carrinho set finalizado = 1 where idCliente = {id_cliente}"
         return self.putDado(comando)
 
     def putEstoque(self, id_produto):
@@ -185,6 +195,7 @@ class BancoDados():
         comando = f"update estoque set quantidade={quantidade} where id={id_produto}"
         return self.putDado(comando)
 
+        
 if __name__ == '__main__':
     bd = BancoDados()
     # print(bd.getTodosProdutos())

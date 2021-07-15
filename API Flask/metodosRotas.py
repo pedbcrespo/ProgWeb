@@ -98,3 +98,11 @@ class Carrinho(Resource, Conexao):
 class TodasCompras(Resource, Conexao):
     def get(self):
         return self.bd.getTodasCompras()
+
+class Estoque(Resource, Conexao):
+    def put(self, id_produto):
+        return self.bd.putEstoque(id_produto)
+
+class TodoEstoque(Resource, Conexao):
+    def get(self):
+        return self.bd.getEstoque()

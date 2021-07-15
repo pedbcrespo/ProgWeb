@@ -28,10 +28,10 @@ function enviar(carrinho, urlNome, idCliente) {
         //atualiza os dados do cliente, finaliza a compra e salva no banco de dados
         console.log(num_cartao, {id, email, endereco, cep})
         postInfoCliente({id, email, endereco, cep});
-        // putCompras(idCliente);
+        putCompras(idCliente);
 
-        // atualizarEstoque(carrinho);
-        // window.location.href=`${urlNome}/`
+        atualizarEstoque(carrinho);
+        window.location.href=`${urlNome}/`
     }
 }
 
