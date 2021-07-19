@@ -1,0 +1,110 @@
+import pymysql
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from config import db
+import json
+
+class Aux:
+    def dicionario(self, **dicionario):
+        return dicionario
+
+
+class Cliente(db.Model, Aux):
+    id = db.Column(db.Integer, primary_key=True)
+    info = db.relationship('Info_cliente', backref='comprador')
+
+    def __init__(self, id):
+        self.id = id
+
+    def __str__(self):
+        return self.dicionario(id=self.id)
+
+
+class Info_cliente(db.Model, Aux):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(50))
+    endereco = db.Column(db.String(255))
+    cep = db.Column(db.String(50))
+    
+    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
+
+    def __init__(self, id, email, endereco, cep, cliente_id):
+        self.id = id
+        self.email = email 
+        self.endereco = endereco
+        self.cep = cep
+        self.cliente_id = cliente_id 
+
+    def __str__(self):
+        return self.dicionario(id=self.id, email=self.email, endereco=self.endereco, 
+        cep=self.cep)
+
+
+class Categoria(db.Model, Aux):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(50))
+    produto = db.relationship('Produto', backref="categoria_produto")
+
+    def __init__(self, id, nome):
+        self.id = id
+        self.nome = nome
+
+    def __str__(self):
+        return self.dicionario(id=self.id, nome=self.nome)
+
+
+class Produto(db.Model, Aux):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(50))
+    categoriaProduto = db.Column(db.Integer, db.ForeignKey('categoria.id'))
+    preco = db.Column(db.Float)
+    caminhoImagem = db.Column(db.LargeBinary)
+
+    def __init__(self, id, nome, id_categoria, preco, imagem):
+        self.id = id
+        self.nome = nome
+        self.categoriaProduto = id_categoria
+        self.preco = preco
+        self.caminhoImagem = imagem
+
+    def __str__(self):
+        return str(self.dicionario(id=self.id, nome=self.nome, categoria=self.categoriaProduto,
+        preco=self.preco))
+
+
+class Estoque(db.Model, Aux):
+    id = db.Column(db.Integer, db.ForeignKey('produto.id'), primary_key=True)
+    quantidade = db.Column(db.Integer)    
+
+    def __init__(self, id_produto, quantidade):
+        self.id = id_produto
+        self.quantidade = quantidade
+
+    def __str__(self):
+        return self.dicionario(id=self.id, quantidade=self.quantidade)
+
+
+class Carrinho(db.Model, Aux):
+    idCliente = db.Column(db.Integer, db.ForeignKey('cliente.id'), primary_key=True)
+    idProduto = db.Column(db.Integer, db.ForeignKey('produto.id'))
+    finalizado = db.Column(db.Boolean)
+
+    def __init__(self, idCliente, idProduto, finalizado=False):
+        self.idCliente = idCliente
+        self.idProduto = idProduto
+        self.finalizado = finalizado
+
+    def __str__(self):
+        return self.dicionario(idCliente=self.idCliente, idProduto=self.idProduto,
+        finalizado=self.finalizado)
+
+if __name__ == '__main__':
+    # novo = Cliente(2)
+    novo = Carrinho(1,2)
+
+    #o equivalente ao POST: 
+    # db.session.add(novo)
+    # db.session.commit()
+    res = Produto.query.all()
+    for p in res:
+        print(p)
