@@ -8,6 +8,7 @@ class Aux:
     def dicionario(self, **dicionario):
         return dicionario
 
+# Tirando a classe Aux, todas as outras representam uma tabela do banco de dados
 
 class Cliente(db.Model, Aux):
     id = db.Column(db.Integer, primary_key=True)
@@ -72,6 +73,7 @@ class Produto(db.Model, Aux):
         preco=self.preco))
 
 
+
 class Estoque(db.Model, Aux):
     id = db.Column(db.Integer, db.ForeignKey('produto.id'), primary_key=True)
     quantidade = db.Column(db.Integer)    
@@ -99,12 +101,27 @@ class Carrinho(db.Model, Aux):
         finalizado=self.finalizado)
 
 if __name__ == '__main__':
-    # novo = Cliente(2)
-    novo = Carrinho(1,2)
 
-    #o equivalente ao POST: 
-    # db.session.add(novo)
+    # Para adicionar no banco de dados, uso o metodo db.session.add(objeto)
+    # Depois uso o db.session.commit()
+    # Exemplo: 
+    #   novo = Carrinho(1,2)
+    #   db.session.add(novo)
+    #   db.session.commit()
+
+    # Delete funciona de forma similar:
+    # db.session.delete(objeto)
     # db.session.commit()
-    res = Produto.query.all()
-    for p in res:
-        print(p)
+
+    # Para fazer um SELECT, buscando todos os dados, uso, o NomeClasse.query.all()
+    # Exemplo:
+    #   res = Produto.query.all()
+    #   for p in res:
+    #       print(p)
+    
+    # Para selecionar de acordo com algum criterio: usar Classe.query.filter_by(coluna=valor).all()
+
+    # lista = Produto.query.filter_by(categoriaProduto=1).all()
+    # for i in lista:
+    #     print(i)
+    pass
