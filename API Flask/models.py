@@ -2,7 +2,7 @@ import pymysql
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import db
-import json
+
 
 class Aux:
     def dicionario(self, **dicionario):
@@ -125,5 +125,7 @@ if __name__ == '__main__':
     # for i in lista:
     #     print(i)
 
-    res = Estoque.query.filter_by(id=5).first()
-    print(res)
+    # res = Estoque.query.filter_by(id=5).first()
+    res = Produto.query.all()
+
+    print([i.__str__() for i in res])
