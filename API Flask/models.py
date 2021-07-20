@@ -6,7 +6,7 @@ import json
 
 class Aux:
     def dicionario(self, **dicionario):
-        return dicionario
+        return str(dicionario)
 
 # Tirando a classe Aux, todas as outras representam uma tabela do banco de dados
 
@@ -69,8 +69,8 @@ class Produto(db.Model, Aux):
         self.caminhoImagem = imagem
 
     def __str__(self):
-        return str(self.dicionario(id=self.id, nome=self.nome, categoria=self.categoriaProduto,
-        preco=self.preco))
+        return self.dicionario(id=self.id, nome=self.nome, categoria=self.categoriaProduto,
+        preco=self.preco)
 
 
 
@@ -124,4 +124,6 @@ if __name__ == '__main__':
     # lista = Produto.query.filter_by(categoriaProduto=1).all()
     # for i in lista:
     #     print(i)
-    pass
+
+    res = Estoque.query.filter_by(id=5).first()
+    print(res)
