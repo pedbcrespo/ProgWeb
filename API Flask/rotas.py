@@ -87,7 +87,7 @@ class CarrinhoRota(Resource):
 
     def post(self):
         novo_carrinho = json.loads(request.data)
-        return self.carrinho.adicionar(
+        return self.carrinho.adicionar_produto(
             novo_carrinho["idCliente"],
             novo_carrinho["idProduto"]
         )

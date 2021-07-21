@@ -6,10 +6,14 @@ import dados_bd as dbd
 
 conn = "mysql+pymysql://{}:{}@{}/{}".format(dbd.usuario, dbd.senha, dbd.host, dbd.bancoDados)
 
-app = Flask('models')
+app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = conn
 db = SQLAlchemy(app)
 api = Api(app)
 CORS(app)
 
-
+cors = CORS(app, resources={
+    r"/*":{
+        "origins":"*"
+    }
+})
