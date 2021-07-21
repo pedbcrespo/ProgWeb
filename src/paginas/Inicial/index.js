@@ -3,7 +3,8 @@ import Produto from '../../componentes/Produto';
 // import ProdCarrinho from '../../componentes/ProdCarrinho';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
-import { rmv, add } from '../../models/prodCar';
+// import { rmv, add } from '../../models/prodCar';
+import { add } from '../../models/prodCar';
 import { useProdutos } from '../../context/produto';
 
 export default function Inicial() {

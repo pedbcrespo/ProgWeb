@@ -9,16 +9,16 @@ export default function ProdutoProvider({ children }) {
     const [listaProdutos, setListaProdutos] = useState([])
     const [carregado, setCarregado] = useState(false);
 
-    function carregaDados(){
-        if(!carregado){
-            getProdutos(setListaProdutos)
-            setCarregado(true);
-        }
-    }
+    // function carregaDados(){
+    //     if(!carregado){
+    //         getProdutos(setListaProdutos)
+    //         setCarregado(true);
+    //     }
+    // }
 
     useEffect(()=>{
-        carregaDados()
-    }, [listaProdutos, carregado]);
+        getProdutos(setListaProdutos)
+    }, []);
     
     return (
         <ProdutoContext.Provider value={{ listaProdutos, setListaProdutos, }}>

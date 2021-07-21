@@ -50,7 +50,6 @@ class Categoria(db.Model, Aux):
     def dic(self):
         return self.dicionario(id=self.id, nome=self.nome)
 
-
 class Produto(db.Model, Aux):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(50))
@@ -66,10 +65,10 @@ class Produto(db.Model, Aux):
         self.caminhoImagem = imagem
 
     def dic(self):
-        return self.dicionario(id=self.id, nome=self.nome, categoria=self.categoriaProduto,
+        # return self.dicionario(id=self.id, nome=self.nome, categoriaProduto=self.categoriaProduto,
+        # preco=self.preco, caminhoImagem=self.caminhoImagem)
+        return self.dicionario(id=self.id, nome=self.nome, categoriaProduto=self.categoriaProduto,
         preco=self.preco)
-
-
 
 class Estoque(db.Model, Aux):
     id = db.Column(db.Integer, db.ForeignKey('produto.id'), primary_key=True)
@@ -81,7 +80,6 @@ class Estoque(db.Model, Aux):
 
     def dic(self):
         return self.dicionario(id=self.id, quantidade=self.quantidade)
-
 
 class Carrinho(db.Model, Aux):
     idCliente = db.Column(db.Integer, db.ForeignKey('cliente.id'), primary_key=True)

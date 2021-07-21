@@ -31,7 +31,8 @@ function getCategorias(setFunction) {
 }
 //mostra todas as compras registradas
 function getTodasCompras(setFunction) {
-    fetch('http://localhost:5000/todas_compras')
+    // fetch('http://localhost:5000/todas_compras')
+    fetch('http://localhost:5000/carrinhos')
         .then(res => res.json())
         .then((data) => {
             setFunction(data)
@@ -66,8 +67,8 @@ async function postCliente(dado){
     })
 }
 //Envia os dados mais detalhados do cliente, como o email e o endereço
-async function postInfoCliente({id, email, endereco, cep, cliente_id}){
-    return await api.post('/info_cliente', {id, email, endereco, cep, cliente_id}).then(res=>{
+async function postInfoCliente({email, endereco, cep, cliente_id}){
+    return await api.post('/info_cliente', {email, endereco, cep, cliente_id}).then(res=>{
         console.log(res.data)
     })
 }

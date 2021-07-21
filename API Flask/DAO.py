@@ -19,11 +19,11 @@ class ClienteDAO:
 
     def buscar_cliente(self, id):
         cliente = Cliente.query.get(id)
-        return cliente
+        return cliente.dic()
 
     def dados_cliente(self, id):
         info = Info_cliente.query.filter_by(cliente_id=id).first()
-        return info
+        return info.dic()
 
     def buscar_todos_cliente_info(self):
         lista_info_cliente = Info_cliente.query.all()
@@ -65,6 +65,7 @@ class CarrinhoDAO:
 class ProdutoDAO:
     def adicionar(self, id, nome, categoria_id, preco, imagem):
         db.session.add(Produto(id, nome, categoria_id, preco, imagem))
+        db.session.commit()
         return {"id":id, "nome":nome, "categoria":categoria_id, "preco":preco}
 
     def deletar(self, id):
@@ -106,3 +107,12 @@ class CategoriaDAO:
     def buscar_todos(self):
         lista_categoria = Categoria.query.all()
         return [categoria.dic() for categoria in lista_categoria]
+
+    def buscar(self, id_categoria):
+        categoria = Categoria.query.get(id_categoria)
+        return categoria.dic()
+
+if __name__ == '__main__':
+    p = CategoriaDAO()
+    print(p.buscar(2))
+    
