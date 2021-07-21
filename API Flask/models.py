@@ -6,7 +6,7 @@ from config import db
 
 class Aux:
     def dicionario(self, **dicionario):
-        return str(dicionario)
+        return dicionario
 
 # Tirando a classe Aux, todas as outras representam uma tabela do banco de dados
 
@@ -17,9 +17,8 @@ class Cliente(db.Model, Aux):
     def __init__(self, id):
         self.id = id
 
-    def __str__(self):
+    def dic(self):
         return self.dicionario(id=self.id)
-
 
 class Info_cliente(db.Model, Aux):
     id = db.Column(db.Integer, primary_key=True)
@@ -36,10 +35,9 @@ class Info_cliente(db.Model, Aux):
         self.cep = cep
         self.cliente_id = cliente_id 
 
-    def __str__(self):
+    def dic(self):
         return self.dicionario(id=self.id, email=self.email, endereco=self.endereco, 
         cep=self.cep)
-
 
 class Categoria(db.Model, Aux):
     id = db.Column(db.Integer, primary_key=True)
@@ -50,7 +48,7 @@ class Categoria(db.Model, Aux):
         self.id = id
         self.nome = nome
 
-    def __str__(self):
+    def dic(self):
         return self.dicionario(id=self.id, nome=self.nome)
 
 
@@ -68,7 +66,7 @@ class Produto(db.Model, Aux):
         self.preco = preco
         self.caminhoImagem = imagem
 
-    def __str__(self):
+    def dic(self):
         return self.dicionario(id=self.id, nome=self.nome, categoria=self.categoriaProduto,
         preco=self.preco)
 
@@ -82,7 +80,7 @@ class Estoque(db.Model, Aux):
         self.id = id_produto
         self.quantidade = quantidade
 
-    def __str__(self):
+    def dic(self):
         return self.dicionario(id=self.id, quantidade=self.quantidade)
 
 
@@ -96,7 +94,7 @@ class Carrinho(db.Model, Aux):
         self.idProduto = idProduto
         self.finalizado = finalizado
 
-    def __str__(self):
+    def dic(self):
         return self.dicionario(idCliente=self.idCliente, idProduto=self.idProduto,
         finalizado=self.finalizado)
 
@@ -126,6 +124,6 @@ if __name__ == '__main__':
     #     print(i)
 
     # res = Estoque.query.filter_by(id=5).first()
-    res = Produto.query.all()
+    res = Produto.query.get(5)
 
-    print([i.__str__() for i in res])
+    print(res)
