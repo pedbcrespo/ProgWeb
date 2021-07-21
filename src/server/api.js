@@ -67,8 +67,8 @@ async function postCliente(dado){
     })
 }
 //Envia os dados mais detalhados do cliente, como o email e o endereço
-async function postInfoCliente({email, endereco, cep, cliente_id}){
-    return await api.post('/info_cliente', {email, endereco, cep, cliente_id}).then(res=>{
+async function postInfoCliente(dados_cliente){
+    return await api.post('/info_cliente', dados_cliente).then(res=>{
         console.log(res.data)
     })
 }

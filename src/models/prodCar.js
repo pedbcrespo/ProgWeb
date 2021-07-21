@@ -1,4 +1,4 @@
-import { postCarrinho, deleteProdutoCarrinho, putEstoque, putCompras, postInfoCliente } from '../server/api';
+import { postCarrinho, deleteProdutoCarrinho, putCompras, postInfoCliente } from '../server/api';
 
 //Esse modulo fica as funçoes relativas a manipulação dos produtos na aplicação
 
@@ -24,21 +24,12 @@ function add(setFuncao, lista, id_cliente) {
 }
 
 function enviar(carrinho, urlNome, idCliente) {
-    return (num_cartao, {id, email, endereco, cep})=>{
+    return (num_cartao, dados_cliente)=>{
         //atualiza os dados do cliente, finaliza a compra e salva no banco de dados
-        console.log(num_cartao, {id, email, endereco, cep})
-        postInfoCliente({id, email, endereco, cep});
+        //dados_cliente = {email, endereco, cep, cliente_id}
+        postInfoCliente(dados_cliente);
         putCompras(idCliente);
-
-        atualizarEstoque(carrinho);
         window.location.href=`${urlNome}/`
-    }
-}
-
-
-function atualizarEstoque(carrinho){
-    for(let i in carrinho){
-        putEstoque(carrinho[i]['id'])
     }
 }
 
