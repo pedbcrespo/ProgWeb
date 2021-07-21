@@ -28,8 +28,7 @@ class Info_cliente(db.Model, Aux):
     
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
 
-    def __init__(self, id, email, endereco, cep, cliente_id):
-        self.id = id
+    def __init__(self, email, endereco, cep, cliente_id):
         self.email = email 
         self.endereco = endereco
         self.cep = cep
@@ -124,6 +123,7 @@ if __name__ == '__main__':
     #     print(i)
 
     # res = Estoque.query.filter_by(id=5).first()
-    res = Produto.query.get(5)
+    # res = Produto.query.get(5)
 
-    print(res)
+    db.session.add(Info_cliente('p-crespo@hotmail.com', "Cabo Frio", "22999000", 1))
+    db.session.commit()

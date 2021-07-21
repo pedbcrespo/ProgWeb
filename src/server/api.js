@@ -37,6 +37,7 @@ function getTodasCompras(setFunction) {
             setFunction(data)
         })
 }
+
 //Busca o carrinho de um determinado cliente
 function getCarrinho(setFunction, id_cliente){
     fetch(`http://localhost:5000/carrinho/${id_cliente}`)
@@ -65,8 +66,8 @@ async function postCliente(dado){
     })
 }
 //Envia os dados mais detalhados do cliente, como o email e o endereço
-async function postInfoCliente({id, email, endereco, cep}){
-    return await api.post('/info_cliente', {id, email, endereco, cep}).then(res=>{
+async function postInfoCliente({id, email, endereco, cep, cliente_id}){
+    return await api.post('/info_cliente', {id, email, endereco, cep, cliente_id}).then(res=>{
         console.log(res.data)
     })
 }

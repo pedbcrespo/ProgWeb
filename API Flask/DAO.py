@@ -7,10 +7,10 @@ class ClienteDAO:
         db.session.commit()
         return {"id":id}
 
-    def adiciona_info(self, id_info, email, endereco, cep, id_cliente):
-        db.session.add(Info_cliente(id_info, email, endereco, cep, id_cliente))
+    def adiciona_info(self, email, endereco, cep, id_cliente):
+        db.session.add(Info_cliente(email, endereco, cep, id_cliente))
         db.session.commit()
-        return {"id":id_info}
+        return {"id":id_cliente}
 
     def deletar(self, id):
         db.session.delete(Cliente.query.get(id))
@@ -28,6 +28,7 @@ class ClienteDAO:
     def buscar_todos_cliente_info(self):
         lista_info_cliente = Info_cliente.query.all()
         return [info.dic() for info in lista_info_cliente]
+
 
 class CarrinhoDAO:
     def adicionar_produto(self, id_cliente, id_produto):
@@ -56,6 +57,11 @@ class CarrinhoDAO:
         compra_atual = Carrinho.query.filter_by(idCliente=id_cliente).all()
         return [compra.dic() for compra in compra_atual]
 
+    def buscar_todos(self):
+        lista_carrinhos = Carrinho.query.all()
+        return [carrinho.dic() for carrinho in lista_carrinhos]
+
+
 class ProdutoDAO:
     def adicionar(self, id, nome, categoria_id, preco, imagem):
         db.session.add(Produto(id, nome, categoria_id, preco, imagem))
@@ -83,6 +89,7 @@ class ProdutoDAO:
     def buscar_todos(self):
         lista_produtos = Produto.query.all()
         return [produto.dic() for produto in lista_produtos]
+
 
 class CategoriaDAO:
     def adicionar(self, id, nome):
