@@ -83,7 +83,7 @@ class Estoque(db.Model, Aux):
 
 class Carrinho(db.Model, Aux):
     idCliente = db.Column(db.Integer, db.ForeignKey('cliente.id'), primary_key=True)
-    idProduto = db.Column(db.Integer, db.ForeignKey('produto.id'))
+    idProduto = db.Column(db.Integer, db.ForeignKey('produto.id'), primary_key=True)
     finalizado = db.Column(db.Boolean)
 
     def __init__(self, idCliente, idProduto, finalizado=False):

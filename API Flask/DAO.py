@@ -37,19 +37,24 @@ class CarrinhoDAO:
         return {"idCliente": id_cliente, "idProduto":id_produto}
 
     def finalizar_compra(self, id_cliente):
-        compra_atual = Carrinho.query.filter_by(idCliente=id_cliente)
+        compra_atual = Carrinho.query.filter_by(idCliente=id_cliente).all()
         
         for compra in compra_atual:
             compra.finalizado = True
-            produto_estoque = db.session.get(compra.idProduto)
+            produto_estoque = Estoque.query.get(compra.idProduto)
             produto_estoque.quantidade -= 1
         
         db.session.commit()
+
         return {"status": "compra finalizada"}
 
     def remover_produto(self, id_cliente, id_produto):
-        produto = Carrinho.query.filter_by(idCliente = id_cliente, idProduto=id_produto).first()
-        db.session.delete(produto)
+        lista_carrinho = Carrinho.query.filter_by(idCliente=id_cliente).all()
+
+        for produto in lista_carrinho:
+            if produto.idProduto == id_produto:
+                db.session.delete(produto)
+                break
         db.session.commit()
         return {"idCliente": id_cliente, "idProduto":id_produto}
 
@@ -113,6 +118,5 @@ class CategoriaDAO:
         return categoria.dic()
 
 if __name__ == '__main__':
-    p = CategoriaDAO()
-    print(p.buscar(2))
-    
+    p = CarrinhoDAO()
+    print(p.finalizar_compra(4103))
