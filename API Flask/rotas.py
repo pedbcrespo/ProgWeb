@@ -27,14 +27,16 @@ class ClienteComDados(Resource):
         return self.cliente.deletar(id_cliente)
 
 class InfoCliente(Resource):
+    cliente = ClienteDAO()
     def post(self):
         dados_cliente = json.loads(request.data)
         return self.cliente.adiciona_info(
             dados_cliente['email'],
             dados_cliente['endereco'],
             dados_cliente['cep'],
-            dados_cliente['cliente_id']
+            dados_cliente['idCliente']
         )
+
 
 
 class ProdutoRota(Resource):

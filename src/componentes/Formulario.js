@@ -19,11 +19,11 @@ export default function Formulario({ enviar }) {
 
     function prepararEnviar(event) {
         event.preventDefault();
-        dados_cliente = {
-            "email":email, 
-            "endereco":endereco, 
-            "cep":cep, 
-            "cliente_id":idCliente
+        let dados_cliente = {
+            email, 
+            endereco, 
+            cep, 
+            idCliente
         };
         enviar(numCartao, dados_cliente);
     }

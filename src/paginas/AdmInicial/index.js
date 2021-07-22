@@ -1,9 +1,23 @@
 import React from 'react';
+import AdmProduto from '../../componentes/AdmProduto';
+import { useProdutos } from '../../context/produto';
+
 export default function AdmInicial() {
+
+    const {listaProdutos, setListaProdutos} = useProdutos();
 
     return (
         <>
-            <h4>Aqui fica a pagina inicial do Administrador</h4>
+            {listaProdutos.map((produto, index)=>{
+                return <div key={index}>
+                    <AdmProduto
+                        id={produto.id}
+                        nome={produto.nome}
+                        categoria={produto.categoria}
+                        preco={produto.preco}
+                    />
+                </div>
+            })}
         </>
     );
 }
