@@ -68,7 +68,7 @@ class CarrinhoDAO:
 
 
 class ProdutoDAO:
-    def adicionar(self, id, nome, categoria_id, preco, imagem):
+    def adicionar(self, nome, categoria_id, preco, imagem):
         db.session.add(Produto(id, nome, categoria_id, preco, imagem))
         db.session.commit()
         return {"id":id, "nome":nome, "categoria":categoria_id, "preco":preco}

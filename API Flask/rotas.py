@@ -38,7 +38,6 @@ class InfoCliente(Resource):
         )
 
 
-
 class ProdutoRota(Resource):
     produto = ProdutoDAO()
     def get(self):
@@ -47,7 +46,6 @@ class ProdutoRota(Resource):
     def post(self):
         novo_produto = json.loads(request.data)
         return self.produto.adicionar(
-            novo_produto["id"],
             novo_produto["nome"], 
             novo_produto["categoriaProduto"],
             novo_produto["preco"],

@@ -50,6 +50,15 @@ function preValidaSenha(senha){
     }
     return {valido: true, texto:""}
 }
+
+function validarProduto(produto){
+    return produto.length >= 4 ? {valido:true, texto:""} : {valido:false, texto:"Minimo de 4 caracteres"};
+}
+
+function validarPreco(preco){
+    return preco >=  0? {valido:true, texto:""} : {valido:false, texto:"Valor positivo e maior que 0"};
+}
+
 export {
     preValidaUsuario,
     preValidaSenha,
@@ -58,5 +67,8 @@ export {
     validarCep,
     validarCartao,
     validarEmail,
+    validarProduto,
+    validarPreco,
+
     acessoAdm
 }

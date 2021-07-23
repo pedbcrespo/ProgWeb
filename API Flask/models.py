@@ -43,8 +43,7 @@ class Categoria(db.Model, Aux):
     nome = db.Column(db.String(50))
     produto = db.relationship('Produto', backref="categoria_produto")
 
-    def __init__(self, id, nome):
-        self.id = id
+    def __init__(self,nome):
         self.nome = nome
 
     def dic(self):
@@ -57,8 +56,7 @@ class Produto(db.Model, Aux):
     preco = db.Column(db.Float)
     caminhoImagem = db.Column(db.LargeBinary)
 
-    def __init__(self, id, nome, id_categoria, preco, imagem):
-        self.id = id
+    def __init__(self, nome, id_categoria, preco, imagem):
         self.nome = nome
         self.categoriaProduto = id_categoria
         self.preco = preco
@@ -123,5 +121,6 @@ if __name__ == '__main__':
     # res = Estoque.query.filter_by(id=5).first()
     # res = Produto.query.get(5)
 
-    db.session.add(Info_cliente('p-crespo@hotmail.com', "Cabo Frio", "22999000", 1))
-    db.session.commit()
+    # db.session.add(Cliente())
+    # db.session.commit()
+    pass

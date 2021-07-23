@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import { useListaCateg } from '../context/categoria';
-
+import { validarProduto, validarPreco } from '../models/validacao';
 
 export default function FormProduto({ enviar, id }) {
 
@@ -10,11 +10,17 @@ export default function FormProduto({ enviar, id }) {
 
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState(0);
-    const [categoria, setCategoria] = useState({})
+    const [categoria, setCategoria] = useState({});
+
+    const [erroNome, setErroNome] = useState({valido:true, texto:""});
+    const [erroPreco, setErroPreco] = useState({valido:true, texto:""});
 
     function prepararEnviar(event) {
         event.preventDefault();
-        enviar({ id, nome, preco, categoria });
+        setErroNome(validarProduto(nome));
+        setErroPreco(validarPreco(preco));
+        if(erroNome['valido'] && erronPreco['valido'])
+            enviar({ id, nome, preco, categoria });
     }
 
     return (
@@ -24,15 +30,25 @@ export default function FormProduto({ enviar, id }) {
                 label="Nome"
                 variant="outlined"
                 value={nome}
+                error={!erroNome['valido']}
+                onBlur={()=>{
+                    setErroNome(validarProduto(nome));
+                }}
                 onChange={(event) => {
                     setNome(event.target.value);
-                }} />
+                }} 
+                fullWidth
+                />
 
             <TextField
                 id="Preco"
                 label="Preço"
                 variant="outlined"
                 value={preco}
+                error={!erroPreco['valido']}
+                onBlur={()=>{
+                    setErroPreco(validarPreco(preco));
+                }}
                 onChange={(event) => {
                     setPreco(event.target.value);
                 }} />
