@@ -7,14 +7,6 @@ export const ProdutoContext = createContext([]);
 
 export default function ProdutoProvider({ children }) {
     const [listaProdutos, setListaProdutos] = useState([])
-    const [carregado, setCarregado] = useState(false);
-
-    // function carregaDados(){
-    //     if(!carregado){
-    //         getProdutos(setListaProdutos)
-    //         setCarregado(true);
-    //     }
-    // }
 
     useEffect(()=>{
         getProdutos(setListaProdutos)

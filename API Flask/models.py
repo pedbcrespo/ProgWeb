@@ -56,11 +56,10 @@ class Produto(db.Model, Aux):
     preco = db.Column(db.Float)
     caminhoImagem = db.Column(db.LargeBinary)
 
-    def __init__(self, nome, id_categoria, preco, imagem):
+    def __init__(self, nome, id_categoria, preco):
         self.nome = nome
         self.categoriaProduto = id_categoria
         self.preco = preco
-        self.caminhoImagem = imagem
 
     def dic(self):
         # return self.dicionario(id=self.id, nome=self.nome, categoriaProduto=self.categoriaProduto,

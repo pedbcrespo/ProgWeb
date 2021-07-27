@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAdmin } from '../context/admin';
+import { useUrlNome } from '../context/urlNome';
 
 export default function CabecalhoAdm(){
     
     const {acesso, setAcesso} = useAdmin() 
+    const {urlNome} = useUrlNome();
 
     return (
         <>
@@ -32,10 +34,10 @@ export default function CabecalhoAdm(){
                                 </ul>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/" onClick={(event)=>{
+                                <a className="nav-link active" aria-current="page" href={urlNome} onClick={(event)=>{
                                     setAcesso(false);
                                     console.log(acesso);
-                                }}>Sair</Link>
+                                }}>Sair</a>
                             </li>
                         </ul>
                     </div>

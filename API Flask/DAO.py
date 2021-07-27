@@ -1,5 +1,6 @@
 from models import Cliente, Info_cliente, Produto, Categoria, Carrinho, Estoque
 from config import db
+import base64
 
 class ClienteDAO:
     def adicionar(self, id):
@@ -40,7 +41,7 @@ class CarrinhoDAO:
         compra_atual = Carrinho.query.filter_by(idCliente=id_cliente).all()
         
         for compra in compra_atual:
-            compra.finalizado = True
+            compra.finalizado = 1
             produto_estoque = Estoque.query.get(compra.idProduto)
             produto_estoque.quantidade -= 1
         
@@ -68,8 +69,8 @@ class CarrinhoDAO:
 
 
 class ProdutoDAO:
-    def adicionar(self, nome, categoria_id, preco, imagem):
-        db.session.add(Produto(id, nome, categoria_id, preco, imagem))
+    def adicionar(self, nome, categoria_id, preco):
+        db.session.add(Produto(id, nome, categoria_id, preco))
         db.session.commit()
         return {"id":id, "nome":nome, "categoria":categoria_id, "preco":preco}
 
@@ -93,9 +94,14 @@ class ProdutoDAO:
         return {"id":id_produto}
 
     def buscar_todos(self):
-        lista_produtos = Produto.query.all()
+        lista_produtos = Produto.query.all()  
         return [produto.dic() for produto in lista_produtos]
 
+    # Lembrar de testar isso aqui depois:
+    def download_imagem(self, id_produto):
+        produto = Produto.query.get(id_produto)
+        imagem = base64.b64encode(produto.caminhoImagem).decode('ascii')
+        return {"imagem":imagem}
 
 class CategoriaDAO:
     def adicionar(self, id, nome):
@@ -118,5 +124,6 @@ class CategoriaDAO:
         return categoria.dic()
 
 if __name__ == '__main__':
-    p = CarrinhoDAO()
-    print(p.finalizar_compra(4103))
+    p = ProdutoDAO()
+
+    print(p.download_imagem(1))

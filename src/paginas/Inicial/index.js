@@ -3,7 +3,6 @@ import Produto from '../../componentes/Produto';
 // import ProdCarrinho from '../../componentes/ProdCarrinho';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
-// import { rmv, add } from '../../models/prodCar';
 import { add } from '../../models/prodCar';
 import { useProdutos } from '../../context/produto';
 
@@ -13,10 +12,11 @@ export default function Inicial() {
     const { lista, setLista } = useListaCarrinho();
     const { idCliente } = useCliente();
 
+    
     return (
         <section className="campInicial">
             <section className="campProduto">
-                {listaProdutos.map((prod) => {
+                {listaProdutos.map((prod, index) => {
                     return (
                         <div key={prod.id}>
                             <Produto
@@ -24,6 +24,7 @@ export default function Inicial() {
                                 nome={prod.nome}
                                 categoria={prod.categoria}
                                 // img={prod.caminhoImagem}
+                                // img={lista_img[index].imagem}
                                 preco={prod.preco}
                                 funcao={add(setLista, lista, idCliente)} 
                                 />
@@ -31,27 +32,6 @@ export default function Inicial() {
                     )
                 })}
             </section>
-
-
-            {/* <aside className="campCarrinho">
-                <h3>Pré visualização carrinho</h3>
-                <ul>
-
-                    {lista.map((prod, indice) => {
-                        return <li key={indice} className="prodCarrinho">
-                            <ProdCarrinho
-                                indice={indice}
-                                id={prod.id}
-                                nome={prod.nome}
-                                categoria={prod.categoria}
-                                preco={prod.preco}
-                                funcao={rmv(setLista, lista, cliente['id'])}
-                            />
-                        </li>
-                    })}
-                </ul>
-
-            </aside> */}
         </section>
     )
 }

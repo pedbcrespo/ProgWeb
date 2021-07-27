@@ -83,7 +83,7 @@ async function putCompras(id_cliente){
     //nesse caso, tanto faz o que vou enviar, nao vou usar porque a unica coisa que vai mudar é o status de finalizado
     //que no caso, ou fica false ou true, entao só há uma unica possibilidade de mudança.
     //portanto, tanto faz o dado que ta sendo enviado.
-    return await api.put(`/carrinho/${id_cliente}`, {"finalizado":true}).then({"mensagem":"atualizado"})
+    return await api.put(`/carrinho/${id_cliente}`, {"finalizado":true}).then(console.log("compra finalizada"))
 }
 
 async function putEstoque(id_produto){

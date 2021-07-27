@@ -30,7 +30,7 @@ function enviar(carrinho, urlNome, idCliente) {
         console.log(dados_cliente);
         postInfoCliente(dados_cliente);
         putCompras(idCliente);
-        // window.location.href=`${urlNome}/`
+        window.location.href=`${urlNome}/`
     }
 }
 

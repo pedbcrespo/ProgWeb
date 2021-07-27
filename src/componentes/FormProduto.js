@@ -4,7 +4,7 @@ import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@m
 import { useListaCateg } from '../context/categoria';
 import { validarProduto, validarPreco } from '../models/validacao';
 
-export default function FormProduto({ enviar, id }) {
+export default function FormProduto({ enviar }) {
 
     const { listaCat } = useListaCateg();
 
@@ -19,8 +19,8 @@ export default function FormProduto({ enviar, id }) {
         event.preventDefault();
         setErroNome(validarProduto(nome));
         setErroPreco(validarPreco(preco));
-        if(erroNome['valido'] && erronPreco['valido'])
-            enviar({ id, nome, preco, categoria });
+        if(erroNome['valido'] && erroPreco['valido'])
+            enviar({nome, preco, categoria });
     }
 
     return (

@@ -14,10 +14,10 @@ import { useEffect } from 'react';
 
 export default function App() {
 
-  const {idCliente} = useCliente();
-  const {sessao, setSessao} = useSessao();
+  const { idCliente } = useCliente();
+  const { sessao, setSessao } = useSessao();
 
-  useEffect(()=>{
+  useEffect(() => {
     inicializaSessao(setSessao, idCliente, sessao);
   }, [])
 
@@ -25,23 +25,23 @@ export default function App() {
     <>
       <Router>
 
-          <Cabecalho />
+        <Cabecalho />
 
-          <Switch>
-            <Route exact path='/'>
-              <Inicial />
-            </Route>
-            <Route path='/carrinho'>
-              <Carrinho />
-            </Route>
-            <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
-            </Route>
-            <Route path="/login">
-              <AdmLogin />
-            </Route>
-            <Adm />
-          </Switch>
-          <Rodape />
+        <Switch>
+          <Route exact path='/'>
+            <Inicial />
+          </Route>
+          <Route path='/carrinho'>
+            <Carrinho />
+          </Route>
+          <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
+          </Route>
+          <Route path="/login">
+            <AdmLogin />
+          </Route>
+          <Adm />
+        </Switch>
+        <Rodape />
 
       </Router>
     </>
