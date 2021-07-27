@@ -21,6 +21,16 @@ function getProduto(ident, setFunction) {
             setFunction(data)
         })
 }
+
+function getImagemProduto(setFunction, id_produto){
+    fetch(`http://localhost:5000/imagem_produto/${id_produto}/`)
+    .then(res => res.json)
+    .then(data => {
+        let imagem_convertida = atob(data.imagem)
+        setFunction(imagem_convertida)
+    })
+}
+
 //Busca todas as categorias
 function getCategorias(setFunction) {
     fetch(`http://localhost:5000/categorias`)
@@ -103,6 +113,7 @@ async function deleteCliente(id_cliente){
 export {
     getProdutos,
     getProduto,
+    getImagemProduto,
     getTodasCompras,
     getCategorias,
     getCarrinho,
