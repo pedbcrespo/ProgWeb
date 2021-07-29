@@ -13,6 +13,7 @@ function getProdutos(setFunction) {
             setFunction(data);
         })
 }
+
 //Busca um produto em especifico
 function getProduto(ident, setFunction) {
     fetch(`http://localhost:5000/produto/${ident}`)
@@ -26,8 +27,9 @@ function getImagemProduto(setFunction, id_produto){
     fetch(`http://localhost:5000/imagem_produto/${id_produto}/`)
     .then(res => res.json)
     .then(data => {
-        let imagem_convertida = atob(data.imagem)
-        setFunction(imagem_convertida)
+        console.log(data)
+        // let imagem_convertida = window.atob(data["imagem"])
+        // setFunction(imagem_convertida)
     })
 }
 
@@ -39,6 +41,7 @@ function getCategorias(setFunction) {
             setFunction(data)
         })
 }
+
 //mostra todas as compras registradas
 function getTodasCompras(setFunction) {
     // fetch('http://localhost:5000/todas_compras')
@@ -70,12 +73,14 @@ function getEndereco(setFunction, cep){
 async function postCarrinho(dado){
     return await api.post('/carrinhos', dado).then({'mensagem': "enviado"})
 }
+
 //Envia dados de um novo cliente, só o id
 async function postCliente(dado){
     return await api.post('/clientes', dado).then(res=>{
         console.log(res.data)
     })
 }
+
 //Envia os dados mais detalhados do cliente, como o email e o endereço
 async function postInfoCliente(dados_cliente){
     return await api.post('/info_cliente', dados_cliente).then(res=>{

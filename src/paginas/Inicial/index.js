@@ -16,15 +16,13 @@ export default function Inicial() {
     return (
         <section className="campInicial">
             <section className="campProduto">
-                {listaProdutos.map((prod, index) => {
+                {listaProdutos.map((prod) => {
                     return (
                         <div key={prod.id}>
                             <Produto
                                 id={prod.id}
                                 nome={prod.nome}
                                 categoria={prod.categoria}
-                                // img={prod.caminhoImagem}
-                                // img={lista_img[index].imagem}
                                 preco={prod.preco}
                                 funcao={add(setLista, lista, idCliente)} 
                                 />
