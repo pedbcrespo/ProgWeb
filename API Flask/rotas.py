@@ -49,7 +49,7 @@ class ProdutoRota(Resource):
             novo_produto["nome"], 
             novo_produto["categoriaProduto"],
             novo_produto["preco"],
-            novo_produto["imagem"]
+            novo_produto['quantidade']
         )
 
 class ProdutoInfo(Resource):

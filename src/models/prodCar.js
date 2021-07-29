@@ -1,4 +1,4 @@
-import { postCarrinho, deleteProdutoCarrinho, putCompras, postInfoCliente } from '../server/api';
+import { postCarrinho, deleteProdutoCarrinho, putCompras, postInfoCliente, postProduto, postCategoria } from '../server/api';
 
 //Esse modulo fica as funçoes relativas a manipulação dos produtos na aplicação
 
@@ -42,9 +42,35 @@ function converteImagem(dataurl, filename) {
     return new File([u8arr], filename, {type:mime});
 }
 
+function add_estoque(setFuncao, lista){
+    return produto => {
+        /**produto deve ser um objeto com os seguintes atributos:
+         * nome, categoriaProduto, preco e quantidade
+         */
+        const novo_produto = {
+            nome: produto.nome, 
+            categoriaProduto:produto.categoriaProduto,
+            preco: produto.preco
+        };
+        const nova_lista = [...lista, novo_produto];
+        setFuncao(nova_lista);
+        postProduto(produto);
+    }
+}
+
+function add_categoria(setFuncao, lista){
+    return categoria => {
+        const nova_lista = [...lista, categoria];
+        setFuncao(nova_lista);
+        postCategoria(categoria);
+    }
+}
+
 export {
     rmv,
     add,
     enviar,
-    converteImagem
+    converteImagem,
+    add_categoria,
+    add_estoque
 }

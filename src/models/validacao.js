@@ -59,6 +59,10 @@ function validarPreco(preco){
     return preco >=  0? {valido:true, texto:""} : {valido:false, texto:"Valor positivo e maior que 0"};
 }
 
+function validarQuantidade(estoque){
+    return estoque >= 0 ? {valido:true, texto:""} : {valido:false, texto:"Quantidade tem que ser positiva"};
+}
+
 export {
     preValidaUsuario,
     preValidaSenha,
@@ -69,6 +73,7 @@ export {
     validarEmail,
     validarProduto,
     validarPreco,
+    validarQuantidade,
 
     acessoAdm
 }

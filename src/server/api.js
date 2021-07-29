@@ -85,6 +85,15 @@ async function postInfoCliente(dados_cliente) {
     })
 }
 
+async function postProduto(dado){
+    return await api.post('/produtos', dado)
+    .then(res=>res)
+}
+
+async function postCategoria(dado){
+    return await api.post('/categorias', dado)
+    .then(res=>res)
+}
 //===================PUT========================//
 //Altera dados do cliente
 async function putCliente(id_cliente, dado) {
@@ -124,6 +133,8 @@ export {
     postCarrinho,
     postCliente,
     postInfoCliente,
+    postProduto,
+    postCategoria,
 
     putCliente,
     putCompras,

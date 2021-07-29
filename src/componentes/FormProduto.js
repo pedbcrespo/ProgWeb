@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import { useListaCateg } from '../context/categoria';
-import { validarProduto, validarPreco } from '../models/validacao';
+import { validarProduto, validarPreco, validarQuantidade } from '../models/validacao';
 
 export default function FormProduto({ enviar }) {
 
@@ -11,14 +11,17 @@ export default function FormProduto({ enviar }) {
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState(0);
     const [categoria, setCategoria] = useState({});
+    const [quantidade, setQuantidade] = useState(0);
 
     const [erroNome, setErroNome] = useState({valido:true, texto:""});
     const [erroPreco, setErroPreco] = useState({valido:true, texto:""});
+    const [erroQuantidade, setErroQuantidade] = useState({valido:true, texto:""});
 
     function prepararEnviar(event) {
         event.preventDefault();
         setErroNome(validarProduto(nome));
         setErroPreco(validarPreco(preco));
+        setErroQuantidade(validarQuantidade(quantidade));
         if(erroNome['valido'] && erroPreco['valido'])
             enviar({nome, preco, categoria });
     }
@@ -51,7 +54,8 @@ export default function FormProduto({ enviar }) {
                 }}
                 onChange={(event) => {
                     setPreco(event.target.value);
-                }} />
+                }} 
+                fullWidth/>
                 {/* consertar, a categoria nao é selecionada */}
             <FormControl variant="outlined" >
                 <InputLabel id="Categoria">Categoria</InputLabel>
@@ -66,6 +70,19 @@ export default function FormProduto({ enviar }) {
 
                 </Select>
             </FormControl>
+            <TextField
+                id="Quantidade"
+                label="Quantidade"
+                variant="outlined"
+                value={quantidade}
+                error={!erroQuantidade['valido']}
+                onBlur={()=>{
+                    setErroQuantidade(validarQuantidade(quantidade));
+                }}
+                onChange={(event) => {
+                    setQuantidade(event.target.value);
+                }} 
+                fullWidth/>
             <br></br>
             <Button variant="contained" color="primary" type="submit">
                 Confirmar

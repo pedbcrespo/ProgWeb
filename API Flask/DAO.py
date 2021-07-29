@@ -69,10 +69,12 @@ class CarrinhoDAO:
 
 
 class ProdutoDAO:
-    def adicionar(self, nome, categoria_id, preco):
-        db.session.add(Produto(id, nome, categoria_id, preco))
+    def adicionar(self, nome, categoria_id, preco, quantidade):
+        db.session.add(Produto(nome, categoria_id, preco))
         db.session.commit()
-        return {"id":id, "nome":nome, "categoria":categoria_id, "preco":preco}
+        produto = Produto.query.filter_by(nome=nome).first()
+        self.adicionar_estoque(produto.id, quantidade)
+        return {"id":produto.id}
 
     def deletar(self, id):
         self.removerEstoque(id)
@@ -80,6 +82,11 @@ class ProdutoDAO:
         db.session.delete(produto)
         db.session.commit()
         return {"id":id}
+
+    def adicionar_estoque(self, id_produto, quantidade):
+        db.session.add(Estoque(id_produto, quantidade))
+        db.session.commit()
+        return {"id": id_produto, "quantidade": quantidade}
 
     def atualizarEstoque(self, id_produto, novo_valor):
         produtoEstoque = Estoque.query.filter_by(id=id_produto).first()
@@ -100,9 +107,8 @@ class ProdutoDAO:
     # Lembrar de testar isso aqui depois:
     def download_imagem(self, id_produto):
         produto = Produto.query.get(id_produto)
-        # imagem = base64.b64encode(produto.caminhoImagem).decode("ascii")
-        # return {"imagem":imagem}
         return {"imagem": base64.b64encode(produto.caminhoImagem).decode("ascii")}
+
 
 class CategoriaDAO:
     def adicionar(self, id, nome):
