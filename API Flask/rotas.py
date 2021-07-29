@@ -127,4 +127,4 @@ api.add_resource(InfoCliente, "/info_cliente")#POST
 api.add_resource(CategoriaInfo, "/categoria/<int:id_categoria>")#GET
 api.add_resource(CarrinhoInfo, "/carrinho/<int:id_cliente>")#GET, PUT
 api.add_resource(CarrinhoProduto, "/carrinho_del/<int:id_cliente>/<int:id_produto>")#DELETE
-api.add_resource(ImagemProduto, "/imagem_produto/<int:id_produto>")#GET, POST
+api.add_resource(ImagemProduto, "/imagem/<int:id_produto>")#GET, POST

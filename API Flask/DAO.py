@@ -100,8 +100,9 @@ class ProdutoDAO:
     # Lembrar de testar isso aqui depois:
     def download_imagem(self, id_produto):
         produto = Produto.query.get(id_produto)
-        imagem = base64.b64encode(produto.caminhoImagem)
-        return imagem
+        # imagem = base64.b64encode(produto.caminhoImagem).decode("ascii")
+        # return {"imagem":imagem}
+        return {"imagem": base64.b64encode(produto.caminhoImagem).decode("ascii")}
 
 class CategoriaDAO:
     def adicionar(self, id, nome):
@@ -126,4 +127,4 @@ class CategoriaDAO:
 if __name__ == '__main__':
     p = ProdutoDAO()
 
-    print(p.download_imagem(1))
+    print(type(p.download_imagem(1)['imagem']))
