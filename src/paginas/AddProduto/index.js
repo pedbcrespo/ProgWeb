@@ -1,6 +1,7 @@
 import React from 'react';
 import FormProduto from '../../componentes/FormProduto';
 import { useProdutos } from '../../context/produto';
+import { add_estoque } from '../../models/prodCar';
 export default function AddProduto(){
     
     /**Jogar os dados direto no banco de dados*/
@@ -17,13 +18,9 @@ export default function AddProduto(){
         return val;
     }
 
-    function enviar(novo_produto){
-        setListaProdutos([...listaProdutos, novo_produto]);
-    }
-
     return(
         <form>
-            <FormProduto enviar={enviar} id={id_disponivel()}/>
+            <FormProduto enviar={add_estoque(setListaProdutos, listaProdutos)} />
         </form>
     );
 }

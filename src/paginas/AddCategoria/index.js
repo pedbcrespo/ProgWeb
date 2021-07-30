@@ -3,22 +3,20 @@ import { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { useAdmin } from '../../context/admin';
 import { Redirect } from 'react-router-dom';
+import { add_categoria } from '../../models/prodCar';
+import { useListaCateg } from '../../context/categoria';
 
 export default function AddCategoria({enviar}){
     
     /**Jogar a atualizacao direto no banco de dados */
     const {acesso} = useAdmin();
     const [nomeCat, setNome] = useState('');
-    
-    function preEnviar(event){
-        event.preventDefault();
-        enviar(nomeCat);
-    }
+    const {listaCat, setListaCat} = useListaCateg();
 
     return acesso? (
-        <form onSubmit={preEnviar}>
+        <form onSubmit={add_categoria(setListaCat, listaCat)}>
             <TextField 
-            id="outlined-basic" 
+            id="Categoria" 
             label="Categoria" 
             variant="outlined" 
             onChange={(event)=>{

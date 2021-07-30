@@ -5,21 +5,26 @@ import { converteImagem } from '../models/prodCar';
 
 export default function Produto({ id, nome, preco, categoria, funcao }) {
     
+    const [preImagem, setPreImagem] = useState(null);
     const [imagem, setImagem] = useState(imagem_background);
 
-    getImagemProduto(setImagem, id);
+    useEffect(()=>{
+        getImagemProduto(setPreImagem, id);
+        // if(preImagem !== null){
+        //     const img_convertida = converteImagem(preImagem, `prod${id}.jpg`);
+        //     // const img_convertida = converteImagem(imagem, `prod${id}`);
+        //     setImagem(img_convertida);
+        // }
+        
+        setImagem(converteImagem(preImagem));
+    }, [])
 
-    // useEffect(()=>{
-    //     getImagemProduto(setImagem, id);
-    // }, [])
 
-    // const img_convertida = converteImagem(imagem, `prod${id}`);
-    const img_convertida = converteImagem(imagem, `prod${id}.jpg`);
     return (
         <div className="div-prod">
             <div className="Produto">
                 <h3>{nome}</h3>
-                <img src={img_convertida} alt={`imagem ${categoria} ${id}`}/>
+                <img src={imagem} alt={`imagem ${categoria} ${id}`}/>
                 <h5>$ {preco.toFixed(2)}</h5>
                 <button
                     type="button"

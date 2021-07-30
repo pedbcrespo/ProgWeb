@@ -23,7 +23,7 @@ export default function FormProduto({ enviar }) {
         setErroPreco(validarPreco(preco));
         setErroQuantidade(validarQuantidade(quantidade));
         if(erroNome['valido'] && erroPreco['valido'])
-            enviar({nome, preco, categoria });
+            enviar({nome, preco, categoria, quantidade });
     }
 
     return (

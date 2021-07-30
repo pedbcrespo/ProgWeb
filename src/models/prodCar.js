@@ -1,5 +1,4 @@
 import { postCarrinho, deleteProdutoCarrinho, putCompras, postInfoCliente, postProduto, postCategoria } from '../server/api';
-
 //Esse modulo fica as funçoes relativas a manipulação dos produtos na aplicação
 
 //So esta salvando no banco de dados, mas nao esta renderizando
@@ -27,19 +26,25 @@ function enviar(carrinho, urlNome, idCliente) {
     return (num_cartao, dados_cliente) => {
         //atualiza os dados do cliente, finaliza a compra e salva no banco de dados
         //dados_cliente = {email, endereco, cep, cliente_id}
-        console.log(dados_cliente);
+        console.log(num_cartao);
         postInfoCliente(dados_cliente);
         putCompras(idCliente);
         window.location.href = `${urlNome}/`
     }
 }
-function converteImagem(dataurl, filename) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while(n--){
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, {type:mime});
+// function converteImagem(url, filename, mimeType){
+//     mimeType = mimeType || (url.match(/^data:([^;]+);/)||'')[1];
+//     return (fetch(url)
+//         .then(function(res){return res.arrayBuffer();})
+//         .then(function(buf){return new File([buf], filename, {type:mimeType});})
+//     );
+// }
+
+function converteImagem(url){
+    var imagem = new Image();
+    imagem.src = url;
+    document.body.appendChild(imagem);
+    return imagem;
 }
 
 function add_estoque(setFuncao, lista){
@@ -49,7 +54,7 @@ function add_estoque(setFuncao, lista){
          */
         const novo_produto = {
             nome: produto.nome, 
-            categoriaProduto:produto.categoriaProduto,
+            categoria:produto.categoriaProduto,
             preco: produto.preco
         };
         const nova_lista = [...lista, novo_produto];

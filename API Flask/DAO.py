@@ -2,6 +2,7 @@ from models import Cliente, Info_cliente, Produto, Categoria, Carrinho, Estoque
 from config import db
 import base64
 
+
 class ClienteDAO:
     def adicionar(self, id):
         db.session.add(Cliente(id))
@@ -104,11 +105,33 @@ class ProdutoDAO:
         lista_produtos = Produto.query.all()  
         return [produto.dic() for produto in lista_produtos]
 
-    # Lembrar de testar isso aqui depois:
     def download_imagem(self, id_produto):
         produto = Produto.query.get(id_produto)
-        return {"imagem": base64.b64encode(produto.caminhoImagem).decode("ascii")}
+        # imagem = base64.b64encode(produto.caminhoImagem).decode("ascii")
+        imagem = base64.b64encode(produto.caminhoImagem).decode('utf-8')
+        imagem_json = f"data:image/jpg;base64,{imagem}"
 
+        return {"imagem": imagem_json}
+
+
+    # Esse metodo nao salva a imagem no BD, mas sim num arquivo no servidor
+    def salva_imagem(self, arquivo, id_produto):
+        cpy_arq = ''
+        with open(arquivo, 'r+b') as arquivo_img:
+            cpy_arq = arquivo_img.read()
+        
+        with open(f"./imgs/produto{id_produto}.jpg", 'w+b') as arquivo_slv:
+            arquivo_slv.write(cpy_arq)
+        
+        return {"id": id_produto}
+
+    # Esse metodo busca a imagem numa pasta no servidor
+    def buscar_imagem(self, id_produto):
+        arquivo_servidor = f"./imgs/produto{id_produto}.jpg"
+        arquivo = ''
+        with open(arquivo_servidor, 'r+b') as arqbin:
+            arquivo = arqbin.read()
+        return {"imagem": arquivo}
 
 class CategoriaDAO:
     def adicionar(self, id, nome):
@@ -133,4 +156,4 @@ class CategoriaDAO:
 if __name__ == '__main__':
     p = ProdutoDAO()
 
-    print(type(p.download_imagem(1)['imagem']))
+    print(p.buscar_imagem(1))
