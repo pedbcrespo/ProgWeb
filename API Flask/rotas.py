@@ -60,7 +60,7 @@ class ProdutoInfo(Resource):
 class ImagemProduto(Resource):
     produto = ProdutoDAO()
     def get(self, id_produto):
-        return self.produto.buscar_imagem(id_produto)
+        return self.produto.download_imagem(id_produto)
 
     def post(self, id_produto):
         imagem = json.loads(request.data)

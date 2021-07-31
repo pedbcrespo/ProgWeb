@@ -1,5 +1,7 @@
 from models import Cliente, Info_cliente, Produto, Categoria, Carrinho, Estoque
 from config import db
+from skimage.transform import resize
+import matplotlib.pyplot as plt
 import base64
 
 
@@ -111,6 +113,18 @@ class ProdutoDAO:
         imagem = base64.b64encode(produto.caminhoImagem).decode('utf-8')
         imagem_json = f"data:image/jpg;base64,{imagem}"
         return {"imagem": imagem_json}
+
+    def upload_imagem(self, id_produto, arquivo_img):
+        produto = Produto.query.get(id_produto)
+        
+        im = plt.imread(arquivo_img)
+        arquivo_res = resize(im, (225, 225))
+
+        with open(arquivo_res, 'r+b') as arq:
+            produto.caminhoImagem = arq.read()
+
+        db.session.commit()
+        return {"id":id, "mensagem": "imagem armazenada com sucesso"}
 
 
     # Esse metodo nao salva a imagem no BD, mas sim num arquivo no servidor
