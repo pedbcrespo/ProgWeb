@@ -110,7 +110,6 @@ class ProdutoDAO:
         # imagem = base64.b64encode(produto.caminhoImagem).decode("ascii")
         imagem = base64.b64encode(produto.caminhoImagem).decode('utf-8')
         imagem_json = f"data:image/jpg;base64,{imagem}"
-
         return {"imagem": imagem_json}
 
 
@@ -131,7 +130,8 @@ class ProdutoDAO:
         arquivo = ''
         with open(arquivo_servidor, 'r+b') as arqbin:
             arquivo = arqbin.read()
-        return {"imagem": arquivo}
+        imagem = base64.b64encode(arquivo).decode('utf-8')
+        return {"imagem": f"data:image/jpg;base64,{imagem}"}
 
 class CategoriaDAO:
     def adicionar(self, id, nome):

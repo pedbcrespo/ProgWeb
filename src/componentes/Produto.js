@@ -4,19 +4,11 @@ import { getImagemProduto } from '../server/api';
 import { converteImagem } from '../models/prodCar';
 
 export default function Produto({ id, nome, preco, categoria, funcao }) {
-    
-    const [preImagem, setPreImagem] = useState(null);
+
     const [imagem, setImagem] = useState(imagem_background);
 
     useEffect(()=>{
-        getImagemProduto(setPreImagem, id);
-        // if(preImagem !== null){
-        //     const img_convertida = converteImagem(preImagem, `prod${id}.jpg`);
-        //     // const img_convertida = converteImagem(imagem, `prod${id}`);
-        //     setImagem(img_convertida);
-        // }
-        
-        setImagem(converteImagem(preImagem));
+        getImagemProduto(setImagem, id);
     }, [])
 
 
