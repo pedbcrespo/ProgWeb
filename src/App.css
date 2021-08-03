@@ -71,6 +71,18 @@
   align-items: center;
 }
 
+.CampFormProduto{
+  display: flex;
+  flex-direction:column;
+  justify-content:space-around;
+  padding: 10px;
+}
+
+.CampFormProduto #Nome, #Preco, #Quantidade{
+  padding: 20px;
+}
+
 .Rodape{
   border-top: 1px solid black;
+  text-align: center;
 }

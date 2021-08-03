@@ -94,10 +94,15 @@ async function postCategoria(dado){
     return await api.post('/categorias', dado)
     .then(res=>res)
 }
+
 //===================PUT========================//
 //Altera dados do cliente
 async function putCliente(id_cliente, dado) {
     return await api.put(`/cliente/${id_cliente}`, dado).then({ "mensagem": "atualizado" })
+}
+
+async function putImagemProduto(id_produto, imagem){
+    return await api.put(`/produto/${id_produto}`, imagem).then({"mensagem": "atualizado"})
 }
 
 async function putCompras(id_cliente) {
@@ -112,8 +117,8 @@ async function putEstoque(id_produto) {
 }
 //===================DELETE=====================//
 //Deleta um produto de um determinado carrinho
-async function deleteProdutoCarrinho(id_cliente, id_produto) {
-    return await api.delete(`/carrinho_del/${id_cliente}/${id_produto}`).then({ "mensagem": "removido" })
+async function deleteProdutoCarrinho(id_cliente, id_produto, indice) {
+    return await api.delete(`/carrinho_del/${id_cliente}/${id_produto}/${indice}`).then({ "mensagem": "removido" })
 }
 
 async function deleteCliente(id_cliente) {

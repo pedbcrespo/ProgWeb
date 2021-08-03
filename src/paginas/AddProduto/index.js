@@ -8,16 +8,6 @@ export default function AddProduto(){
 
     const { listaProdutos, setListaProdutos } = useProdutos()
 
-    function id_disponivel(){
-        let val = 1;
-        for(let i in listaProdutos){
-            if( listaProdutos[i].id === val){
-                val += 1;
-            }
-        }
-        return val;
-    }
-
     return(
         <form>
             <FormProduto enviar={add_estoque(setListaProdutos, listaProdutos)} />

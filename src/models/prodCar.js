@@ -1,4 +1,12 @@
-import { postCarrinho, deleteProdutoCarrinho, putCompras, postInfoCliente, postProduto, postCategoria } from '../server/api';
+import { 
+    postCarrinho, 
+    deleteProdutoCarrinho, 
+    putCompras, 
+    postInfoCliente, 
+    postProduto, 
+    postCategoria,
+    putImagemProduto
+} from '../server/api';
 //Esse modulo fica as funçoes relativas a manipulação dos produtos na aplicação
 
 //So esta salvando no banco de dados, mas nao esta renderizando
@@ -9,7 +17,7 @@ function rmv(setFuncao, lista, id_cliente, indice) {
         const copia_lista = Array.from(lista);
         copia_lista.splice(indice, 1);
         setFuncao(copia_lista);
-        deleteProdutoCarrinho(id_cliente, id_produto);
+        deleteProdutoCarrinho(id_cliente, id_produto, indice);
     }
 }
 
@@ -24,8 +32,6 @@ function add(setFuncao, lista, id_cliente) {
 
 function enviar(carrinho, urlNome, idCliente) {
     return (num_cartao, dados_cliente) => {
-        //atualiza os dados do cliente, finaliza a compra e salva no banco de dados
-        //dados_cliente = {email, endereco, cep, cliente_id}
         console.log(num_cartao);
         postInfoCliente(dados_cliente);
         putCompras(idCliente);
@@ -43,9 +49,17 @@ function add_estoque(setFuncao, lista){
             categoria:produto.categoriaProduto,
             preco: produto.preco
         };
+        const novo_produto_post = {
+            nome: produto.nome,
+            categoriaProduto: produto.categoriaProduto,
+            preco: produto.preco,
+            quantidade: produto.quantidade
+        };
         const nova_lista = [...lista, novo_produto];
         setFuncao(nova_lista);
-        postProduto(produto);
+        let id_produto = postProduto(novo_produto_post);
+        // putImagemProduto(id_produto, produto.arquivoImagem);
+        console.log(id_produto);
     }
 }
 

@@ -79,6 +79,7 @@ class Estoque(db.Model, Aux):
         return self.dicionario(id=self.id, quantidade=self.quantidade)
 
 class Carrinho(db.Model, Aux):
+    id = db.Column(db.Integer, primary_key=True)
     idCliente = db.Column(db.Integer, db.ForeignKey('cliente.id'), primary_key=True)
     idProduto = db.Column(db.Integer, db.ForeignKey('produto.id'), primary_key=True)
     finalizado = db.Column(db.Boolean)
@@ -89,7 +90,7 @@ class Carrinho(db.Model, Aux):
         self.finalizado = finalizado
 
     def dic(self):
-        return self.dicionario(idCliente=self.idCliente, idProduto=self.idProduto,
+        return self.dicionario(id=self.id, idCliente=self.idCliente, idProduto=self.idProduto,
         finalizado=self.finalizado)
 
 class Tipo_imagem_produto(db.Model, Aux):

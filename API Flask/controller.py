@@ -52,14 +52,16 @@ class CarrinhoDAO:
 
         return {"status": "compra finalizada"}
 
-    def remover_produto(self, id_cliente, id_produto):
-        lista_carrinho = Carrinho.query.filter_by(idCliente=id_cliente).all()
+    def remover_produto(self, id_cliente, id_produto, indice):
+        lista_produtos = Carrinho.query.filter_by(idCliente=id_cliente).all()
+        print([p.dic() for p in lista_produtos])
 
-        for produto in lista_carrinho:
-            if produto.idProduto == id_produto:
+        for produto in lista_produtos:
+            if produto.idProduto == id_produto and lista_produtos.index(produto) == indice:
                 db.session.delete(produto)
                 break
         db.session.commit()
+        
         return {"idCliente": id_cliente, "idProduto":id_produto}
 
     def buscar(self, id_cliente):
@@ -172,5 +174,9 @@ class CategoriaDAO:
 
 if __name__ == '__main__':
     p = ProdutoDAO()
+    c = CarrinhoDAO()
 
-    print(p.buscar_imagem(1))
+    # print(c.buscar_todos())
+    
+    print(c.remover_produto(1,2,3))
+    # print(c.buscar_todos())

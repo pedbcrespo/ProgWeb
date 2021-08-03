@@ -63,6 +63,12 @@ function validarQuantidade(estoque){
     return estoque >= 0 ? {valido:true, texto:""} : {valido:false, texto:"Quantidade tem que ser positiva"};
 }
 
+function validarArquivoImagem(arquivo){
+    if(arquivo !== null)
+        return {valido: true, texto: ""}
+    return {valido: false, texto: "atribuição invalida"}
+}
+
 export {
     preValidaUsuario,
     preValidaSenha,
@@ -74,6 +80,7 @@ export {
     validarProduto,
     validarPreco,
     validarQuantidade,
+    validarArquivoImagem,
 
     acessoAdm
 }
