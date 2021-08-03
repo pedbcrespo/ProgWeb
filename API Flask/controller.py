@@ -1,4 +1,4 @@
-from models import Cliente, Info_cliente, Produto, Categoria, Carrinho, Estoque
+from models import Cliente, Info_cliente, Produto, Categoria, Carrinho, Estoque, Tipo_imagem_produto
 from config import db
 from skimage.transform import resize
 import matplotlib.pyplot as plt
@@ -109,14 +109,17 @@ class ProdutoDAO:
 
     def download_imagem(self, id_produto):
         produto = Produto.query.get(id_produto)
-        # imagem = base64.b64encode(produto.caminhoImagem).decode("ascii")
+        tipo_imagem = Tipo_imagem_produto.query.filter_by(id_produto=id_produto).first()
+        tipo = tipo_imagem.tipo_imagem
         imagem = base64.b64encode(produto.caminhoImagem).decode('utf-8')
-        imagem_json = f"data:image/jpg;base64,{imagem}"
+        imagem_json = f"data:image/{tipo};base64,{imagem}"
         return {"imagem": imagem_json}
 
     def upload_imagem(self, id_produto, arquivo_img):
         produto = Produto.query.get(id_produto)
         
+        tipo_imagem = arquivo_img.split('.')[1]
+
         im = plt.imread(arquivo_img)
         arquivo_res = resize(im, (225, 225))
 

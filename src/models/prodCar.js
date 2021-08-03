@@ -32,20 +32,6 @@ function enviar(carrinho, urlNome, idCliente) {
         window.location.href = `${urlNome}/`
     }
 }
-// function converteImagem(url, filename, mimeType){
-//     mimeType = mimeType || (url.match(/^data:([^;]+);/)||'')[1];
-//     return (fetch(url)
-//         .then(function(res){return res.arrayBuffer();})
-//         .then(function(buf){return new File([buf], filename, {type:mimeType});})
-//     );
-// }
-
-function converteImagem(url){
-    var imagem = new Image();
-    imagem.src = url;
-    document.body.appendChild(imagem);
-    return imagem;
-}
 
 function add_estoque(setFuncao, lista){
     return produto => {
@@ -75,7 +61,6 @@ export {
     rmv,
     add,
     enviar,
-    converteImagem,
     add_categoria,
     add_estoque
 }

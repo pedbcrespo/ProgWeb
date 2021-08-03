@@ -10,7 +10,7 @@ export default function FormProduto({ enviar }) {
 
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState(0);
-    const [categoria, setCategoria] = useState({});
+    const [categoria, setCategoria] = useState(0);
     const [quantidade, setQuantidade] = useState(0);
 
     const [erroNome, setErroNome] = useState({valido:true, texto:""});
@@ -62,10 +62,11 @@ export default function FormProduto({ enviar }) {
                 <Select 
                     labelId="Categoria"
                     id="Categoria-select"
+                    onChange={e => setCategoria(e.target.value)}
                 >
                 
                     {listaCat.map((cat)=>{
-                        return <MenuItem value={cat.nome} key={cat.id}>{cat.nome}</MenuItem>
+                        return <MenuItem value={cat.id} key={cat.id}>{cat.nome}</MenuItem>
                     })}
 
                 </Select>
@@ -83,6 +84,7 @@ export default function FormProduto({ enviar }) {
                     setQuantidade(event.target.value);
                 }} 
                 fullWidth/>
+            <input type='file'>Imagem do produto</input>
             <br></br>
             <Button variant="contained" color="primary" type="submit">
                 Confirmar

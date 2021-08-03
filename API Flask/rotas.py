@@ -1,7 +1,7 @@
 from flask import request
 from flask_restful import Resource, reqparse
 from config import api
-from DAO import *
+from controller import *
 import json
 
 class Inicial(Resource):

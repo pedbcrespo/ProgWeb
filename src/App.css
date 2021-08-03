@@ -23,7 +23,6 @@
 
 .Produto{
   flex: 1;
-  /* border: 1px solid black; */
   border-radius: 10px;
   box-shadow: 1px 1px black;
   background-color: rgb(230, 228, 228);
@@ -67,8 +66,9 @@
 }
 
 .campFormulario{
-  margin-left: 75px;
-  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Rodape{

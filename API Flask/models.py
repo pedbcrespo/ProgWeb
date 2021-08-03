@@ -92,6 +92,17 @@ class Carrinho(db.Model, Aux):
         return self.dicionario(idCliente=self.idCliente, idProduto=self.idProduto,
         finalizado=self.finalizado)
 
+class Tipo_imagem_produto(db.Model, Aux):
+    id_produto = db.Column(db.Integer, db.ForeignKey('produto.id'), primary_key=True)
+    tipo_imagem = db.Column(db.String(10))
+
+    def __init__(self, id_produto, tipo_imagem):
+        self.id_produto = id_produto
+        self.tipo_imagem = tipo_imagem
+
+    def dif(self):
+        return self.dicionario(id_produto=self.id_produto, tipo_imagem=self.tipo_imagem)
+
 if __name__ == '__main__':
 
     # Para adicionar no banco de dados, uso o metodo db.session.add(objeto)

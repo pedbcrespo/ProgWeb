@@ -16,7 +16,7 @@ export default function Produto({ id, nome, preco, categoria, funcao }) {
         <div className="div-prod">
             <div className="Produto">
                 <h3>{nome}</h3>
-                <img src={imagem} alt={`imagem ${categoria} ${id}`}/>
+                <img src={imagem} alt={`produto${categoria}${id}`}/>
                 <h5>$ {preco.toFixed(2)}</h5>
                 <button
                     type="button"
