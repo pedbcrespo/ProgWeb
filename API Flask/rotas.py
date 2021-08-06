@@ -67,8 +67,9 @@ class ImagemProduto(Resource):
         return self.produto.download_imagem(id_produto)
 
     def post(self, id_produto):
-        imagem = json.loads(request.data)
-        self.produto.salva_imagem(imagem)
+        imagem = request.files['file']
+        if imagem:
+            self.produto.upload_imagem(id_produto, imagem)
         return {"mensagem": "uma imagem foi enviada"}
 
 class CategoriaRota(Resource):

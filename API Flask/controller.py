@@ -152,6 +152,7 @@ class ProdutoDAO:
         imagem = base64.b64encode(arquivo).decode('utf-8')
         return {"imagem": f"data:image/jpg;base64,{imagem}"}
 
+
 class CategoriaDAO:
     def adicionar(self, id, nome):
         db.session.add(Categoria(id, nome))

@@ -1,13 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import imagem_background from '../server/bdimg/background.png';
 import { getImagemProduto } from '../server/api';
-import { converteImagem } from '../models/prodCar';
 
 export default function Produto({ id, nome, preco, categoria, funcao }) {
 
     const [imagem, setImagem] = useState(imagem_background);
 
-    useEffect(()=>{
+    useEffect(() => {
         getImagemProduto(setImagem, id);
     }, [])
 
@@ -16,7 +15,7 @@ export default function Produto({ id, nome, preco, categoria, funcao }) {
         <div className="div-prod">
             <div className="Produto">
                 <h3>{nome}</h3>
-                <img src={imagem} alt={`produto${categoria}${id}`}/>
+                <img src={imagem} alt={`produto${categoria}${id}`} id='imagem-produto'/>
                 <h5>$ {preco.toFixed(2)}</h5>
                 <button
                     type="button"

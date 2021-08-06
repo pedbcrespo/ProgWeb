@@ -64,8 +64,11 @@ function validarQuantidade(estoque){
 }
 
 function validarArquivoImagem(arquivo){
-    if(arquivo !== null)
+    let tipo = arquivo['name'].split('.')[1];
+
+    if(arquivo !== null && ['jpg','png','jpeg', 'jfif'].indexOf(tipo) !== -1){
         return {valido: true, texto: ""}
+    }
     return {valido: false, texto: "atribuição invalida"}
 }
 

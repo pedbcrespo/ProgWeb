@@ -12,6 +12,7 @@ export default function FormProduto({ enviar }) {
     const [preco, setPreco] = useState(0);
     const [categoria, setCategoria] = useState(0);
     const [quantidade, setQuantidade] = useState(0);
+    //arquivoImagem é um objeto, para saber o nome dele, basta acessar o campo 'name'
     const [arquivoImagem, setArquivoImagem] = useState(null);
 
     const [erroNome, setErroNome] = useState({ valido: true, texto: "" });
@@ -25,8 +26,15 @@ export default function FormProduto({ enviar }) {
         setErroPreco(validarPreco(preco));
         setErroQuantidade(validarQuantidade(quantidade));
         setErroArquivo(validarArquivoImagem(arquivoImagem));
-        if (erroNome['valido'] && erroPreco['valido'])
+        
+        if (erroNome['valido'] && erroPreco['valido']) {
             enviar({ nome, preco, categoria, arquivoImagem, quantidade });
+        }else {
+            let erros = [erroNome, erroPreco, erroQuantidade, erroArquivo];
+            let mensagem_erros = erros.filter((err)=>{return err['valido']})
+            let mensagem = '\n'.join(mensagem_erros.map((err)=>{return err['texto']}))
+            alert(`ERRO ${mensagem}`)
+        }
     }
 
     return (
@@ -95,13 +103,16 @@ export default function FormProduto({ enviar }) {
                     fullWidth />
                 <br></br>
                 <br></br>
-                <Input 
+                <Input
                     ip='upload_imagem'
-                    type='file' 
+                    type='file'
                     error={!erroArquivo['valido']}
-                    onChange={(event)=>{
+                    onChange={(event) => {
+                        console.log(event.target.files[0])
+                        validarArquivoImagem(event.target.files[0])
                         setArquivoImagem(event.target.files[0])
                     }}
+                    name="file"
                 />
                 <br></br>
                 <br></br>
