@@ -37,6 +37,10 @@ class InfoCliente(Resource):
             dados_cliente['idCliente']
         )
 
+class ClienteDados(Resource):
+    cliente = ClienteDAO()
+    def get(self, id_cliente):
+        return self.cliente.buscar_cliente(id_cliente)
 
 class ProdutoRota(Resource):
     produto = ProdutoDAO()
@@ -130,9 +134,9 @@ api.add_resource(ClienteRota, "/clientes")#GET, POST(só o id)
 api.add_resource(CarrinhoRota, "/carrinhos")#GET, POST
 
 api.add_resource(InfoCliente, "/info_cliente")#POST
+api.add_resource(ClienteDados, "/dados_cliente/<int:id_cliente>")#POST
 
 api.add_resource(CategoriaInfo, "/categoria/<int:id_categoria>")#GET
 api.add_resource(CarrinhoInfo, "/carrinho/<int:id_cliente>")#GET, PUT
-# api.add_resource(CarrinhoProduto, "/carrinho_del/<int:id_cliente>/<int:id_produto>")#DELETE
 api.add_resource(CarrinhoProduto, "/carrinho_del/<int:id_cliente>/<int:id_produto>/<int:indice>")#DELETE
 api.add_resource(ImagemProduto, "/imagem/<int:id_produto>")#GET, POST

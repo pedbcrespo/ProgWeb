@@ -8,9 +8,5 @@ export default function AddProduto(){
 
     const { listaProdutos, setListaProdutos } = useProdutos()
 
-    return(
-        <form>
-            <FormProduto enviar={add_estoque(setListaProdutos, listaProdutos)} />
-        </form>
-    );
+    return(<FormProduto enviar={add_estoque(setListaProdutos, listaProdutos)} />);
 }

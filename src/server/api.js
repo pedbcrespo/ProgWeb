@@ -65,6 +65,12 @@ function getEndereco(setFunction, cep) {
         })
 }
 
+function getInfoCliente(setFunction, id_cliente){
+    fetch(`http://localhost:5000/dados_cliente/${id_cliente}`)
+        .then(res => res.json())
+        .then(setFunction)
+}
+
 //===================POST========================//
 //Envia dados de um novo carrinho
 async function postCarrinho(dado) {
@@ -124,6 +130,10 @@ async function deleteProdutoCarrinho(id_cliente, id_produto, indice) {
 async function deleteCliente(id_cliente) {
     return await api.delete(`/cliente/${id_cliente}`).then({ "mensagem": "excluido" })
 }
+
+async function deleteProduto(id_produto) {
+    return await api.delete(`/produto/${id_produto}`).then({mensagem:"excluido"})
+}
 //===================fetchFunctions==============//
 
 export {
@@ -134,6 +144,7 @@ export {
     getCategorias,
     getCarrinho,
     getEndereco,
+    getInfoCliente,
 
     postCarrinho,
     postCliente,
@@ -147,4 +158,5 @@ export {
 
     deleteProdutoCarrinho,
     deleteCliente,
+    deleteProduto,
 }

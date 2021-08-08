@@ -51,6 +51,12 @@
   text-align: center;
 }
 
+.miniCarrinho{
+  display: flex;
+  justify-content: space-around;
+  padding: 5px;
+}
+
 .Carrinho-section{
   width: 800px;
   background-color: rgb(230, 228, 228);

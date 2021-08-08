@@ -5,7 +5,8 @@ import {
     postInfoCliente, 
     postProduto, 
     postCategoria,
-    putImagemProduto
+    putImagemProduto,
+    deleteProduto
 } from '../server/api';
 //Esse modulo fica as funçoes relativas a manipulação dos produtos na aplicação
 
@@ -71,8 +72,23 @@ function add_categoria(setFuncao, lista){
     }
 }
 
+function rmv_produto_estoque(setFuncao, lista, id_produto){
+    const copia_lista = Array.from(lista);
+    let indice;
+    for(let i in lista){
+        if(lista[i].id === id_produto){
+            indice = i;
+            break;
+        }
+    }
+    copia_lista.splice((indice), 1);
+    setFuncao(copia_lista);
+    deleteProduto(id_produto);
+}
+
 export {
     rmv,
+    rmv_produto_estoque,
     add,
     enviar,
     add_categoria,

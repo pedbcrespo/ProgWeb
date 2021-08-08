@@ -34,10 +34,10 @@ export default function CabecalhoAdm(){
                                 </ul>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href={urlNome} onClick={(event)=>{
+                                <Link className="nav-link active" aria-current="page" to={urlNome} onClick={(event)=>{
                                     setAcesso(false);
                                     console.log(acesso);
-                                }}>Sair</a>
+                                }}>Sair</Link >
                             </li>
                         </ul>
                     </div>
