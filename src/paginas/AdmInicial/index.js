@@ -32,7 +32,7 @@ export default function AdmInicial() {
                 <Table size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Produto</TableCell>
+                            <TableCell>Nome</TableCell>
                             <TableCell align="right">Categoria</TableCell>
                             <TableCell align="right">Preço</TableCell>
                             <TableCell align="right">Operações</TableCell>
