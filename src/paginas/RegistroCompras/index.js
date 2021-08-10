@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { getTodasCompras } from '../../server/api';
+import { getTodasCompras, getTodasInfoCliente } from '../../server/api';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import InfoCliente from '../../componentes/InfoCliente';
 
 export default function () {
 
     const [listaCompras, setListaCompras] = useState([]);
+    const [listaInfoClientes, setListaInfoClientes] = useState([]);
 
     useEffect(() => {
         getTodasCompras(setListaCompras);
+        getTodasInfoCliente(setListaInfoClientes);
     }, []);
 
+    console.log(listaInfoClientes)
     return (
         <section>
             <h2>Compras realizadas</h2>
@@ -42,14 +45,15 @@ export default function () {
                     <Table size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Email</TableCell>
+                                <TableCell>ID</TableCell>
+                                <TableCell align="right">Email</TableCell>
                                 <TableCell align="right">Endereço</TableCell>
                                 <TableCell align="right">CEP</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {listaCompras.map((row) => (
-                                <InfoCliente id_cliente = {row.idCliente}/>
+                            {listaInfoClientes.map((row) => (
+                                <InfoCliente cliente = {row}/>
                             ))}
                         </TableBody>
                     </Table>

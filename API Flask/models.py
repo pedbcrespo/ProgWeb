@@ -36,7 +36,7 @@ class Info_cliente(db.Model, Aux):
 
     def dic(self):
         return self.dicionario(id=self.id, email=self.email, endereco=self.endereco, 
-        cep=self.cep)
+        cep=self.cep, cliente_id=self.cliente_id)
 
 class Categoria(db.Model, Aux):
     id = db.Column(db.Integer, primary_key=True)

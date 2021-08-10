@@ -71,7 +71,7 @@ export default function AdmAlteraProduto({ enviar }) {
                 <br></br>
                 <TextField
                     value={quantidade}
-                    label="Preço"
+                    label="Quantidade"
                     id="quantidade"
                     variant="outlined"
                     error={!erroQuantidade['valido']}

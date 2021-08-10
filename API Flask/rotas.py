@@ -37,6 +37,9 @@ class InfoCliente(Resource):
             dados_cliente['idCliente']
         )
 
+    def get(self):
+        return self.cliente.buscar_todos_cliente_info()
+
 class ClienteDados(Resource):
     cliente = ClienteDAO()
     def get(self, id_cliente):
@@ -140,7 +143,7 @@ api.add_resource(ProdutoInfo, "/produto/<int:id_produto>")#GET, PUT
 api.add_resource(CategoriaRota, "/categorias")#GET, POST
 api.add_resource(ClienteRota, "/clientes")#GET, POST(só o id)
 api.add_resource(CarrinhoRota, "/carrinhos")#GET, POST
-api.add_resource(InfoCliente, "/info_cliente")#POST
+api.add_resource(InfoCliente, "/info_cliente")#GET, POST
 api.add_resource(ClienteDados, "/dados_cliente/<int:id_cliente>")#POST
 api.add_resource(CategoriaInfo, "/categoria/<int:id_categoria>")#GET
 api.add_resource(CarrinhoInfo, "/carrinho/<int:id_cliente>")#GET, PUT

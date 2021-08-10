@@ -76,6 +76,13 @@ function getTodoEstoque(setFunction) {
         .then(res => res.json())
         .then(setFunction)
 }
+
+function getTodasInfoCliente(setFunction){
+    fetch(`http://localhost:5000/info_cliente`)
+        .then(res => res.json())
+        .then(setFunction)
+}
+
 //===================POST========================//
 //Envia dados de um novo carrinho
 async function postCarrinho(dado) {
@@ -154,6 +161,7 @@ export {
     getCarrinho,
     getEndereco,
     getInfoCliente,
+    getTodasInfoCliente,
     getTodoEstoque,
 
     postCarrinho,
