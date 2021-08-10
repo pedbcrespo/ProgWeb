@@ -109,6 +109,10 @@ class ProdutoDAO:
         lista_produtos = Produto.query.all()  
         return [produto.dic() for produto in lista_produtos]
 
+    def buscar(self, id_produto):
+        prod = Produto.query.filter_by(id=id_produto).first()
+        return prod.dic()
+
     def download_imagem(self, id_produto):
         produto = Produto.query.get(id_produto)
         tipo_imagem = Tipo_imagem_produto.query.filter_by(id_produto=id_produto).first()
@@ -122,15 +126,15 @@ class ProdutoDAO:
         
         tipo_imagem = arquivo_img.split('.')[1]
 
-        im = plt.imread(arquivo_img)
-        arquivo_res = resize(im, (225, 225))
-
-        with open(arquivo_res, 'r+b') as arq:
+        with open(arquivo_img, 'r+b') as arq:
             produto.caminhoImagem = arq.read()
 
         db.session.commit()
         return {"id":id, "mensagem": "imagem armazenada com sucesso"}
 
+    def buscar_todo_estoque(self):
+        estoque = Estoque.query.all()
+        return [dado.dic() for dado in estoque]
 
     # Esse metodo nao salva a imagem no BD, mas sim num arquivo no servidor
     def salva_imagem(self, arquivo, id_produto):

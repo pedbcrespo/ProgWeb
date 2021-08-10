@@ -8,6 +8,8 @@ export default function FormProduto({ enviar }) {
 
     const { listaCat } = useListaCateg();
 
+    const statusErroPadrao = { valido: true, texto: '' };
+
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState(0);
     const [categoria, setCategoria] = useState(0);
@@ -15,10 +17,10 @@ export default function FormProduto({ enviar }) {
     //arquivoImagem é um objeto, para saber o nome dele, basta acessar o campo 'name'
     const [arquivoImagem, setArquivoImagem] = useState(null);
 
-    const [erroNome, setErroNome] = useState({ valido: true, texto: "" });
-    const [erroPreco, setErroPreco] = useState({ valido: true, texto: "" });
-    const [erroQuantidade, setErroQuantidade] = useState({ valido: true, texto: "" });
-    const [erroArquivo, setErroArquivo] = useState({ valido: true, texto: "" });
+    const [erroNome, setErroNome] = useState(statusErroPadrao);
+    const [erroPreco, setErroPreco] = useState(statusErroPadrao);
+    const [erroQuantidade, setErroQuantidade] = useState(statusErroPadrao);
+    const [erroArquivo, setErroArquivo] = useState(statusErroPadrao);
 
     function prepararEnviar(event) {
         event.preventDefault();

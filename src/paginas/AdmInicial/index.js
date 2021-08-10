@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProdutos } from '../../context/produto';
 import { useListaCateg } from '../../context/categoria';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button } from '@material-ui/core';
-import { deleteProduto } from '../../server/api';
+import { rmv_produto_estoque } from '../../models/prodCar';
+import { getTodoEstoque } from '../../server/api';
 
 export default function AdmInicial() {
 
@@ -20,15 +21,28 @@ export default function AdmInicial() {
         return 'Não identificado';
     }
 
-    function alterar(produto) {
-        return <Link to={`/adm/alterar_produto/${produto}`} />
+    function retNomeProduto(id){
+        for(let i in listaProdutos){
+            if(listaProdutos[i].id === id){
+                return listaProdutos[i].nome;
+            }
+        }
     }
+
+    function remover(produto){
+        console.log(`remover ${produto}`);
+        rmv_produto_estoque(setListaProdutos, listaProdutos, produto.id);
+    }
+
+    useEffect(()=>{
+        getTodoEstoque(setEstoque);
+    }, []);
 
     return (
         <>
             <br></br>
             <h2>Produtos</h2>
-            <TableContainer >
+            <TableContainer className='Tabela'>
                 <Table size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
@@ -40,15 +54,17 @@ export default function AdmInicial() {
                     </TableHead>
                     <TableBody>
                         {listaProdutos.map((row) => (
-                            <TableRow key={row.id} onClick={() => { console.log(row) }}>
+                            <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">
                                     {row.nome}
                                 </TableCell>
                                 <TableCell align="right">{categ(row.categoriaProduto)}</TableCell>
                                 <TableCell align="right">{row.preco.toFixed(2)}</TableCell>
                                 <TableCell align="right">
-                                    <Button>Alterar</Button>
-                                    <Button>Remover</Button>
+                                    <Button variant="contained" color="primary">
+                                        <Link to={`/adm/alterar_produto/${row.id}`} id="linkAlterar">Alterar</Link>
+                                    </Button>
+                                    <Button onClick={()=>{remover(row)}}>Remover</Button>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -57,7 +73,7 @@ export default function AdmInicial() {
             </TableContainer>
             <br></br>
             <h2>Estoque</h2>
-            <TableContainer >
+            <TableContainer className='Tabela'>
                 <Table size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
@@ -69,9 +85,9 @@ export default function AdmInicial() {
                         {estoque.map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">
-                                    {row.nome}
+                                    {retNomeProduto(row.id)}
                                 </TableCell>
-                                <TableCell align="right">{categ(row.quantidade)}</TableCell>
+                                <TableCell align="right">{row.quantidade}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

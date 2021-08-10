@@ -59,6 +59,9 @@ class ProdutoRota(Resource):
 
 class ProdutoInfo(Resource):
     produto = ProdutoDAO()
+    def get(self, id_produto):
+        return self.produto.buscar(id_produto)
+
     def delete(self, id_produto):
         return self.produto.deletar(id_produto)
 
@@ -124,19 +127,23 @@ class CarrinhoProduto(Resource):
     def delete(self, id_cliente, id_produto, indice):
         return self.carrinho.remover_produto(id_cliente, id_produto, indice)
 
+class EstoqueRota(Resource):
+    produto = ProdutoDAO()
+    def get(self):
+        return self.produto.buscar_todo_estoque()
 
 # Definindo o caminho para a API
 
 api.add_resource(Inicial, "/")#GET
 api.add_resource(ProdutoRota, "/produtos")#GET, POST
+api.add_resource(ProdutoInfo, "/produto/<int:id_produto>")#GET, PUT
 api.add_resource(CategoriaRota, "/categorias")#GET, POST
 api.add_resource(ClienteRota, "/clientes")#GET, POST(só o id)
 api.add_resource(CarrinhoRota, "/carrinhos")#GET, POST
-
 api.add_resource(InfoCliente, "/info_cliente")#POST
 api.add_resource(ClienteDados, "/dados_cliente/<int:id_cliente>")#POST
-
 api.add_resource(CategoriaInfo, "/categoria/<int:id_categoria>")#GET
 api.add_resource(CarrinhoInfo, "/carrinho/<int:id_cliente>")#GET, PUT
 api.add_resource(CarrinhoProduto, "/carrinho_del/<int:id_cliente>/<int:id_produto>/<int:indice>")#DELETE
 api.add_resource(ImagemProduto, "/imagem/<int:id_produto>")#GET, POST
+api.add_resource(EstoqueRota, "/estoque")

@@ -1,9 +1,9 @@
-import { 
-    postCarrinho, 
-    deleteProdutoCarrinho, 
-    putCompras, 
-    postInfoCliente, 
-    postProduto, 
+import {
+    postCarrinho,
+    deleteProdutoCarrinho,
+    putCompras,
+    postInfoCliente,
+    postProduto,
     postCategoria,
     putImagemProduto,
     deleteProduto
@@ -40,14 +40,14 @@ function enviar(carrinho, urlNome, idCliente) {
     }
 }
 
-function add_estoque(setFuncao, lista){
+function add_estoque(setFuncao, lista) {
     return produto => {
         /**produto deve ser um objeto com os seguintes atributos:
          * nome, categoriaProduto, preco e quantidade
          */
         const novo_produto = {
-            nome: produto.nome, 
-            categoria:produto.categoriaProduto,
+            nome: produto.nome,
+            categoria: produto.categoriaProduto,
             preco: produto.preco
         };
         const novo_produto_post = {
@@ -64,7 +64,7 @@ function add_estoque(setFuncao, lista){
     }
 }
 
-function add_categoria(setFuncao, lista){
+function add_categoria(setFuncao, lista) {
     return categoria => {
         const nova_lista = [...lista, categoria];
         setFuncao(nova_lista);
@@ -72,23 +72,37 @@ function add_categoria(setFuncao, lista){
     }
 }
 
-function rmv_produto_estoque(setFuncao, lista, id_produto){
+function rmv_produto_estoque(setFuncaoLista, lista, id_produto) {
     const copia_lista = Array.from(lista);
     let indice;
-    for(let i in lista){
-        if(lista[i].id === id_produto){
+    for (let i in lista) {
+        if (lista[i].id === id_produto) {
             indice = i;
             break;
         }
     }
     copia_lista.splice((indice), 1);
-    setFuncao(copia_lista);
+    setFuncaoLista(copia_lista);
     deleteProduto(id_produto);
+}
+
+function atualiza_produto(setFuncao, lista, id_produto) {
+    return (objeto_produto) => {
+        for (let i in lista) {
+            if (lista[i].id === id_produto) {
+                lista[i].nome = objeto_produto.nome;
+                lista[i].preco = objeto_produto.preco;
+                break;
+            }
+        }
+        setFuncao(lista);
+    }
 }
 
 export {
     rmv,
     rmv_produto_estoque,
+    atualiza_produto,
     add,
     enviar,
     add_categoria,

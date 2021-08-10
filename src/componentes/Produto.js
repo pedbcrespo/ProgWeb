@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import imagem_background from '../server/bdimg/background.png';
 import { getImagemProduto } from '../server/api';
 
 export default function Produto({ id, nome, preco, categoria, funcao }) {
 
-    const [imagem, setImagem] = useState(imagem_background);
+    const [imagem, setImagem] = useState(null);
 
     useEffect(() => {
         getImagemProduto(setImagem, id);

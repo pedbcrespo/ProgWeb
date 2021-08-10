@@ -27,7 +27,7 @@ function getProduto(ident, setFunction) {
 function getImagemProduto(setFunction, id_produto) {
     fetch(`http://localhost:5000/imagem/${id_produto}`)
         .then(res => res.json())
-        .then(data=>setFunction(data.imagem))
+        .then(data => setFunction(data.imagem))
 }
 
 //Busca todas as categorias
@@ -65,16 +65,16 @@ function getEndereco(setFunction, cep) {
         })
 }
 
-function getInfoCliente(setFunction, id_cliente){
+function getInfoCliente(setFunction, id_cliente) {
     fetch(`http://localhost:5000/dados_cliente/${id_cliente}`)
         .then(res => res.json())
         .then(setFunction)
 }
 
-function getTodoEstoque(setFunction){
+function getTodoEstoque(setFunction) {
     fetch(`http://localhost:5000/estoque`)
-    .then(res=>res.json())
-    .then(setFunction)
+        .then(res => res.json())
+        .then(setFunction)
 }
 //===================POST========================//
 //Envia dados de um novo carrinho
@@ -96,14 +96,14 @@ async function postInfoCliente(dados_cliente) {
     })
 }
 
-async function postProduto(dado){
+async function postProduto(dado) {
     return await api.post('/produtos', dado)
-    .then(res=>res)
+        .then(res => res)
 }
 
-async function postCategoria(dado){
+async function postCategoria(dado) {
     return await api.post('/categorias', dado)
-    .then(res=>res)
+        .then(res => res)
 }
 
 //===================PUT========================//
@@ -112,8 +112,12 @@ async function putCliente(id_cliente, dado) {
     return await api.put(`/cliente/${id_cliente}`, dado).then({ "mensagem": "atualizado" })
 }
 
-async function putImagemProduto(id_produto, imagem){
-    return await api.put(`/produto/${id_produto}`, imagem).then({"mensagem": "atualizado"})
+async function putImagemProduto(id_produto, imagem) {
+    return await api.put(`/produto/${id_produto}`, imagem,{
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+    }).then({ "mensagem": "atualizado" })
 }
 
 async function putCompras(id_cliente) {
@@ -137,7 +141,7 @@ async function deleteCliente(id_cliente) {
 }
 
 async function deleteProduto(id_produto) {
-    return await api.delete(`/produto/${id_produto}`).then({mensagem:"excluido"})
+    return await api.delete(`/produto/${id_produto}`).then({ mensagem: "excluido" })
 }
 //===================fetchFunctions==============//
 
@@ -161,7 +165,8 @@ export {
     putCliente,
     putCompras,
     putEstoque,
-
+    putImagemProduto,
+    
     deleteProdutoCarrinho,
     deleteCliente,
     deleteProduto,

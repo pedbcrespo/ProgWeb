@@ -95,6 +95,11 @@
   padding: 20px;
 }
 
+#linkAlterar{
+  color:#fff;
+  text-decoration: none;
+}
+
 .Rodape{
   border-top: 1px solid black;
   text-align: center;

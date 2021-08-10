@@ -16,7 +16,7 @@ export default function Adm() {
             <Route exact path="/adm/add_categoria" children={<AddCategoria / >} />
             <Route exact path="/adm/add_produto" children={<AddProduto />}/>
             <Route exact path="/adm/registros" children={<RegistroCompras />}/>
-            <Route exact path="/adm/alterar_produto/:produto" children={<AdmAlteraProduto />}/>
+            <Route exact path="/adm/alterar_produto/:produto_id" children={<AdmAlteraProduto />}/>
         </Switch>
 
     ) : <Redirect to="/login" />
