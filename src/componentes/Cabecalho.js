@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom';
 import { useListaCateg } from '../context/categoria';
 import CabecalhoAdm from './CabecalhoAdm';
 import { useAdmin } from '../context/admin';
+import logo from "../imagens/logo.png";
 
 export default function Cabecalho() {
     const { listaCat } = useListaCateg();
     const { acesso } = useAdmin();
 
-    return acesso? <CabecalhoAdm/> : (
+    return acesso ? <CabecalhoAdm /> : (
         <>
             <header className="Cabecalho">
-                <h1>ProgWeb Commerce</h1>
+                {/* <h1><img src={logo} /></h1> */}
+                <h1>Prog Web</h1>
                 <h2>A lojinha mais sagaz da internet</h2>
             </header>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -30,7 +32,7 @@ export default function Cabecalho() {
                                     Categoria
                                 </Link>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    {listaCat.map((cat, indice)=>{
+                                    {listaCat.map((cat, indice) => {
                                         return (<li key={indice}>
                                             <Link className="dropdown-item" to={`/categoria/${cat.nome}`}>{cat.nome}</Link>
                                         </li>)

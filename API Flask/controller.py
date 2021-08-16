@@ -1,11 +1,9 @@
 from models import Cliente, Info_cliente, Produto, Categoria, Carrinho, Estoque, Tipo_imagem_produto
 from config import db
-from skimage.transform import resize
-import matplotlib.pyplot as plt
 import base64
 
 
-class ClienteDAO:
+class ClienteController:
     def adicionar(self, id):
         db.session.add(Cliente(id))
         db.session.commit()
@@ -33,8 +31,12 @@ class ClienteDAO:
         lista_info_cliente = Info_cliente.query.all()
         return [info.dic() for info in lista_info_cliente]
 
+    def buscar_todos(self):
+        lista_id_cliente = Cliente.query.all()
+        return [cliente.dic() for cliente in lista_id_cliente]
 
-class CarrinhoDAO:
+
+class CarrinhoController:
     def adicionar_produto(self, id_cliente, id_produto):
         db.session.add(Carrinho(id_cliente,id_produto))
         db.session.commit()
@@ -73,7 +75,7 @@ class CarrinhoDAO:
         return [carrinho.dic() for carrinho in lista_carrinhos]
 
 
-class ProdutoDAO:
+class ProdutoController:
     def adicionar(self, nome, categoria_id, preco, quantidade):
         db.session.add(Produto(nome, categoria_id, preco))
         db.session.commit()
@@ -157,7 +159,7 @@ class ProdutoDAO:
         return {"imagem": f"data:image/jpg;base64,{imagem}"}
 
 
-class CategoriaDAO:
+class CategoriaController:
     def adicionar(self, id, nome):
         db.session.add(Categoria(id, nome))
         db.session.commit()
@@ -178,8 +180,8 @@ class CategoriaDAO:
         return categoria.dic()
 
 if __name__ == '__main__':
-    p = ProdutoDAO()
-    c = CarrinhoDAO()
+    p = ProdutoController()
+    c = CarrinhoController()
 
     # print(c.buscar_todos())
     

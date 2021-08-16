@@ -46,7 +46,8 @@ export default function AdmInicial() {
                 <Table size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Nome</TableCell>
+                            <TableCell>ID</TableCell>
+                            <TableCell align="right">Nome</TableCell>
                             <TableCell align="right">Categoria</TableCell>
                             <TableCell align="right">Preço</TableCell>
                             <TableCell align="right">Operações</TableCell>
@@ -55,7 +56,8 @@ export default function AdmInicial() {
                     <TableBody>
                         {listaProdutos.map((row) => (
                             <TableRow key={row.id}>
-                                <TableCell component="th" scope="row">
+                                <TableCell component="th" scope="row">{row.id}</TableCell>
+                                <TableCell align="right">
                                     {row.nome}
                                 </TableCell>
                                 <TableCell align="right">{categ(row.categoriaProduto)}</TableCell>

@@ -3,6 +3,13 @@
   text-align: center;
   color:#fff;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  height:150px;
+  padding:30px 70px 30px 70px;
+  
+}
+
+.Cabecalho h1 img{
+  height: 100px;
 }
 
 .campProduto{
@@ -100,7 +107,12 @@
   text-decoration: none;
 }
 
+
+
+
 .Rodape{
   border-top: 1px solid black;
   text-align: center;
+  padding: 35px 0 10px 0;
+  background-color:#060606;
 }
