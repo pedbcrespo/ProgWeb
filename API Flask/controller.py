@@ -35,6 +35,14 @@ class ClienteController:
         lista_id_cliente = Cliente.query.all()
         return [cliente.dic() for cliente in lista_id_cliente]
 
+    def limpa_inativos(self, id_cliente):
+        lista_clientes = Cliente.query.all()
+        for cliente in lista_clientes:
+            lista = Carrinho.query.filter_by(idCliente=cliente.id).all()
+            if len(lista) == 0 and cliente.id != id_cliente:
+                db.session.delete(cliente)
+        db.session.commit()
+        return {"status":"ok"}
 
 class CarrinhoController:
     def adicionar_produto(self, id_cliente, id_produto):
@@ -182,8 +190,8 @@ class CategoriaController:
 if __name__ == '__main__':
     p = ProdutoController()
     c = CarrinhoController()
-
+    v = ClienteController()
     # print(c.buscar_todos())
     
-    print(c.remover_produto(1,2,3))
+    print(v.limpa_inativos(399))
     # print(c.buscar_todos())

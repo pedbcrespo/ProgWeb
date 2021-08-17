@@ -9,6 +9,10 @@ class Inicial(Resource):
     def get(self):
         return {"status":"rodando"}
 
+class Verificacao(Resource):
+    def get(self, id_cliente):
+        cliente = ClienteController()
+        return cliente.limpa_inativos(id_cliente)
 
 class ClienteRota(Resource):
     cliente = ClienteController()
@@ -83,7 +87,8 @@ class ImagemProduto(Resource):
     def post(self, id_produto):
         imagem = request.files['file']
         if imagem:
-            self.produto.upload_imagem(id_produto, imagem)
+            # self.produto.upload_imagem(id_produto, imagem)
+            print(request.files)
         return {"mensagem": "uma imagem foi enviada"}
 
 class CategoriaRota(Resource):
@@ -142,6 +147,7 @@ class EstoqueRota(Resource):
 # Definindo o caminho para a API
 
 api.add_resource(Inicial, "/")#GET
+api.add_resource(Verificacao, "/<int:id_cliente>")#GET
 api.add_resource(ProdutoRota, "/produtos")#GET, POST
 api.add_resource(ProdutoInfo, "/produto/<int:id_produto>")#GET, PUT
 api.add_resource(CategoriaRota, "/categorias")#GET, POST

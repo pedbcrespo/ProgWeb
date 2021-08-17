@@ -89,6 +89,12 @@ function getClientes(setFunction){
         .then(setFunction)
 }
 
+
+function Verificacao_clientes_inativos(id_cliente_atual){
+    fetch(`http://localhost:5000/${id_cliente_atual}`)
+    .then(res=>res.json())
+}
+
 //===================POST========================//
 //Envia dados de um novo carrinho
 async function postCarrinho(dado) {
@@ -185,4 +191,6 @@ export {
     deleteProdutoCarrinho,
     deleteCliente,
     deleteProduto,
+
+    Verificacao_clientes_inativos
 }
