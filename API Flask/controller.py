@@ -39,13 +39,19 @@ class ClienteController:
         lista_clientes = Cliente.query.all()
         for cliente in lista_clientes:
             lista = Carrinho.query.filter_by(idCliente=cliente.id).all()
-            
-            if cliente.id != id_cliente and cliente.ativo:
-                cliente.ativo = False
 
             if len(lista) == 0 and cliente.id != id_cliente and not cliente.ativo:
                 db.session.delete(cliente)
                 
+            elif len(lista)>0:
+                nao_finalizado = True
+                for elem in lista:
+                    nao_finalizado = nao_finalizado and not elem.finalizado
+                if nao_finalizado:
+                    for elem in lista:
+                        db.session.delete(elem)
+                    db.session.delete(cliente)
+        
         db.session.commit()
         return {"status":"ok"}
 

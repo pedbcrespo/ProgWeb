@@ -15,9 +15,9 @@ class Cliente(db.Model, Aux):
     ativo = db.Column(db.Boolean)
     info = db.relationship('Info_cliente', backref='comprador')
 
-    def __init__(self, id, ativo=1):
+    def __init__(self, id):
         self.id = id
-        self.ativo=ativo
+        self.ativo = False
 
     def dic(self):
         return self.dicionario(id=self.id, ativo=self.ativo)
@@ -81,7 +81,7 @@ class Estoque(db.Model, Aux):
         return self.dicionario(id=self.id, quantidade=self.quantidade)
 
 class Carrinho(db.Model, Aux):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     idCliente = db.Column(db.Integer, db.ForeignKey('cliente.id'), primary_key=True)
     idProduto = db.Column(db.Integer, db.ForeignKey('produto.id'), primary_key=True)
     finalizado = db.Column(db.Boolean)
