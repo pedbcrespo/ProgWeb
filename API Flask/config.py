@@ -12,6 +12,7 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg'}
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = conn
 app.config['UPLOAD_FOLDER'] = '/imgs'
+app.config['CORS_HEADERS'] = 'Content-Type'
 db = SQLAlchemy(app)
 api = Api(app)
 CORS(app)

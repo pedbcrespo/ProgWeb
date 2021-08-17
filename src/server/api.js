@@ -121,8 +121,9 @@ async function postProduto(dado) {
 }
 
 async function postCategoria(dado) {
-    return await api.post('/categorias', dado)
-        .then(res => res)
+    // dado tem que ser um OBJETO
+    return await api.post("/categorias", dado)
+        .then(res =>{console.log(res.data)})
 }
 
 //===================PUT========================//

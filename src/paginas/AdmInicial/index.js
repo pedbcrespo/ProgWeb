@@ -64,7 +64,7 @@ export default function AdmInicial() {
                                 <TableCell align="right">{row.preco.toFixed(2)}</TableCell>
                                 <TableCell align="right">
                                     <Button variant="contained" color="primary">
-                                        <Link to={`/adm/alterar_produto/${row.id}`} id="linkAlterar">Alterar</Link>
+                                        <Link to={`/adm/alterar_produto/${row.id}`} className="linkAlterar">Alterar</Link>
                                     </Button>
                                     <Button onClick={()=>{remover(row)}}>Remover</Button>
                                 </TableCell>

@@ -9,6 +9,59 @@ class Inicial(Resource):
     def get(self):
         return {"status":"rodando"}
 
+# ------------- PRODUTO ------------- #
+class ProdutoInfo(Resource):
+    produto = ProdutoController()
+    def get(self, id_produto):
+        return self.produto.buscar(id_produto)
+
+    def delete(self, id_produto):
+        return self.produto.deletar(id_produto)
+
+    def put(self, id_produto):
+        pass
+
+class ImagemProduto(Resource):
+    produto = ProdutoController()
+    def get(self, id_produto):
+        return self.produto.download_imagem(id_produto)
+
+    def post(self, id_produto):
+        imagem = request.files['file']
+        if imagem:
+            # self.produto.upload_imagem(id_produto, imagem)
+            print(request.files)
+        return {"mensagem": "uma imagem foi enviada"}
+
+class ProdutoRota(Resource):
+    produto = ProdutoController()
+    def get(self):
+        return self.produto.buscar_todos()
+
+    def post(self):
+        novo_produto = json.loads(request.data)
+
+        return self.produto.adicionar(
+            novo_produto["nome"], 
+            novo_produto["categoriaProduto"],
+            novo_produto["preco"],
+            novo_produto['quantidade']
+        )
+
+
+# ------------- CATEGORIA ------------- #
+class CategoriaRota(Resource):
+    categoria = CategoriaController()
+    def get(self):
+        return self.categoria.buscar_todos()        
+
+    def post(self):
+        nova_categoria = json.loads(request.data)
+        return self.categoria.adicionar(
+            nova_categoria['nome']
+        )
+
+# ------------- CLIENTE ------------- #
 class Verificacao(Resource):
     def get(self, id_cliente):
         cliente = ClienteController()
@@ -22,6 +75,11 @@ class ClienteRota(Resource):
     def post(self):
         novo_cliente = json.loads(request.data)
         return self.cliente.adicionar(novo_cliente['id'])
+
+class ClienteInfo(Resource):
+    cliente = ClienteController()
+    def get(self, id_cliente):
+        return self.cliente.buscar_cliente(id_cliente)
 
 class ClienteComDados(Resource):
     cliente = ClienteController()
@@ -53,65 +111,8 @@ class ClienteDados(Resource):
     def get(self, id_cliente):
         return self.cliente.buscar_cliente(id_cliente)
 
-class ProdutoRota(Resource):
-    produto = ProdutoController()
-    def get(self):
-        return self.produto.buscar_todos()
 
-    def post(self):
-        novo_produto = json.loads(request.data)
-
-        return self.produto.adicionar(
-            novo_produto["nome"], 
-            novo_produto["categoriaProduto"],
-            novo_produto["preco"],
-            novo_produto['quantidade']
-        )
-
-class ProdutoInfo(Resource):
-    produto = ProdutoController()
-    def get(self, id_produto):
-        return self.produto.buscar(id_produto)
-
-    def delete(self, id_produto):
-        return self.produto.deletar(id_produto)
-
-    def put(self, id_produto):
-        pass
-
-class ImagemProduto(Resource):
-    produto = ProdutoController()
-    def get(self, id_produto):
-        return self.produto.download_imagem(id_produto)
-
-    def post(self, id_produto):
-        imagem = request.files['file']
-        if imagem:
-            # self.produto.upload_imagem(id_produto, imagem)
-            print(request.files)
-        return {"mensagem": "uma imagem foi enviada"}
-
-class CategoriaRota(Resource):
-    categoria = CategoriaController()
-    def get(self):
-        return self.categoria.buscar_todos()        
-
-    def post(self):
-        nova_categoria = json.loads(request.data)
-        return self.categoria.adicionar(
-            nova_categoria['id'],
-            nova_categoria['nome']
-        )
-
-class CategoriaInfo(Resource):
-    categoria = CategoriaController()
-    def get(self, id_categoria):
-        return self.categoria.buscar(id_categoria)
-
-    def delete(self, id_categoria):
-        return self.categoria.deletar(id_categoria)
-
-
+# ------------- CARRINHO ------------- #
 class CarrinhoRota(Resource):
     carrinho = CarrinhoController()
 
@@ -139,25 +140,45 @@ class CarrinhoProduto(Resource):
     def delete(self, id_cliente, id_produto, indice):
         return self.carrinho.remover_produto(id_cliente, id_produto, indice)
 
+
+# ------------- ESTOQUE ------------- #
 class EstoqueRota(Resource):
     produto = ProdutoController()
     def get(self):
         return self.produto.buscar_todo_estoque()
 
+
+
+
 # Definindo o caminho para a API
 
+
 api.add_resource(Inicial, "/")#GET
-api.add_resource(Verificacao, "/<int:id_cliente>")#GET
+
+# ------------- PRODUTO ------------- #
+
 api.add_resource(ProdutoRota, "/produtos")#GET, POST
 api.add_resource(ProdutoInfo, "/produto/<int:id_produto>")#GET, PUT
+api.add_resource(ImagemProduto, "/imagem/<int:id_produto>")#GET, POST
+
+# ------------- CATEGORIA ------------- #
+
 api.add_resource(CategoriaRota, "/categorias")#GET, POST
+
+# ------------- CLIENTE ------------- #
+
+api.add_resource(Verificacao, "/<int:id_cliente>")#GET
 api.add_resource(ClienteRota, "/clientes")#GET, POST(só o id)
-api.add_resource(ClienteComDados, "/cliente")#GET, DELETE(só o id)
-api.add_resource(CarrinhoRota, "/carrinhos")#GET, POST
+api.add_resource(ClienteComDados, "/cliente/<int:id_cliente>")#GET, DELETE(só o id)
 api.add_resource(InfoCliente, "/info_cliente")#GET, POST
 api.add_resource(ClienteDados, "/dados_cliente/<int:id_cliente>")#POST
-api.add_resource(CategoriaInfo, "/categoria/<int:id_categoria>")#GET
+
+# ------------- CARRINHO ------------- #
+
+api.add_resource(CarrinhoRota, "/carrinhos")#GET, POST
 api.add_resource(CarrinhoInfo, "/carrinho/<int:id_cliente>")#GET, PUT
 api.add_resource(CarrinhoProduto, "/carrinho_del/<int:id_cliente>/<int:id_produto>/<int:indice>")#DELETE
-api.add_resource(ImagemProduto, "/imagem/<int:id_produto>")#GET, POST
+
+# ------------- ESTOQUE ------------- #
+
 api.add_resource(EstoqueRota, "/estoque")#GET

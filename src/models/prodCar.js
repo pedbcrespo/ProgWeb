@@ -6,7 +6,8 @@ import {
     postProduto,
     postCategoria,
     putImagemProduto,
-    deleteProduto
+    deleteProduto,
+    getCategorias
 } from '../server/api';
 //Esse modulo fica as funçoes relativas a manipulação dos produtos na aplicação
 
@@ -64,12 +65,12 @@ function add_estoque(setFuncao, lista) {
     }
 }
 
-function add_categoria(setFuncao, lista) {
+function add_categoria(setLista, lista) {
     return categoria => {
-        const nova_lista = [...lista, categoria];
-        setFuncao(nova_lista);
         postCategoria(categoria);
-    }
+        getCategorias(setLista);
+        console.log(lista);
+    } 
 }
 
 function rmv_produto_estoque(setFuncaoLista, lista, id_produto) {

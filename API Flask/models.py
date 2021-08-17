@@ -12,13 +12,15 @@ class Aux:
 
 class Cliente(db.Model, Aux):
     id = db.Column(db.Integer, primary_key=True)
+    ativo = db.Column(db.Boolean)
     info = db.relationship('Info_cliente', backref='comprador')
 
-    def __init__(self, id):
+    def __init__(self, id, ativo=1):
         self.id = id
+        self.ativo=ativo
 
     def dic(self):
-        return self.dicionario(id=self.id)
+        return self.dicionario(id=self.id, ativo=self.ativo)
 
 class Info_cliente(db.Model, Aux):
     id = db.Column(db.Integer, primary_key=True)

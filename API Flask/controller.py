@@ -39,37 +39,53 @@ class ClienteController:
         lista_clientes = Cliente.query.all()
         for cliente in lista_clientes:
             lista = Carrinho.query.filter_by(idCliente=cliente.id).all()
-            if len(lista) == 0 and cliente.id != id_cliente:
+            
+            if cliente.id != id_cliente and cliente.ativo:
+                cliente.ativo = False
+
+            if len(lista) == 0 and cliente.id != id_cliente and not cliente.ativo:
                 db.session.delete(cliente)
+                
         db.session.commit()
         return {"status":"ok"}
 
+
 class CarrinhoController:
     def adicionar_produto(self, id_cliente, id_produto):
+        cliente = Cliente.query.get(id_cliente)
         db.session.add(Carrinho(id_cliente,id_produto))
+        
+        if not cliente.ativo:
+            cliente.ativo = True
+
         db.session.commit()
         return {"idCliente": id_cliente, "idProduto":id_produto}
 
     def finalizar_compra(self, id_cliente):
         compra_atual = Carrinho.query.filter_by(idCliente=id_cliente).all()
+        cliente = Cliente.query.get(id_cliente)
         
         for compra in compra_atual:
             compra.finalizado = 1
             produto_estoque = Estoque.query.get(compra.idProduto)
             produto_estoque.quantidade -= 1
         
+        cliente.ativo = False
         db.session.commit()
 
         return {"status": "compra finalizada"}
 
     def remover_produto(self, id_cliente, id_produto, indice):
+        cliente = Cliente.query.get(id_cliente)
         lista_produtos = Carrinho.query.filter_by(idCliente=id_cliente).all()
-        print([p.dic() for p in lista_produtos])
-
         for produto in lista_produtos:
             if produto.idProduto == id_produto and lista_produtos.index(produto) == indice:
                 db.session.delete(produto)
                 break
+
+        if len(lista_produtos) == 0:
+            cliente.ativo = False
+            
         db.session.commit()
         
         return {"idCliente": id_cliente, "idProduto":id_produto}
@@ -168,10 +184,11 @@ class ProdutoController:
 
 
 class CategoriaController:
-    def adicionar(self, id, nome):
-        db.session.add(Categoria(id, nome))
+    def adicionar(self, nome):
+        nova_categoria = Categoria(nome)
+        db.session.add(nova_categoria)
         db.session.commit()
-        return {"id":id, "nome":nome}
+        return {"nome":nome}
     
     def deletar(self, id):
         categoria = Categoria.query.filter_by(id=id).first()
