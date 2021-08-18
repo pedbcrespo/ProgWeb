@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button, Input } from '@material-ui/core';
 import { useListaCateg } from '../context/categoria';
 import { validarProduto, validarPreco, validarQuantidade, validarArquivoImagem } from '../models/validacao';
+import FileBase64 from 'react-file-base64';
 
-export default function FormProduto({ enviar }) {
+export default function FormProduto({ enviar, enviar_imagem }) {
 
     const { listaCat } = useListaCateg();
 
@@ -27,15 +28,13 @@ export default function FormProduto({ enviar }) {
         setErroNome(validarProduto(nome));
         setErroPreco(validarPreco(preco));
         setErroQuantidade(validarQuantidade(quantidade));
-        setErroArquivo(validarArquivoImagem(arquivoImagem));
         
         if (erroNome['valido'] && erroPreco['valido']) {
+            console.log(arquivoImagem)
             enviar({ nome, preco, categoria, arquivoImagem, quantidade });
+
         }else {
-            let erros = [erroNome, erroPreco, erroQuantidade, erroArquivo];
-            let mensagem_erros = erros.filter((err)=>{return err['valido']})
-            let mensagem = '\n'.join(mensagem_erros.map((err)=>{return err['texto']}))
-            alert(`ERRO ${mensagem}`)
+            window.alert("Erro!")
         }
     }
 
@@ -105,17 +104,20 @@ export default function FormProduto({ enviar }) {
                     fullWidth />
                 <br></br>
                 <br></br>
-                <Input
+                {/* <Input
                     ip='upload_imagem'
                     type='file'
                     error={!erroArquivo['valido']}
                     onChange={(event) => {
-                        console.log(event.target.files[0])
                         validarArquivoImagem(event.target.files[0])
                         setArquivoImagem(event.target.files[0])
                     }}
+                    accept="image/*"
                     name="file"
-                />
+                /> */}
+                <FileBase64 multiple={false}
+                onDone={(e)=>{
+                    setArquivoImagem(e)}}/>
                 <br></br>
                 <br></br>
 

@@ -7,9 +7,9 @@ export const AdminContext = createContext([]);
 export default function AdminProvider({ children }) {
     const [acesso, setAcesso] = useState(false)
 
-    useEffect(()=>{
-        console.log(acesso)
-    }, [acesso]);
+    // useEffect(()=>{
+    //     console.log(acesso)
+    // }, [acesso]);
 
     return (
         <AdminContext.Provider value={{ acesso, setAcesso, }}>

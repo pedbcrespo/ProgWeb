@@ -5,6 +5,7 @@ import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
 import { add } from '../../models/prodCar';
 import { useProdutos } from '../../context/produto';
+import { useAdmin } from '../../context/admin';
 
 export default function Inicial() {
 
@@ -12,7 +13,7 @@ export default function Inicial() {
     const { lista, setLista } = useListaCarrinho();
     const { idCliente } = useCliente();
 
-    
+
     return (
         <section className="campInicial">
             <section className="campProduto">

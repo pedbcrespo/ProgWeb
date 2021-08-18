@@ -5,10 +5,12 @@ import {
     postInfoCliente,
     postProduto,
     postCategoria,
-    putImagemProduto,
+    postImagemProduto,
     deleteProduto,
-    getCategorias
+    getCategorias,
+    getProdutos
 } from '../server/api';
+
 //Esse modulo fica as funçoes relativas a manipulação dos produtos na aplicação
 
 //So esta salvando no banco de dados, mas nao esta renderizando
@@ -41,29 +43,28 @@ function enviar(carrinho, urlNome, idCliente) {
     }
 }
 
+function add_imagem_produto(arquivo, id){
+    postImagemProduto(arquivo,id);
+}
+
 function add_estoque(setFuncao, lista) {
     return produto => {
-        /**produto deve ser um objeto com os seguintes atributos:
-         * nome, categoriaProduto, preco e quantidade
-         */
-        const novo_produto = {
-            nome: produto.nome,
-            categoria: produto.categoriaProduto,
-            preco: produto.preco
-        };
-        const novo_produto_post = {
-            nome: produto.nome,
-            categoriaProduto: produto.categoriaProduto,
-            preco: produto.preco,
-            quantidade: produto.quantidade
-        };
-        const nova_lista = [...lista, novo_produto];
-        setFuncao(nova_lista);
-        let id_produto = postProduto(novo_produto_post);
-        // putImagemProduto(id_produto, produto.arquivoImagem);
-        console.log(id_produto);
+        const {nome, categoria, preco, quantidade, arquivoImagem} = produto;
+
+        const formData = new FormData();
+        formData.append("imagem", arquivoImagem['base64']);
+        // formData.append("nome_imagem", arquivoImagem.name);
+        formData.append("nome", nome);
+        formData.append("categoria", categoria);
+        formData.append("preco", preco);
+        formData.append("quantidade", quantidade);
+        postProduto(formData);
+        getProdutos(setFuncao);
+        // setFuncao(nova_lista);
     }
 }
+
+
 
 function add_categoria(setLista, lista) {
     return categoria => {

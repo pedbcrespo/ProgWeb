@@ -56,7 +56,7 @@ function validarProduto(produto){
 }
 
 function validarPreco(preco){
-    return preco >=  0? {valido:true, texto:""} : {valido:false, texto:"Valor positivo e maior que 0"};
+    return preco >  0? {valido:true, texto:""} : {valido:false, texto:"Valor positivo e maior que 0"};
 }
 
 function validarQuantidade(estoque){

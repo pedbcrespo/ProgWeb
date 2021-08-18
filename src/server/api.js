@@ -77,22 +77,22 @@ function getTodoEstoque(setFunction) {
         .then(setFunction)
 }
 
-function getTodasInfoCliente(setFunction){
+function getTodasInfoCliente(setFunction) {
     fetch(`http://localhost:5000/info_cliente`)
         .then(res => res.json())
         .then(setFunction)
 }
 
-function getClientes(setFunction){
+function getClientes(setFunction) {
     fetch(`http://localhost:5000/clientes`)
         .then(res => res.json())
         .then(setFunction)
 }
 
 
-function Verificacao_clientes_inativos(id_cliente_atual){
+function Verificacao_clientes_inativos(id_cliente_atual) {
     fetch(`http://localhost:5000/${id_cliente_atual}`)
-    .then(res=>res.json())
+        .then(res => res.json())
 }
 
 //===================POST========================//
@@ -116,28 +116,34 @@ async function postInfoCliente(dados_cliente) {
 }
 
 async function postProduto(dado) {
-    return await api.post('/produtos', dado)
-        .then(res => res)
+    return await api.post('/produtos', dado, {
+        headers:{
+            'Content-Type': `multipart/form-data; boundary=${dado._boundary}`
+        }
+    })
+        .then(res => res.data)
+        .then(console.log)
 }
 
 async function postCategoria(dado) {
     // dado tem que ser um OBJETO
     return await api.post("/categorias", dado)
-        .then(res =>{console.log(res.data)})
+        .then(res => { console.log(res.data) })
+}
+
+async function postImagemProduto(imagem, id_produto) {
+    return await api.post(`/imagem/${id_produto}`, imagem, {
+        headers: {
+            "Content-Type": `multipart/form-data; boundary=${imagem._boundary}`,
+        }
+    })
+        .then(res => { console.log(res.data) })
 }
 
 //===================PUT========================//
 //Altera dados do cliente
 async function putCliente(id_cliente, dado) {
     return await api.put(`/cliente/${id_cliente}`, dado).then({ "mensagem": "atualizado" })
-}
-
-async function putImagemProduto(id_produto, imagem) {
-    return await api.put(`/produto/${id_produto}`, imagem,{
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-    }).then({ "mensagem": "atualizado" })
 }
 
 async function putCompras(id_cliente) {
@@ -183,12 +189,12 @@ export {
     postInfoCliente,
     postProduto,
     postCategoria,
+    postImagemProduto,
 
     putCliente,
     putCompras,
     putEstoque,
-    putImagemProduto,
-    
+
     deleteProdutoCarrinho,
     deleteCliente,
     deleteProduto,

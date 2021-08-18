@@ -28,10 +28,10 @@ class ImagemProduto(Resource):
 
     def post(self, id_produto):
         imagem = request.files['file']
-        if imagem:
-            # self.produto.upload_imagem(id_produto, imagem)
-            print(request.files)
-        return {"mensagem": "uma imagem foi enviada"}
+        # if imagem:
+        #     # self.produto.upload_imagem(id_produto, imagem)
+        #     print(request.files)
+        return {"mensagem": imagem}
 
 class ProdutoRota(Resource):
     produto = ProdutoController()
@@ -39,14 +39,16 @@ class ProdutoRota(Resource):
         return self.produto.buscar_todos()
 
     def post(self):
-        novo_produto = json.loads(request.data)
-
+        novo_produto = request.form
         return self.produto.adicionar(
             novo_produto["nome"], 
-            novo_produto["categoriaProduto"],
-            novo_produto["preco"],
-            novo_produto['quantidade']
+            int(novo_produto["categoria"]),
+            float(novo_produto["preco"]),
+            int(novo_produto['quantidade']),
+            novo_produto['imagem'],
         )
+        # return novo_produto
+
 
 
 # ------------- CATEGORIA ------------- #

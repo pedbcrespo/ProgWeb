@@ -106,12 +106,13 @@ class CarrinhoController:
 
 
 class ProdutoController:
-    def adicionar(self, nome, categoria_id, preco, quantidade):
+    def adicionar(self, nome, categoria_id, preco, quantidade, imagem):
         db.session.add(Produto(nome, categoria_id, preco))
         db.session.commit()
         produto = Produto.query.filter_by(nome=nome).first()
         self.adicionar_estoque(produto.id, quantidade)
-        return {"id":produto.id}
+        self.upload_imagem(produto.id, imagem)
+        return produto.id
 
     def deletar(self, id):
         self.removerEstoque(id)
@@ -153,16 +154,20 @@ class ProdutoController:
         imagem_json = f"data:image/{tipo};base64,{imagem}"
         return {"imagem": imagem_json}
 
-    def upload_imagem(self, id_produto, arquivo_img):
-        produto = Produto.query.get(id_produto)
-        
-        tipo_imagem = arquivo_img.split('.')[1]
+    def upload_imagem(self, id, imagem):
+        dado_imagem = imagem.split(',')[1]
+        dado_imagem_bin = base64.decode(dado_imagem)
 
-        with open(arquivo_img, 'r+b') as arq:
-            produto.caminhoImagem = arq.read()
+        produto = Produto.query.get(id)
+        produto.caminhoImagem = dado_imagem_bin
 
+        tipo_imagem = imagem.split(',')[0] # data:image/[tipo];base64
+        tipo_imagem = tipo_imagem('/')[1]  # [tipo];base64
+        tipo_imagem = tipo_imagem.split(';')[0] # [tipo]
+
+        db.session.add(Tipo_imagem_produto(id, tipo_imagem))
         db.session.commit()
-        return {"id":id, "mensagem": "imagem armazenada com sucesso"}
+        return {"mensagem": "imagem armazenada com sucesso"}
 
     def buscar_todo_estoque(self):
         estoque = Estoque.query.all()

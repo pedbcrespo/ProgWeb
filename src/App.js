@@ -11,6 +11,7 @@ import { useCliente } from './context/cliente';
 import { useSessao } from './context/sessao';
 import { inicializaSessao } from './models/dadosCliente';
 import { useEffect } from 'react';
+import AdminProvider from './context/admin';
 
 export default function App() {
 
