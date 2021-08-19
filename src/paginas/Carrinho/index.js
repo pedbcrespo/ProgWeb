@@ -5,6 +5,7 @@ import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
 import { useUrlNome } from '../../context/urlNome';
 import { rmv, enviar } from '../../models/prodCar';
+import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
 export default function Carrinho() {
     /**Ajeitar o CSS*/
@@ -21,9 +22,39 @@ export default function Carrinho() {
         return total.toFixed(2);
     }
 
+
     return (
 
             <section className="Carrinho-section">
+                <FormControl variant="outlined">
+                    <InputLabel id="Categoria">Ordenar por</InputLabel>
+                    <Select
+                        labelId="Categoria"
+                        id="Categoria-select"
+                        onChange={e => {
+                            const copia_lista = Array.from(lista);
+                            if(!e.target.value){
+                                copia_lista.sort(
+                                    (a,b)=>{
+                                        return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0);
+                                    }
+                                )
+                            }
+                            else{
+                                copia_lista.sort(
+                                    (a,b)=>{
+                                        return (a.preco > b.preco) ? 1 : ((b.preco > a.preco) ? -1 : 0);
+                                    }
+                                )
+                            }
+                            setLista(copia_lista);
+                        }}
+                    >
+                        <MenuItem value={0}>Alfabetica</MenuItem>
+                        <MenuItem value={1}>Preço</MenuItem>
+
+                    </Select>
+                </FormControl>
                 <section className="campoProduto">
                     {lista.map((produto, indice) => {
                         return (
@@ -32,7 +63,7 @@ export default function Carrinho() {
                                     id={produto.id}
                                     nome={produto.nome}
                                     categoria={produto.categoria}
-                                    preco={produto.preco}
+                                    preco={produto.preco.toFixed(2)}
                                     funcao={rmv(setLista, lista, idCliente, indice)}
                                 />
                             </div>
