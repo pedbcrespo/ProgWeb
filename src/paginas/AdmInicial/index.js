@@ -4,7 +4,7 @@ import { useProdutos } from '../../context/produto';
 import { useListaCateg } from '../../context/categoria';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button } from '@material-ui/core';
 import { rmv_produto_estoque } from '../../models/prodCar';
-import { getTodoEstoque } from '../../server/api';
+import { getTodoEstoque, getProdutos } from '../../server/api';
 
 export default function AdmInicial() {
 
@@ -36,6 +36,7 @@ export default function AdmInicial() {
 
     useEffect(()=>{
         getTodoEstoque(setEstoque);
+        getProdutos(setListaProdutos);
     }, []);
 
     return (

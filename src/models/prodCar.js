@@ -8,7 +8,8 @@ import {
     postImagemProduto,
     deleteProduto,
     getCategorias,
-    getProdutos
+    getProdutos,
+    putProduto
 } from '../server/api';
 
 //Esse modulo fica as funçoes relativas a manipulação dos produtos na aplicação
@@ -43,9 +44,6 @@ function enviar(carrinho, urlNome, idCliente) {
     }
 }
 
-function add_imagem_produto(arquivo, id){
-    postImagemProduto(arquivo,id);
-}
 
 function add_estoque(setFuncao, lista) {
     return produto => {
@@ -53,14 +51,13 @@ function add_estoque(setFuncao, lista) {
 
         const formData = new FormData();
         formData.append("imagem", arquivoImagem['base64']);
-        // formData.append("nome_imagem", arquivoImagem.name);
         formData.append("nome", nome);
         formData.append("categoria", categoria);
         formData.append("preco", preco);
         formData.append("quantidade", quantidade);
         postProduto(formData);
         getProdutos(setFuncao);
-        // setFuncao(nova_lista);
+
     }
 }
 
@@ -90,14 +87,16 @@ function rmv_produto_estoque(setFuncaoLista, lista, id_produto) {
 
 function atualiza_produto(setFuncao, lista, id_produto) {
     return (objeto_produto) => {
-        for (let i in lista) {
-            if (lista[i].id === id_produto) {
-                lista[i].nome = objeto_produto.nome;
-                lista[i].preco = objeto_produto.preco;
-                break;
-            }
-        }
-        setFuncao(lista);
+
+        const copia_lista = Array.from(lista);
+        // // for (let i in copia_lista) {
+        // //     if (copia_lista[i].id === id_produto) {
+        // //         copia_lista[i].nome = objeto_produto.nome;
+        // //         copia_lista[i].preco = objeto_produto.preco;
+        // //         break;
+        // //     }
+        // // }
+        putProduto(setFuncao, id_produto, objeto_produto);
     }
 }
 

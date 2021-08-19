@@ -132,6 +132,19 @@ class ProdutoController:
         db.session.commit()
         return {"id":id_produto, "quantidade":novo_valor}
 
+    def atualizar_produto(self, id_produto, alteracao_json):
+        produto = Produto.query.get(id_produto)
+        estoque = Estoque.query.filter_by(id=id_produto).first()
+
+        produto.nome = alteracao_json['nome']
+        produto.preco = alteracao_json['preco']
+
+        estoque.quantidade = alteracao_json['quantidade']
+
+        db.session.commit()
+ 
+        return self.buscar_todos()
+
     def removerEstoque(self, id_produto):
         produtoEstoque = Estoque.query.filter_by(id=id_produto).first()
         db.session.delete(produtoEstoque)

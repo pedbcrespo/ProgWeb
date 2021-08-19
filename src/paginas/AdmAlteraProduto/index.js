@@ -3,11 +3,16 @@ import { TextField, Button } from '@material-ui/core';
 import { validarProduto, validarPreco, validarQuantidade, validarArquivoImagem } from '../../models/validacao';
 import { useParams } from 'react-router-dom';
 import { getProduto } from '../../server/api';
+import { Link } from 'react-router-dom';
+import { atualiza_produto } from '../../models/prodCar';
+import { useProdutos } from '../../context/produto';
 
 export default function AdmAlteraProduto({ enviar }) {
 
     const statusErroPadrao = { valido: true, texto: '' };
     const { produto_id } = useParams();
+
+    const {listaProdutos, setListaProdutos} = useProdutos();
 
     const [produto, setProduto] = useState({});
     useEffect(()=>{
@@ -17,12 +22,10 @@ export default function AdmAlteraProduto({ enviar }) {
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState(0);
     const [quantidade, setQuantidade] = useState(0);
-    const [arquivoImagem, setArquivoImagem] = useState(null);
 
     const [erroNome, setErroNome] = useState(statusErroPadrao);
     const [erroPreco, setErroPreco] = useState(statusErroPadrao);
     const [erroQuantidade, setErroQuantidade] = useState(statusErroPadrao);
-    const [erroArquivo, setErroArquivo] = useState(statusErroPadrao);
 
     console.log(produto_id);
 
@@ -33,16 +36,16 @@ export default function AdmAlteraProduto({ enviar }) {
         setErroQuantidade(validarQuantidade(quantidade));
 
         if (erroNome['valido'] && erroPreco['valido'] && erroQuantidade['valido']) {
-            enviar({ nome, preco, quantidade });
+            atualiza_produto(setListaProdutos, listaProdutos,produto_id)({nome, preco, quantidade});
         }
 
     }
 
     return (
         <div className='CampFormProduto'>
-            <form onSubmit={prepararEnviar}>
+            <form>
                 <TextField
-                    value={produto.nome}
+                    // value={produto.nome}
                     id="nome"
                     variant="outlined"
                     error={!erroNome['valido']}
@@ -56,7 +59,7 @@ export default function AdmAlteraProduto({ enviar }) {
                 <br></br>
                 <br></br>
                 <TextField
-                    value={produto.preco}
+                    // value={produto.preco}
                     id="preco"
                     variant="outlined"
                     error={!erroPreco['valido']}
@@ -70,13 +73,13 @@ export default function AdmAlteraProduto({ enviar }) {
                 <br></br>
                 <br></br>
                 <TextField
-                    value={quantidade}
+                    // value={quantidade}
                     label="Quantidade"
                     id="quantidade"
                     variant="outlined"
                     error={!erroQuantidade['valido']}
-                    placeholder={produto.quantidade}
-                    onChange={(e) => { setNome(e.target.value) }}
+                    // placeholder={produto.quantidade}
+                    onChange={(e) => { setQuantidade(e.target.value) }}
                     onBlur={() => {
                         setErroQuantidade(validarQuantidade(quantidade));
                     }}
@@ -84,18 +87,8 @@ export default function AdmAlteraProduto({ enviar }) {
                 />
                 <br></br>
                 <br></br>
-                {/* <Input
-                    ip='upload_imagem'
-                    type='file'
-                    onChange={(event) => {
-                        console.log(event.target.files[0])
-                        validarArquivoImagem(event.target.files[0])
-                        setArquivoImagem(event.target.files[0])
-                    }}
-                    name="file"
-                /> */}
-                <Button variant="contained" color="primary" type="submit">
-                    Confirmar
+                <Button variant="contained" color="primary" onClick={prepararEnviar}>
+                    <Link to="/adm/inicial" className="linkAlterar">Confirmar</Link>
                 </Button>
             </form>
         </div>

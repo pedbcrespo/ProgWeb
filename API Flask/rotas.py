@@ -19,7 +19,8 @@ class ProdutoInfo(Resource):
         return self.produto.deletar(id_produto)
 
     def put(self, id_produto):
-        pass
+        dados_atualizados = json.loads(request.data)
+        return self.produto.atualizar_produto(id_produto, dados_atualizados)
 
 class ImagemProduto(Resource):
     produto = ProdutoController()

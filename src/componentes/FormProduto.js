@@ -4,6 +4,7 @@ import { TextField, FormControl, InputLabel, Select, MenuItem, Button, Input } f
 import { useListaCateg } from '../context/categoria';
 import { validarProduto, validarPreco, validarQuantidade, validarArquivoImagem } from '../models/validacao';
 import FileBase64 from 'react-file-base64';
+import { Link } from 'react-router-dom';
 
 export default function FormProduto({ enviar, enviar_imagem }) {
 
@@ -28,12 +29,12 @@ export default function FormProduto({ enviar, enviar_imagem }) {
         setErroNome(validarProduto(nome));
         setErroPreco(validarPreco(preco));
         setErroQuantidade(validarQuantidade(quantidade));
-        
+
         if (erroNome['valido'] && erroPreco['valido']) {
             console.log(arquivoImagem)
             enviar({ nome, preco, categoria, arquivoImagem, quantidade });
 
-        }else {
+        } else {
             window.alert("Erro!")
         }
     }
@@ -41,7 +42,7 @@ export default function FormProduto({ enviar, enviar_imagem }) {
     return (
         <div className="CampFormProduto">
 
-            <form onSubmit={prepararEnviar}>
+            <form>
                 <TextField
                     id="Nome"
                     label="Nome"
@@ -104,25 +105,16 @@ export default function FormProduto({ enviar, enviar_imagem }) {
                     fullWidth />
                 <br></br>
                 <br></br>
-                {/* <Input
-                    ip='upload_imagem'
-                    type='file'
-                    error={!erroArquivo['valido']}
-                    onChange={(event) => {
-                        validarArquivoImagem(event.target.files[0])
-                        setArquivoImagem(event.target.files[0])
-                    }}
-                    accept="image/*"
-                    name="file"
-                /> */}
-                <FileBase64 multiple={false}
-                onDone={(e)=>{
-                    setArquivoImagem(e)}}/>
+                <FileBase64 
+                    multiple={false}
+                    onDone={(e) => {
+                        setArquivoImagem(e)
+                    }} />
                 <br></br>
                 <br></br>
 
-                <Button variant="contained" color="primary" type="submit">
-                    Confirmar
+                <Button variant="contained" color="primary" onClick={prepararEnviar}>
+                    <Link to='/adm/inicial' className="linkAlterar">Confirmar</Link>
                 </Button>
             </form>
         </div>

@@ -131,19 +131,17 @@ async function postCategoria(dado) {
         .then(res => { console.log(res.data) })
 }
 
-async function postImagemProduto(imagem, id_produto) {
-    return await api.post(`/imagem/${id_produto}`, imagem, {
-        headers: {
-            "Content-Type": `multipart/form-data; boundary=${imagem._boundary}`,
-        }
-    })
-        .then(res => { console.log(res.data) })
+//===================PUT========================//
+async function putProduto(setFunction, id_produto, obj_alteracoes){
+    return await api.put(`/produto/${id_produto}`, obj_alteracoes)
+    .then(res=>res.data)
+    .then(setFunction)
 }
 
-//===================PUT========================//
 //Altera dados do cliente
 async function putCliente(id_cliente, dado) {
-    return await api.put(`/cliente/${id_cliente}`, dado).then({ "mensagem": "atualizado" })
+    return await api.put(`/cliente/${id_cliente}`, dado)
+    .then({ "mensagem": "atualizado" });
 }
 
 async function putCompras(id_cliente) {
@@ -189,8 +187,8 @@ export {
     postInfoCliente,
     postProduto,
     postCategoria,
-    postImagemProduto,
 
+    putProduto,
     putCliente,
     putCompras,
     putEstoque,
