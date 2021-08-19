@@ -45,7 +45,6 @@ export default function AdmAlteraProduto({ enviar }) {
         <div className='CampFormProduto'>
             <form>
                 <TextField
-                    // value={produto.nome}
                     id="nome"
                     variant="outlined"
                     error={!erroNome['valido']}
@@ -59,7 +58,6 @@ export default function AdmAlteraProduto({ enviar }) {
                 <br></br>
                 <br></br>
                 <TextField
-                    // value={produto.preco}
                     id="preco"
                     variant="outlined"
                     error={!erroPreco['valido']}
@@ -73,12 +71,10 @@ export default function AdmAlteraProduto({ enviar }) {
                 <br></br>
                 <br></br>
                 <TextField
-                    // value={quantidade}
                     label="Quantidade"
                     id="quantidade"
                     variant="outlined"
                     error={!erroQuantidade['valido']}
-                    // placeholder={produto.quantidade}
                     onChange={(e) => { setQuantidade(e.target.value) }}
                     onBlur={() => {
                         setErroQuantidade(validarQuantidade(quantidade));
