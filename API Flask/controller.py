@@ -112,7 +112,7 @@ class ProdutoController:
         produto = Produto.query.filter_by(nome=nome).first()
         self.adicionar_estoque(produto.id, quantidade)
         self.upload_imagem(produto.id, imagem)
-        return produto.id
+        return {"status":"ok"}
 
     def deletar(self, id):
         self.removerEstoque(id)
@@ -156,18 +156,19 @@ class ProdutoController:
 
     def upload_imagem(self, id, imagem):
         dado_imagem = imagem.split(',')[1]
-        dado_imagem_bin = base64.decode(dado_imagem)
-
+        dado_imagem_bin = base64.b64decode(dado_imagem)
+        
         produto = Produto.query.get(id)
         produto.caminhoImagem = dado_imagem_bin
 
         tipo_imagem = imagem.split(',')[0] # data:image/[tipo];base64
-        tipo_imagem = tipo_imagem('/')[1]  # [tipo];base64
+        tipo_imagem = tipo_imagem.split('/')[1]  # [tipo];base64
         tipo_imagem = tipo_imagem.split(';')[0] # [tipo]
 
         db.session.add(Tipo_imagem_produto(id, tipo_imagem))
         db.session.commit()
-        return {"mensagem": "imagem armazenada com sucesso"}
+        return {"imagem":dado_imagem,
+            "tipo": tipo_imagem}
 
     def buscar_todo_estoque(self):
         estoque = Estoque.query.all()
@@ -220,6 +221,13 @@ if __name__ == '__main__':
     c = CarrinhoController()
     v = ClienteController()
     # print(c.buscar_todos())
-    
-    print(v.limpa_inativos(399))
+    from teste import dic
+
+
+    print(p.adicionar(
+        dic['nome'],
+        int(dic['categoria']),
+        float(dic['preco']),
+        int(dic['quantidade']),
+        dic['imagem']))
     # print(c.buscar_todos())
