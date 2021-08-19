@@ -87,15 +87,7 @@ function rmv_produto_estoque(setFuncaoLista, lista, id_produto) {
 
 function atualiza_produto(setFuncao, lista, id_produto) {
     return (objeto_produto) => {
-
-        const copia_lista = Array.from(lista);
-        // // for (let i in copia_lista) {
-        // //     if (copia_lista[i].id === id_produto) {
-        // //         copia_lista[i].nome = objeto_produto.nome;
-        // //         copia_lista[i].preco = objeto_produto.preco;
-        // //         break;
-        // //     }
-        // // }
+        console.log(lista);
         putProduto(setFuncao, id_produto, objeto_produto);
     }
 }
