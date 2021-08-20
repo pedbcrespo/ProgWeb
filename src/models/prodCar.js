@@ -1,28 +1,27 @@
 import {
     postCarrinho,
-    deleteProdutoCarrinho,
+    // deleteProdutoCarrinho,
     putCompras,
     postInfoCliente,
     postProduto,
     postCategoria,
-    postImagemProduto,
     deleteProduto,
     getCategorias,
     getProdutos,
-    putProduto
+    putProduto,
+    postCliente,
+    finalizarCompra
 } from '../server/api';
 
-//Esse modulo fica as funçoes relativas a manipulação dos produtos na aplicação
-
-//So esta salvando no banco de dados, mas nao esta renderizando
-//precisa mexer no context carrinho
+// Alterar no models e no banco de dados para tirar a coluna finalizado da tabela
+// carrinho.
 
 function rmv(setFuncao, lista, id_cliente, indice) {
     return (id_produto) => {
         const copia_lista = Array.from(lista);
         copia_lista.splice(indice, 1);
         setFuncao(copia_lista);
-        deleteProdutoCarrinho(id_cliente, id_produto, indice);
+        // deleteProdutoCarrinho(id_cliente, id_produto, indice);
     }
 }
 
@@ -31,15 +30,28 @@ function add(setFuncao, lista, id_cliente) {
         const nova_lista = [...lista, dado];
         let id_produto = dado.id;
         setFuncao(nova_lista);
-        postCarrinho({ "idCliente": id_cliente, "idProduto": id_produto });
+        // postCarrinho({ "idCliente": id_cliente, "idProduto": id_produto });
     }
 }
 
-function enviar(carrinho, urlNome, idCliente) {
+function enviar_carrinho(carrinho, id_cliente) {
+    let lista_id_produtos = carrinho.map((prod) => { return prod.id })
+    const dados_compras = {
+        idCliente: id_cliente,
+        lista: lista_id_produtos
+    }
+    postCarrinho(dados_compras);
+}
+
+function finalizar_compras(carrinho, urlNome, idCliente) {
     return (num_cartao, dados_cliente) => {
+        postCliente({ "id": idCliente });
         console.log(num_cartao);
+
+        enviar_carrinho(carrinho, idCliente);
+
         postInfoCliente(dados_cliente);
-        putCompras(idCliente);
+        finalizarCompra(idCliente);
         window.location.href = `${urlNome}/`
     }
 }
@@ -47,7 +59,7 @@ function enviar(carrinho, urlNome, idCliente) {
 
 function add_estoque(setFuncao, lista) {
     return produto => {
-        const {nome, categoria, preco, quantidade, arquivoImagem} = produto;
+        const { nome, categoria, preco, quantidade, arquivoImagem } = produto;
 
         const formData = new FormData();
         formData.append("imagem", arquivoImagem['base64']);
@@ -68,7 +80,7 @@ function add_categoria(setLista, lista) {
         postCategoria(categoria);
         getCategorias(setLista);
         console.log(lista);
-    } 
+    }
 }
 
 function rmv_produto_estoque(setFuncaoLista, lista, id_produto) {
@@ -97,7 +109,7 @@ export {
     rmv_produto_estoque,
     atualiza_produto,
     add,
-    enviar,
+    finalizar_compras,
     add_categoria,
     add_estoque
 }

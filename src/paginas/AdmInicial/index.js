@@ -37,7 +37,7 @@ export default function AdmInicial() {
     useEffect(()=>{
         getTodoEstoque(setEstoque);
         getProdutos(setListaProdutos);
-    }, []);
+    },[setEstoque, setListaProdutos]);
 
     return (
         <>

@@ -1,11 +1,9 @@
 import React from 'react';
 import Produto from '../../componentes/Produto';
-// import ProdCarrinho from '../../componentes/ProdCarrinho';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
 import { add } from '../../models/prodCar';
 import { useProdutos } from '../../context/produto';
-import { useAdmin } from '../../context/admin';
 
 export default function Inicial() {
 
@@ -23,7 +21,7 @@ export default function Inicial() {
                             <Produto
                                 id={prod.id}
                                 nome={prod.nome}
-                                categoria={prod.categoria}
+                                categoria={prod.categoriaProduto}
                                 preco={prod.preco}
                                 funcao={add(setLista, lista, idCliente)} 
                                 />

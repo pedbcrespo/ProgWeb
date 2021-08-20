@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getImagemProduto } from '../server/api';
 
 export default function Produto({ id, nome, preco, categoria, funcao }) {
 
     const [imagem, setImagem] = useState(null);
 
-    useEffect(() => {
-        getImagemProduto(setImagem, id);
-    }, [])
+    getImagemProduto(setImagem, id);
+    // useEffect(() => {
+    //     getImagemProduto(setImagem, id);
+    // }, [])
 
 
     return (

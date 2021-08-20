@@ -7,20 +7,21 @@ import Inicial from './paginas/Inicial';
 import Carrinho from './paginas/Carrinho';
 import AdmLogin from './paginas/AdmLogin';
 import CategoriaEsp from './paginas/CategoriaEsp';
-import { useCliente } from './context/cliente';
+// import { useCliente } from './context/cliente';
 import { useSessao } from './context/sessao';
 import { inicializaSessao } from './models/dadosCliente';
 import { useEffect } from 'react';
-import AdminProvider from './context/admin';
 
 export default function App() {
 
-  const { idCliente } = useCliente();
+  // const { idCliente, setCliente } = useCliente();
+  // const { setCliente } = useCliente();
   const { sessao, setSessao } = useSessao();
 
   useEffect(() => {
-    inicializaSessao(setSessao, idCliente, sessao);
-  }, [])
+    inicializaSessao(setSessao, sessao);
+  }, [setSessao, sessao]);
+
 
   return (
     <>

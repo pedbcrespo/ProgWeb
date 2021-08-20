@@ -12,15 +12,13 @@ class Aux:
 
 class Cliente(db.Model, Aux):
     id = db.Column(db.Integer, primary_key=True)
-    ativo = db.Column(db.Boolean)
     info = db.relationship('Info_cliente', backref='comprador')
 
     def __init__(self, id):
         self.id = id
-        self.ativo = False
 
     def dic(self):
-        return self.dicionario(id=self.id, ativo=self.ativo)
+        return self.dicionario(id=self.id)
 
 class Info_cliente(db.Model, Aux):
     id = db.Column(db.Integer, primary_key=True)
@@ -64,8 +62,6 @@ class Produto(db.Model, Aux):
         self.preco = preco
 
     def dic(self):
-        # return self.dicionario(id=self.id, nome=self.nome, categoriaProduto=self.categoriaProduto,
-        # preco=self.preco, caminhoImagem=self.caminhoImagem)
         return self.dicionario(id=self.id, nome=self.nome, categoriaProduto=self.categoriaProduto,
         preco=self.preco)
 
@@ -84,16 +80,15 @@ class Carrinho(db.Model, Aux):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     idCliente = db.Column(db.Integer, db.ForeignKey('cliente.id'), primary_key=True)
     idProduto = db.Column(db.Integer, db.ForeignKey('produto.id'), primary_key=True)
-    finalizado = db.Column(db.Boolean)
 
-    def __init__(self, idCliente, idProduto, finalizado=False):
+
+    def __init__(self, idCliente, idProduto):
         self.idCliente = idCliente
         self.idProduto = idProduto
-        self.finalizado = finalizado
+
 
     def dic(self):
-        return self.dicionario(id=self.id, idCliente=self.idCliente, idProduto=self.idProduto,
-        finalizado=self.finalizado)
+        return self.dicionario(id=self.id, idCliente=self.idCliente, idProduto=self.idProduto)
 
 class Tipo_imagem_produto(db.Model, Aux):
     id_produto = db.Column(db.Integer, db.ForeignKey('produto.id'), primary_key=True)

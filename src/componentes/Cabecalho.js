@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useListaCateg } from '../context/categoria';
 import CabecalhoAdm from './CabecalhoAdm';
 import { useAdmin } from '../context/admin';
-import logo from "../imagens/logo.png";
+// import logo from "../imagens/logo.png";
 
 export default function Cabecalho() {
     const { listaCat } = useListaCateg();

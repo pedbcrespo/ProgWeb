@@ -3,7 +3,7 @@ import { getTodasCompras, getTodasInfoCliente } from '../../server/api';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import InfoCliente from '../../componentes/InfoCliente';
 
-export default function () {
+export default function RegistroCompras() {
 
     const [listaCompras, setListaCompras] = useState([]);
     const [listaInfoClientes, setListaInfoClientes] = useState([]);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
-import { validarProduto, validarPreco, validarQuantidade, validarArquivoImagem } from '../../models/validacao';
+import { validarProduto, validarPreco, validarQuantidade } from '../../models/validacao';
 import { useParams } from 'react-router-dom';
 import { getProduto } from '../../server/api';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ export default function AdmAlteraProduto({ enviar }) {
     const [produto, setProduto] = useState({});
     useEffect(()=>{
         getProduto(produto_id, setProduto);
-    }, []);
+    }, [produto_id, setProduto]);
 
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState(0);

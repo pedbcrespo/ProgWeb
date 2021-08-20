@@ -27,6 +27,11 @@ class ClienteController:
         info = Info_cliente.query.filter_by(cliente_id=id).first()
         return info.dic()
 
+    def estado_cliente(self, id):
+        # Retorna {id, ativo}
+        cliente = Cliente.query.get(id)
+        return cliente.dic()
+
     def buscar_todos_cliente_info(self):
         lista_info_cliente = Info_cliente.query.all()
         return [info.dic() for info in lista_info_cliente]
@@ -35,49 +40,33 @@ class ClienteController:
         lista_id_cliente = Cliente.query.all()
         return [cliente.dic() for cliente in lista_id_cliente]
 
-    def limpa_inativos(self, id_cliente):
-        lista_clientes = Cliente.query.all()
-        for cliente in lista_clientes:
-            lista = Carrinho.query.filter_by(idCliente=cliente.id).all()
-
-            if len(lista) == 0 and cliente.id != id_cliente and not cliente.ativo:
-                db.session.delete(cliente)
-                
-            elif len(lista)>0:
-                nao_finalizado = True
-                for elem in lista:
-                    nao_finalizado = nao_finalizado and not elem.finalizado
-                if nao_finalizado:
-                    for elem in lista:
-                        db.session.delete(elem)
-                    db.session.delete(cliente)
-        
-        db.session.commit()
-        return {"status":"ok"}
 
 
 class CarrinhoController:
     def adicionar_produto(self, id_cliente, id_produto):
         cliente = Cliente.query.get(id_cliente)
         db.session.add(Carrinho(id_cliente,id_produto))
-        
-        if not cliente.ativo:
-            cliente.ativo = True
 
         db.session.commit()
         return {"idCliente": id_cliente, "idProduto":id_produto}
 
+    def adicionar_lista_produtos(self, id_cliente, lista_produtos):
+        for produto_id in lista_produtos:
+            self.adicionar_produto(id_cliente, int(produto_id))
+        return {"idCliente": id_cliente, "lista":lista_produtos}
+
+
     def finalizar_compra(self, id_cliente):
         compra_atual = Carrinho.query.filter_by(idCliente=id_cliente).all()
-        cliente = Cliente.query.get(id_cliente)
         
-        for compra in compra_atual:
-            compra.finalizado = 1
-            produto_estoque = Estoque.query.get(compra.idProduto)
+        def atualiza_estoque(id_produto):
+            produto_estoque = Estoque.query.filter_by(id=id_produto).first()
             produto_estoque.quantidade -= 1
-        
-        cliente.ativo = False
-        db.session.commit()
+            db.session.commit()
+            return True
+
+        for compra in compra_atual:
+            atualiza_estoque(compra.idProduto)
 
         return {"status": "compra finalizada"}
 
@@ -88,9 +77,6 @@ class CarrinhoController:
             if produto.idProduto == id_produto and lista_produtos.index(produto) == indice:
                 db.session.delete(produto)
                 break
-
-        if len(lista_produtos) == 0:
-            cliente.ativo = False
             
         db.session.commit()
         
@@ -233,14 +219,4 @@ if __name__ == '__main__':
     p = ProdutoController()
     c = CarrinhoController()
     v = ClienteController()
-    # print(c.buscar_todos())
-    from teste import dic
-
-
-    print(p.adicionar(
-        dic['nome'],
-        int(dic['categoria']),
-        float(dic['preco']),
-        int(dic['quantidade']),
-        dic['imagem']))
     # print(c.buscar_todos())

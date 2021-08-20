@@ -1,6 +1,6 @@
 import { postCliente } from '../server/api';
 
-function geradorId(lista) {
+function geradorId() {
     let id = Math.floor(Math.random()*10000) - Math.floor(Math.random()*1000) + Math.floor(Math.random()*1000);
         
     if(id < 0){
@@ -9,10 +9,10 @@ function geradorId(lista) {
     return id;
 }
 
-function inicializaSessao(setFunctionValidacao, idCliente, validacao){
+function inicializaSessao(setFunctionValidacao, validacao){
     if(!validacao){
         setFunctionValidacao(true);
-        postCliente({id:idCliente});
+        // postCliente({id:idCliente});
     }
 }
 

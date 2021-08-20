@@ -89,23 +89,21 @@ function getClientes(setFunction) {
         .then(setFunction)
 }
 
-
-function Verificacao_clientes_inativos(id_cliente_atual) {
-    fetch(`http://localhost:5000/${id_cliente_atual}`)
-        .then(res => res.json())
+function finalizarCompra(id_cliente){
+    fetch(`http://localhost:5000/finalizar_compra/${id_cliente}`)
+    .then(res=>res.data)
 }
-
 //===================POST========================//
 //Envia dados de um novo carrinho
 async function postCarrinho(dado) {
-    return await api.post('/carrinhos', dado).then({ 'mensagem': "enviado" })
+    console.log(dado)
+    return await api.post('/carrinhos', dado)
+    .then(res=>res.data)
 }
 
 //Envia dados de um novo cliente, só o id
 async function postCliente(dado) {
-    return await api.post('/clientes', dado).then(res => {
-        console.log(res.data)
-    })
+    return await api.post('/clientes', dado).then(res => res.data)
 }
 
 //Envia os dados mais detalhados do cliente, como o email e o endereço
@@ -197,5 +195,5 @@ export {
     deleteCliente,
     deleteProduto,
 
-    Verificacao_clientes_inativos
+    finalizarCompra
 }

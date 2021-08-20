@@ -4,7 +4,7 @@ import Formulario from '../../componentes/Formulario';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
 import { useUrlNome } from '../../context/urlNome';
-import { rmv, enviar } from '../../models/prodCar';
+import { rmv, finalizar_compras } from '../../models/prodCar';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
 export default function Carrinho() {
@@ -34,23 +34,28 @@ export default function Carrinho() {
                     onChange={e => {
                         const copia_lista = Array.from(lista);
                         let func;
-                        if (!e.target.value) {
+                        if (e.target.value === 'alfbt_cres') {
                             func = (a, b) => {
                                 return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0);
                             }
-
                         }
-                        else {
+                        else if(e.target.value === 'preco_cres'){
                             func = (a,b)=>{
                                 return b.preco - a.preco;
+                            }
+                        }
+                        else{
+                            func = (a,b)=>{
+                                return a.preco - b.preco;
                             }
                         }
                         copia_lista.sort(func)
                         setLista(copia_lista);
                     }}
                 >
-                    <MenuItem value={0}>Alfabetica</MenuItem>
-                    <MenuItem value={1}>Preço</MenuItem>
+                    <MenuItem value={'alfbt_cres'}>A-Z</MenuItem>
+                    <MenuItem value={'preco_cres'}>Maior</MenuItem>
+                    <MenuItem value={'preco_dcres'}>Menor</MenuItem>
 
                 </Select>
             </FormControl>
@@ -61,7 +66,7 @@ export default function Carrinho() {
                             <ProdCarrinho
                                 id={produto.id}
                                 nome={produto.nome}
-                                categoria={produto.categoria}
+                                categoria={produto.categoriaProduto}
                                 preco={produto.preco.toFixed(2)}
                                 funcao={rmv(setLista, lista, idCliente, indice)}
                             />
@@ -71,7 +76,7 @@ export default function Carrinho() {
                 <h3>Total: R$ {precoTotal()}</h3>
             </section>
             <div className="campFormulario">
-                <Formulario enviar={enviar(lista, urlNome, idCliente)} />
+                <Formulario enviar={finalizar_compras(lista, urlNome, idCliente)} />
             </div>
         </section>
 

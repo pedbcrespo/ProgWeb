@@ -65,11 +65,6 @@ class CategoriaRota(Resource):
         )
 
 # ------------- CLIENTE ------------- #
-class Verificacao(Resource):
-    def get(self, id_cliente):
-        cliente = ClienteController()
-        return cliente.limpa_inativos(id_cliente)
-
 class ClienteRota(Resource):
     cliente = ClienteController()
     def get(self):
@@ -87,7 +82,8 @@ class ClienteInfo(Resource):
 class ClienteComDados(Resource):
     cliente = ClienteController()
     def get(self, id_cliente):
-        return self.cliente.dados_cliente(id_cliente)
+        # Retorna {id, ativo}
+        return self.cliente.estado_cliente(id_cliente)
 
     def delete(self, id_cliente):
         return self.cliente.deletar(id_cliente)
@@ -124,9 +120,9 @@ class CarrinhoRota(Resource):
 
     def post(self):
         novo_carrinho = json.loads(request.data)
-        return self.carrinho.adicionar_produto(
+        return self.carrinho.adicionar_lista_produtos(
             novo_carrinho["idCliente"],
-            novo_carrinho["idProduto"]
+            novo_carrinho["lista"]
         )
 
 class CarrinhoInfo(Resource):
@@ -143,6 +139,10 @@ class CarrinhoProduto(Resource):
     def delete(self, id_cliente, id_produto, indice):
         return self.carrinho.remover_produto(id_cliente, id_produto, indice)
 
+class FinalizarCompra(Resource):
+    carrinho = CarrinhoController()
+    def get(self, id_cliente):
+        return self.carrinho.finalizar_compra(id_cliente)
 
 # ------------- ESTOQUE ------------- #
 class EstoqueRota(Resource):
@@ -170,7 +170,6 @@ api.add_resource(CategoriaRota, "/categorias")#GET, POST
 
 # ------------- CLIENTE ------------- #
 
-api.add_resource(Verificacao, "/<int:id_cliente>")#GET
 api.add_resource(ClienteRota, "/clientes")#GET, POST(só o id)
 api.add_resource(ClienteComDados, "/cliente/<int:id_cliente>")#GET, DELETE(só o id)
 api.add_resource(InfoCliente, "/info_cliente")#GET, POST
@@ -181,6 +180,8 @@ api.add_resource(ClienteDados, "/dados_cliente/<int:id_cliente>")#POST
 api.add_resource(CarrinhoRota, "/carrinhos")#GET, POST
 api.add_resource(CarrinhoInfo, "/carrinho/<int:id_cliente>")#GET, PUT
 api.add_resource(CarrinhoProduto, "/carrinho_del/<int:id_cliente>/<int:id_produto>/<int:indice>")#DELETE
+
+api.add_resource(FinalizarCompra, "/finalizar_compra/<int:id_cliente>")
 
 # ------------- ESTOQUE ------------- #
 

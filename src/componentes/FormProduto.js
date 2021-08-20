@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import { TextField, FormControl, InputLabel, Select, MenuItem, Button, Input } from '@material-ui/core';
+import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import { useListaCateg } from '../context/categoria';
-import { validarProduto, validarPreco, validarQuantidade, validarArquivoImagem } from '../models/validacao';
+import { validarProduto, validarPreco, validarQuantidade } from '../models/validacao';
 import FileBase64 from 'react-file-base64';
 import { Link } from 'react-router-dom';
 
-export default function FormProduto({ enviar, enviar_imagem }) {
+export default function FormProduto({ enviar }) {
 
     const { listaCat } = useListaCateg();
 
@@ -22,8 +22,8 @@ export default function FormProduto({ enviar, enviar_imagem }) {
     const [erroNome, setErroNome] = useState(statusErroPadrao);
     const [erroPreco, setErroPreco] = useState(statusErroPadrao);
     const [erroQuantidade, setErroQuantidade] = useState(statusErroPadrao);
-    const [erroArquivo, setErroArquivo] = useState(statusErroPadrao);
 
+    
     function prepararEnviar(event) {
         event.preventDefault();
         setErroNome(validarProduto(nome));

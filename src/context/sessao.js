@@ -1,14 +1,14 @@
 import React, { createContext, useState, useContext } from 'react';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 export const SessaoContext = createContext([]);
 
 export default function SessaoProvider({ children }) {
     const [sessao, setSessao] = useState(false)
 
-    useEffect(()=>{
-        console.log(sessao)
-    }, [sessao]);
+    // useEffect(()=>{
+    //     console.log(sessao)
+    // }, [sessao]);
 
     return (
         <SessaoContext.Provider value={{ sessao, setSessao, }}>

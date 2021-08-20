@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from 'react';
 import { useEffect } from 'react';
-import { useCliente } from './cliente';
-import { getCarrinho } from '../server/api';
+// import { useCliente } from './cliente';
+// import { getCarrinho } from '../server/api';
 
 //Estou usando o context do cliente aqui!
 
