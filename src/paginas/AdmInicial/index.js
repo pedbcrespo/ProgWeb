@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProdutos } from '../../context/produto';
 import { useListaCateg } from '../../context/categoria';
-import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { rmv_produto_estoque } from '../../models/prodCar';
 import { getTodoEstoque, getProdutos } from '../../server/api';
+import { Table } from 'react-bootstrap';
 
 export default function AdmInicial() {
 
@@ -21,81 +22,74 @@ export default function AdmInicial() {
         return 'Não identificado';
     }
 
-    function retNomeProduto(id){
-        for(let i in listaProdutos){
-            if(listaProdutos[i].id === id){
+    function retNomeProduto(id) {
+        for (let i in listaProdutos) {
+            if (listaProdutos[i].id === id) {
                 return listaProdutos[i].nome;
             }
         }
     }
 
-    function remover(produto){
+    function remover(produto) {
         console.log(`remover ${produto}`);
         rmv_produto_estoque(setListaProdutos, listaProdutos, produto.id);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getTodoEstoque(setEstoque);
         getProdutos(setListaProdutos);
-    },[setEstoque, setListaProdutos]);
+    }, [setEstoque, setListaProdutos]);
 
     return (
         <>
             <br></br>
             <h2>Produtos</h2>
-            <TableContainer className='Tabela'>
-                <Table size="small" aria-label="a dense table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>ID</TableCell>
-                            <TableCell align="right">Nome</TableCell>
-                            <TableCell align="right">Categoria</TableCell>
-                            <TableCell align="right">Preço</TableCell>
-                            <TableCell align="right">Operações</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {listaProdutos.map((row) => (
-                            <TableRow key={row.id}>
-                                <TableCell component="th" scope="row">{row.id}</TableCell>
-                                <TableCell align="right">
-                                    {row.nome}
-                                </TableCell>
-                                <TableCell align="right">{categ(row.categoriaProduto)}</TableCell>
-                                <TableCell align="right">{row.preco.toFixed(2)}</TableCell>
-                                <TableCell align="right">
-                                    <Button variant="contained" color="primary">
-                                        <Link to={`/adm/alterar_produto/${row.id}`} className="linkAlterar">Alterar</Link>
-                                    </Button>
-                                    <Button onClick={()=>{remover(row)}}>Remover</Button>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <Table striped bordered hover variant="dark" className="tabela">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Preço</th>
+                        <th>Operações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {listaProdutos.map((row) => {
+                        return <tr key={row.id}>
+                            <td>{row.id}</td>
+                            <td>{row.nome}</td>
+                            <td>{categ(row.categoriaProduto)}</td>
+                            <td>{row.preco.toFixed(2)}</td>
+                            <td><Button variant="contained" color="primary">
+                                <Link to={`/adm/alterar_produto/${row.id}`} className="linkAlterar">Alterar</Link>
+                            </Button>
+                                <Button onClick={() => { remover(row) }} variant="contained">Remover</Button>
+                            </td>
+                        </tr>
+                    })}
+                </tbody>
+            </Table>
+
             <br></br>
             <h2>Estoque</h2>
-            <TableContainer className='Tabela'>
-                <Table size="small" aria-label="a dense table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Produto</TableCell>
-                            <TableCell align="right">Quanditade</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {estoque.map((row) => (
-                            <TableRow key={row.id}>
-                                <TableCell component="th" scope="row">
-                                    {retNomeProduto(row.id)}
-                                </TableCell>
-                                <TableCell align="right">{row.quantidade}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+
+            <Table striped bordered hover variant="dark" className="tabela">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {estoque.map((row) => {
+                        return <tr key={row.id}>
+                            <td>{retNomeProduto(row.id)}</td>
+                            <td>{row.quantidade}</td>
+                        </tr>
+                    })}
+                </tbody>
+            </Table>
         </>
     );
 }
