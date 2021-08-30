@@ -25,7 +25,16 @@ export default function Formulario({ enviar }) {
             cep, 
             idCliente
         };
-        enviar(numCartao, dados_cliente);
+        if(erroCartao['valido'] && erroCep['valido'] && erroEmail['valido'])
+            enviar(numCartao, dados_cliente);
+        else{
+            let erro = '';
+            let lista_erro = [erroCartao, erroEmail, erroCep];
+            for(let i in lista_erro){
+                erro = ! lista_erro[i]['valido'] ? `${lista_erro[i]['texto']}\n` : '';
+            }
+            window.alert(erro);
+        }
     }
 
     return (

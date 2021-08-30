@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useListaCateg } from '../context/categoria';
 import CabecalhoAdm from './CabecalhoAdm';
 import { useAdmin } from '../context/admin';
-// import logo from "../imagens/logo.png";
+import logo from "../imagens/logo.png";
 
 export default function Cabecalho() {
     const { listaCat } = useListaCateg();
@@ -12,9 +12,9 @@ export default function Cabecalho() {
     return acesso ? <CabecalhoAdm /> : (
         <>
             <header className="Cabecalho">
-                {/* <h1><img src={logo} /></h1> */}
-                <h1>Prog Web</h1>
-                <h2>A lojinha mais sagaz da internet</h2>
+                <h1><img src={logo} /></h1>
+                {/* <h1>Prog Web</h1>
+                <h2>A lojinha mais sagaz da internet</h2> */}
             </header>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">

@@ -6,10 +6,6 @@ export default function Produto({ id, nome, preco, categoria, funcao }) {
     const [imagem, setImagem] = useState(null);
 
     getImagemProduto(setImagem, id);
-    // useEffect(() => {
-    //     getImagemProduto(setImagem, id);
-    // }, [])
-
 
     return (
         <div className="div-prod">
