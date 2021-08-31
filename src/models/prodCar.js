@@ -1,7 +1,5 @@
 import {
     postCarrinho,
-    // deleteProdutoCarrinho,
-    putCompras,
     postInfoCliente,
     postProduto,
     postCategoria,
@@ -21,7 +19,6 @@ function rmv(setFuncao, lista, id_cliente, indice) {
         const copia_lista = Array.from(lista);
         copia_lista.splice(indice, 1);
         setFuncao(copia_lista);
-        // deleteProdutoCarrinho(id_cliente, id_produto, indice);
     }
 }
 
@@ -30,7 +27,6 @@ function add(setFuncao, lista, id_cliente) {
         const nova_lista = [...lista, dado];
         let id_produto = dado.id;
         setFuncao(nova_lista);
-        // postCarrinho({ "idCliente": id_cliente, "idProduto": id_produto });
     }
 }
 
@@ -46,7 +42,6 @@ function enviar_carrinho(carrinho, id_cliente) {
 function finalizar_compras(carrinho, urlNome, idCliente) {
     return (num_cartao, dados_cliente) => {
         postCliente({ "id": idCliente });
-        console.log(num_cartao);
 
         enviar_carrinho(carrinho, idCliente);
 
@@ -79,7 +74,6 @@ function add_categoria(setLista, lista) {
     return categoria => {
         postCategoria(categoria);
         getCategorias(setLista);
-        console.log(lista);
     }
 }
 
@@ -99,7 +93,6 @@ function rmv_produto_estoque(setFuncaoLista, lista, id_produto) {
 
 function atualiza_produto(setFuncao, lista, id_produto) {
     return (objeto_produto) => {
-        console.log(lista);
         putProduto(setFuncao, id_produto, objeto_produto);
     }
 }
