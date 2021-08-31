@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const api = axios.create({
+// tera de ser alterado no heroku
     baseURL: 'http://localhost:5000',
-
 })
 //===================GET======================//
 //Busca todos os produtos
