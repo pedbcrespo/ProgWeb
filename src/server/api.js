@@ -5,7 +5,7 @@ const urlBackEnd = 'https://prog-web-back-end.herokuapp.com';
 const api = axios.create({
 // tera de ser alterado no heroku
 // antigo: http://localhost:5000
-    baseURL: 'https://prog-web-back-end.herokuapp.com',
+    baseURL: urlBackEnd,
 })
 //===================GET======================//
 //Busca todos os produtos
