@@ -11,7 +11,6 @@ export default function Inicial() {
     const { lista, setLista } = useListaCarrinho();
     const { idCliente } = useCliente();
 
-
     return (
         <section className="campInicial">
             <section className="campProduto">

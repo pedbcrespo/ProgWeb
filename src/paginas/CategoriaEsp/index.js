@@ -1,6 +1,5 @@
 import React from 'react';
 import Produto from '../../componentes/Produto';
-// import ProdCarrinho from '../../componentes/ProdCarrinho';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useParams } from 'react-router-dom';
 import { useProdutos } from '../../context/produto';
@@ -14,7 +13,6 @@ export default function CategoriaEsp(){
     const { listaProdutos } = useProdutos()
     const { lista, setLista } = useListaCarrinho();
     const { listaCat } = useListaCateg()
-
     const { categoria } = useParams();
 
     function pegaIdCategoria(categoria){
@@ -44,6 +42,7 @@ export default function CategoriaEsp(){
                                 nome={prod.nome}
                                 categoria={prod.categoria}
                                 preco={prod.preco}
+                                imagem={prod.imagem}
                                 funcao={add(setLista, lista, idCliente)} 
                                 />
                         </div>
