@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const urlBackEnd = 'https://prog-web-back-end.herokuapp.com/';
+const urlBackEnd = 'https://prog-web-back-end.herokuapp.com';
 
 const api = axios.create({
 // tera de ser alterado no heroku
