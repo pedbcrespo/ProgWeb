@@ -23,6 +23,7 @@ export default function Inicial() {
                                 nome={prod.nome}
                                 categoria={prod.categoriaProduto}
                                 preco={prod.preco}
+                                imagem = {prod.imagem}
                                 funcao={add(setLista, lista, idCliente)} 
                                 />
                         </div>

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { getImagemProduto } from '../server/api';
+import React from 'react';
+// import { useState } from 'react';
+// import { getImagemProduto } from '../server/api';
 
-export default function Produto({ id, nome, preco, categoria, funcao }) {
+export default function Produto({ id, nome, preco, categoria, imagem, funcao }) {
 
-    const [imagem, setImagem] = useState(null);
+    // const [imagem, setImagem] = useState(null);
 
-    getImagemProduto(setImagem, id);
+    // getImagemProduto(setImagem, id);
 
     return (
         <div className="div-prod">
