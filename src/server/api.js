@@ -2,7 +2,8 @@ import axios from 'axios'
 
 const api = axios.create({
 // tera de ser alterado no heroku
-    baseURL: 'http://localhost:5000',
+// antigo: http://localhost:5000
+    baseURL: 'https://prog-web-back-end.herokuapp.com/',
 })
 //===================GET======================//
 //Busca todos os produtos
