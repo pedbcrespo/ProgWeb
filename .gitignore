@@ -4,10 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-/API_Flask/venv
-/API php
-/API Express
-/API_Flask/__pycache__
 # testing
 /coverage
 
