@@ -1,14 +1,17 @@
 import axios from 'axios'
 
+const urlBackEnd = 'https://prog-web-back-end.herokuapp.com';
+
 const api = axios.create({
 // tera de ser alterado no heroku
 // antigo: http://localhost:5000
-    baseURL: 'https://prog-web-back-end.herokuapp.com/',
+    baseURL: 'https://prog-web-back-end.herokuapp.com',
 })
 //===================GET======================//
 //Busca todos os produtos
 function getProdutos(setFunction) {
-    fetch('http://localhost:5000/produtos')
+    `${urlBackEnd}/produtos`
+    fetch(`${urlBackEnd}/produtos`)
         .then(res => res.json())
         .then((data) => {
             setFunction(data);
@@ -18,7 +21,7 @@ function getProdutos(setFunction) {
 //Busca um produto em especifico
 //a rota foi excluida
 function getProduto(ident, setFunction) {
-    fetch(`http://localhost:5000/produto/${ident}`)
+    fetch(`${urlBackEnd}/produtos/${ident}`)
         .then(res => res.json())
         .then(data => {
             setFunction(data)
@@ -26,14 +29,14 @@ function getProduto(ident, setFunction) {
 }
 
 function getImagemProduto(setFunction, id_produto) {
-    fetch(`http://localhost:5000/imagem/${id_produto}`)
+    fetch(`${urlBackEnd}/imagem/${id_produto}`)
         .then(res => res.json())
         .then(data => setFunction(data.imagem))
 }
 
 //Busca todas as categorias
 function getCategorias(setFunction) {
-    fetch(`http://localhost:5000/categorias`)
+    fetch(`${urlBackEnd}/categorias`)
         .then(res => res.json())
         .then(data => {
             setFunction(data)
@@ -42,8 +45,8 @@ function getCategorias(setFunction) {
 
 //mostra todas as compras registradas
 function getTodasCompras(setFunction) {
-    // fetch('http://localhost:5000/todas_compras')
-    fetch('http://localhost:5000/carrinhos')
+
+    fetch(`${urlBackEnd}/carrinhos`)
         .then(res => res.json())
         .then((data) => {
             setFunction(data)
@@ -52,7 +55,8 @@ function getTodasCompras(setFunction) {
 
 //Busca o carrinho de um determinado cliente
 function getCarrinho(setFunction, id_cliente) {
-    fetch(`http://localhost:5000/carrinho/${id_cliente}`)
+
+    fetch(`${urlBackEnd}/carrinho/${id_cliente}`)
         .then(res => res.json())
         .then(setFunction)
 }
@@ -67,31 +71,31 @@ function getEndereco(setFunction, cep) {
 }
 
 function getInfoCliente(setFunction, id_cliente) {
-    fetch(`http://localhost:5000/dados_cliente/${id_cliente}`)
+    fetch(`${urlBackEnd}/dados_cliente/${id_cliente}`)
         .then(res => res.json())
         .then(setFunction)
 }
 
 function getTodoEstoque(setFunction) {
-    fetch(`http://localhost:5000/estoque`)
+    fetch(`${urlBackEnd}/estoque`)
         .then(res => res.json())
         .then(setFunction)
 }
 
 function getTodasInfoCliente(setFunction) {
-    fetch(`http://localhost:5000/info_cliente`)
+    fetch(`${urlBackEnd}/info_cliente`)
         .then(res => res.json())
         .then(setFunction)
 }
 
 function getClientes(setFunction) {
-    fetch(`http://localhost:5000/clientes`)
+    fetch(`${urlBackEnd}/clientes`)
         .then(res => res.json())
         .then(setFunction)
 }
 
 function finalizarCompra(id_cliente){
-    fetch(`http://localhost:5000/finalizar_compra/${id_cliente}`)
+    fetch(`${urlBackEnd}/finalizar_compra/${id_cliente}`)
     .then(res=>res.data)
 }
 //===================POST========================//
