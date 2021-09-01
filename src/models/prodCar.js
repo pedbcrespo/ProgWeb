@@ -25,7 +25,7 @@ function rmv(setFuncao, lista, id_cliente, indice) {
 function add(setFuncao, lista, id_cliente) {
     return (dado) => {
         const nova_lista = [...lista, dado];
-        let id_produto = dado.id;
+        // let id_produto = dado.id;
         setFuncao(nova_lista);
     }
 }

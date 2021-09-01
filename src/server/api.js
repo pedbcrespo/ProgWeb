@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const urlBackEnd = 'https://prog-web-back-end.herokuapp.com';
+const urlBackEnd = 'https://prog-web-back-end.herokuapp.com/';
 
 const api = axios.create({
 // tera de ser alterado no heroku
@@ -145,12 +145,12 @@ async function putCliente(id_cliente, dado) {
     .then({ "mensagem": "atualizado" });
 }
 
-async function putCompras(id_cliente) {
-    //nesse caso, tanto faz o que vou enviar, nao vou usar porque a unica coisa que vai mudar é o status de finalizado
-    //que no caso, ou fica false ou true, entao só há uma unica possibilidade de mudança.
-    //portanto, tanto faz o dado que ta sendo enviado.
-    return await api.put(`/carrinho/${id_cliente}`, { "finalizado": true }).then(console.log("compra finalizada"))
-}
+// async function putCompras(id_cliente) {
+//     //nesse caso, tanto faz o que vou enviar, nao vou usar porque a unica coisa que vai mudar é o status de finalizado
+//     //que no caso, ou fica false ou true, entao só há uma unica possibilidade de mudança.
+//     //portanto, tanto faz o dado que ta sendo enviado.
+//     return await api.put(`/carrinho/${id_cliente}`, { "finalizado": true }).then(console.log("compra finalizada"))
+// }
 
 async function putEstoque(id_produto) {
     return await api.put(`/estoque/${id_produto}`, { "quantidade": 0 }).then({ "mensagem": "atualizado" })
@@ -191,7 +191,7 @@ export {
 
     putProduto,
     putCliente,
-    putCompras,
+    // putCompras,
     putEstoque,
 
     deleteProdutoCarrinho,

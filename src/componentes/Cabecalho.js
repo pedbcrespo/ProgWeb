@@ -12,7 +12,7 @@ export default function Cabecalho() {
     return acesso ? <CabecalhoAdm /> : (
         <>
             <header className="Cabecalho">
-                <h1><img src={logo} /></h1>
+                <h1><img src={logo} alt="logo da pagina"/></h1>
                 {/* <h1>Prog Web</h1>
                 <h2>A lojinha mais sagaz da internet</h2> */}
             </header>
