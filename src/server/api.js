@@ -10,7 +10,6 @@ const api = axios.create({
 //===================GET======================//
 //Busca todos os produtos
 function getProdutos(setFunction) {
-    `${urlBackEnd}/produtos`
     fetch(`${urlBackEnd}/produtos`)
         .then(res => res.json())
         .then((data) => {
@@ -101,7 +100,6 @@ function finalizarCompra(id_cliente){
 //===================POST========================//
 //Envia dados de um novo carrinho
 async function postCarrinho(dado) {
-    console.log(dado)
     return await api.post('/carrinhos', dado)
     .then(res=>res.data)
 }
