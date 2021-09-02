@@ -39,6 +39,7 @@ export default function RegistroCompras() {
                 <Table striped bordered hover variant="dark" className="tabela">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Email</th>
                             <th>Endereço</th>
                             <th>CEP</th>
@@ -47,6 +48,7 @@ export default function RegistroCompras() {
                     <tbody>
                         {listaInfoClientes.map((row) => {
                             return <tr key={row.id}>
+                                <td>{row.id}</td>
                                 <td>{row.email}</td>
                                 <td>{row.endereco}</td>
                                 <td>{row.cep}</td>
