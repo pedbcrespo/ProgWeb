@@ -1,6 +1,5 @@
 SITE NO AR: https://eprogweb.herokuapp.com/
 
-Tecnologias usadas:
-Front End: React Js
-Back End: Flask
-Banco de dados: MySQL
+Tecnologias usadas: React Js, Flask, MySQL
+
+O Back End da aplicação esta neste repositorio: https://github.com/pedbcrespo/back_pw
