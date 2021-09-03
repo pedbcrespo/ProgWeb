@@ -48,7 +48,7 @@ export default function RegistroCompras() {
                     <tbody>
                         {listaInfoClientes.map((row) => {
                             return <tr key={row.id}>
-                                <td>{row.id}</td>
+                                <td>{row.cliente_id}</td>
                                 <td>{row.email}</td>
                                 <td>{row.endereco}</td>
                                 <td>{row.cep}</td>
