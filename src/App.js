@@ -7,15 +7,12 @@ import Inicial from './paginas/Inicial';
 import Carrinho from './paginas/Carrinho';
 import AdmLogin from './paginas/AdmLogin';
 import CategoriaEsp from './paginas/CategoriaEsp';
-// import { useCliente } from './context/cliente';
 import { useSessao } from './context/sessao';
 import { inicializaSessao } from './models/dadosCliente';
 import { useEffect } from 'react';
 
 export default function App() {
 
-  // const { idCliente, setCliente } = useCliente();
-  // const { setCliente } = useCliente();
   const { sessao, setSessao } = useSessao();
 
   useEffect(() => {

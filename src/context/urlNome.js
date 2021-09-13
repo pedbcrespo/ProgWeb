@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext } from 'react';
 export const UrlNomeContext = createContext([]);
 
 export default function UrlProvider({ children }) {
-    const [urlNome, setUrlNome] = useState('http://localhost:3000')
+    const [urlNome, setUrlNome] = useState('https://eprogweb.herokuapp.com/')
     
     return (
         <UrlNomeContext.Provider value={{ urlNome, setUrlNome, }}>

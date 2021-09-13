@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { useCliente } from '../context/cliente';
-import { validarCartao, validarCep, validarEmail } from '../models/validacao';
+import { validarCartao, validarCep, validarEmail, tam_campo } from '../models/validacao';
 
 export default function Formulario({ enviar }) {
 
@@ -55,6 +55,7 @@ export default function Formulario({ enviar }) {
                 label="Cartão"
                 onChange={(event) => {
                     setNumCartao(event.target.value);
+                    tam_campo(16, event.target.value);
                 }}
                 error={!erroCartao['valido']}
                 onBlur={()=>{
@@ -73,6 +74,7 @@ export default function Formulario({ enviar }) {
                 label="Cep"
                 onChange={(event) => {
                     setCep( event.target.value);
+                    tam_campo(8, event.target.value);
                 }}
                 error={!erroCep['valido']}
                 onBlur={()=>{

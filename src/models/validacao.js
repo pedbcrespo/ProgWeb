@@ -72,6 +72,13 @@ function validarArquivoImagem(arquivo){
     return {valido: false, texto: "atribuição invalida"}
 }
 
+function tam_campo(limite, valor, setValor){
+    if(valor.length > limite){
+        let novo_valor = valor.slice(0,limite);
+        setValor(novo_valor);
+    }
+}
+
 export {
     preValidaUsuario,
     preValidaSenha,
@@ -85,5 +92,6 @@ export {
     validarQuantidade,
     validarArquivoImagem,
 
-    acessoAdm
+    acessoAdm,
+    tam_campo
 }
