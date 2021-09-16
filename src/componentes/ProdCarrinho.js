@@ -4,7 +4,7 @@ export default function ProdCarrinho({ id, nome, categoria, preco, funcao }) {
 
     return (
         <div className="miniCarrinho">
-            <h4>{nome} {categoria} R${preco}</h4>
+            <h4>{nome} {categoria} ${preco}</h4>
             <button
                 type="button"
                 className="btn btn-outline-dark"

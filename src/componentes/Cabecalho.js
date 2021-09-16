@@ -13,8 +13,6 @@ export default function Cabecalho() {
         <>
             <header className="Cabecalho">
                 <h1><img src={logo} alt="logo da pagina"/></h1>
-                {/* <h1>Prog Web</h1>
-                <h2>A lojinha mais sagaz da internet</h2> */}
             </header>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
