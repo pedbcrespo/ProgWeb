@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { useCliente } from '../context/cliente';
 import { validarCartao, validarCep, validarEmail, tam_campo } from '../models/validacao';
@@ -18,6 +18,10 @@ export default function Formulario({ enviar }) {
 
     const {idCliente} = useCliente()
 
+
+    useEffect(()=>{
+        console.log(endereco)
+    }, [endereco]);
 
     function prepararEnviar(event) {
         event.preventDefault();
@@ -55,6 +59,7 @@ export default function Formulario({ enviar }) {
             <TextField
                 id="Cartao"
                 label="Cartão"
+                value={endereco}
                 onChange={(event) => {
                     setNumCartao(event.target.value);
                     tam_campo(16, event.target.value);
@@ -84,11 +89,14 @@ export default function Formulario({ enviar }) {
                     setErroCep(validarCep(cep))
                 }} 
                 />
-                <Button onClick={()=>{
-                    if(cep.length === 8){
-                        getEndereco(setEndereco, cep);
-                    }
-                }}>Buscar</Button>
+                <Button 
+                    onClick={()=>{
+                        if(cep.length === 8){
+                            getEndereco(setEndereco, cep);
+                        }                
+                }}
+                variant="contained"
+                >Buscar</Button>
             <br></br>
             <br></br>
             <Button variant="contained" color="primary" type="submit">
