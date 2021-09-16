@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { useCliente } from '../context/cliente';
 import { validarCartao, validarCep, validarEmail, tam_campo } from '../models/validacao';
+import { getEndereco } from '../server/api';
+
 
 export default function Formulario({ enviar }) {
 
@@ -75,6 +77,9 @@ export default function Formulario({ enviar }) {
                 onChange={(event) => {
                     setCep( event.target.value);
                     tam_campo(8, event.target.value);
+                    if(cep.length === 8){
+                        getEndereco(setEndereco, cep);
+                    }
                 }}
                 error={!erroCep['valido']}
                 onBlur={()=>{
