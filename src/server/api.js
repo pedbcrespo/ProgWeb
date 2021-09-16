@@ -64,7 +64,12 @@ function getEndereco(setFunction, cep) {
     fetch(`https://viacep.com.br/ws/${cep}/json`)
         .then(res => res.json())
         .then(res => {
-            let endereco = `${res['logradouro']},${res['bairro']},${res['localidade']},${res['uf']}`
+            let endereco = "";
+            if(res['erro']){
+                endereco = "";
+            }
+            else
+                endereco = `${res['logradouro']},${res['bairro']},${res['localidade']},${res['uf']}`
             setFunction(endereco)
         })
 }
