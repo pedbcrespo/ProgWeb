@@ -59,7 +59,6 @@ export default function Formulario({ enviar }) {
             <TextField
                 id="Cartao"
                 label="Cartão"
-                value={endereco}
                 onChange={(event) => {
                     setNumCartao(event.target.value);
                     tam_campo(16, event.target.value);
@@ -72,6 +71,7 @@ export default function Formulario({ enviar }) {
             <TextField
                 id="Endereco"
                 label="Endereço"
+                value={endereco}
                 onChange={(event) => {
                     setEndereco(event.target.value)
                 }} 
