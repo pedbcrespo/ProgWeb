@@ -77,15 +77,18 @@ export default function Formulario({ enviar }) {
                 onChange={(event) => {
                     setCep( event.target.value);
                     tam_campo(8, event.target.value);
-                    if(cep.length === 8){
-                        getEndereco(setEndereco, cep);
-                    }
                 }}
+
                 error={!erroCep['valido']}
                 onBlur={()=>{
                     setErroCep(validarCep(cep))
                 }} 
-                fullWidth/>
+                />
+                <Button onClick={()=>{
+                    if(cep.length === 8){
+                        getEndereco(setEndereco, cep);
+                    }
+                }}>Buscar</Button>
             <br></br>
             <br></br>
             <Button variant="contained" color="primary" type="submit">
