@@ -97,6 +97,16 @@ function atualiza_produto(setFuncao, lista, id_produto) {
     }
 }
 
+function busca_prod_lista(lista, nome_produto){
+    for(produto of lista){
+        if(produto.nome === nome_produto){
+            return [produto];
+        }
+    }
+
+    return [];
+}
+
 export {
     rmv,
     rmv_produto_estoque,
@@ -104,5 +114,6 @@ export {
     add,
     finalizar_compras,
     add_categoria,
-    add_estoque
+    add_estoque,
+    busca_prod_lista
 }

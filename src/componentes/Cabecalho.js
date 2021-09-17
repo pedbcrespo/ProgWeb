@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useListaCateg } from '../context/categoria';
 import CabecalhoAdm from './CabecalhoAdm';
 import { useAdmin } from '../context/admin';
+import { useProdutos } from '../context/produto';
+import { busca_prod_lista } from '../models/prodCar';
 import logo from "../imagens/logo.png";
 
 export default function Cabecalho() {
     const { listaCat } = useListaCateg();
     const { acesso } = useAdmin();
+    const { listaProdutos } = useProdutos();
+
+    const [produto, setProduto] = useState('');
 
     return acesso ? <CabecalhoAdm /> : (
         <>
@@ -39,8 +44,19 @@ export default function Cabecalho() {
                             </li>
                         </ul>
                         <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                            <button class ="btn btn-outline-success" type ="submit">Search</button>
+                            <input 
+                            class="form-control me-2" 
+                            type="search" 
+                            placeholder="Search" 
+                            aria-label="Search"
+                            onChange={(event)=>{
+                                setProduto(event.target.value);
+                            }}/>
+                            <Link to={`/produto_buscado/${produto}`}>
+                            <button class ="btn btn-outline-success"
+                            onClick={()=>{
+                                busca_prod_lista(listaProdutos, produto);
+                            }}>Search</button></Link>
                         </form>
                     </div>
                 </div>

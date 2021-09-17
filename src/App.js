@@ -7,6 +7,7 @@ import Inicial from './paginas/Inicial';
 import Carrinho from './paginas/Carrinho';
 import AdmLogin from './paginas/AdmLogin';
 import CategoriaEsp from './paginas/CategoriaEsp';
+import ProdutoBuscado from './paginas/ProdutoBuscado';
 import { useSessao } from './context/sessao';
 import { inicializaSessao } from './models/dadosCliente';
 import { useEffect } from 'react';
@@ -35,6 +36,7 @@ export default function App() {
           </Route>
           <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
           </Route>
+          <Route path="/produto_buscado/:produto" children={<ProdutoBuscado />}></Route>
           <Route path="/login">
             <AdmLogin />
           </Route>
