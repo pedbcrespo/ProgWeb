@@ -3,6 +3,7 @@ import Produto from '../../componentes/Produto';
 import { useCliente } from '../../context/cliente';
 import { add } from '../../models/prodCar';
 // import { useProdutos } from '../../context/produto';
+import { useListaCarrinho } from '../../context/carrinho';
 
 
 export default function ProdutoBuscado(){

@@ -53,7 +53,7 @@ export default function Cabecalho() {
                                 setProduto(event.target.value);
                             }}/>
                             <Link to={`/produto_buscado/${produto}`}>
-                            <button class ="btn btn-outline-success"
+                            <button class ="btn btn-outline-light"
                             onClick={()=>{
                                 busca_prod_lista(listaProdutos, produto);
                             }}>Search</button></Link>

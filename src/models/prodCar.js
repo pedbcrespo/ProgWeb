@@ -98,9 +98,9 @@ function atualiza_produto(setFuncao, lista, id_produto) {
 }
 
 function busca_prod_lista(lista, nome_produto){
-    for(produto of lista){
-        if(produto.nome === nome_produto){
-            return [produto];
+    for(i in lista){
+        if(lista[i].nome === nome_produto){
+            return [lista[i]];
         }
     }
 
