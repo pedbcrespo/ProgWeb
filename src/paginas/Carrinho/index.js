@@ -6,6 +6,7 @@ import { useCliente } from '../../context/cliente';
 import { useUrlNome } from '../../context/urlNome';
 import { rmv, finalizar_compras } from '../../models/prodCar';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { Table } from 'react-bootstrap';
 
 export default function Carrinho() {
     /**Ajeitar o CSS*/
@@ -60,7 +61,7 @@ export default function Carrinho() {
                 </Select>
             </FormControl>
             <section className="campoProduto">
-                {lista.map((produto, indice) => {
+                {/* {lista.map((produto, indice) => {
                     return (
                         <div key={indice}>
                             <ProdCarrinho
@@ -72,8 +73,33 @@ export default function Carrinho() {
                             />
                         </div>
                     );
-                })}
-                <h3>Total: R$ {precoTotal()}</h3>
+                })} */}
+
+                <Table striped bordered hover variant="dark" className="tabela">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Preço ($)</th>
+                            <th>del</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {lista.map((produto, indice) => {
+                            return <tr key={indice}>
+                                <td>{produto.nome}</td>
+                                <td>{produto.preco}</td>
+                                <td><button
+                                    type="button"
+                                    className="btn btn-outline-dark"
+                                    onClick={()=>{
+                                        rmv(setLista, lista, idCliente, indice)(produto.id);
+                                    }}
+                                    >X</button></td>
+                            </tr>
+                        })}
+                    </tbody>
+                </Table>
+                <h3>Total: $ {precoTotal()}</h3>
             </section>
             <div className="campFormulario">
                 <Formulario enviar={finalizar_compras(lista, urlNome, idCliente)} />
