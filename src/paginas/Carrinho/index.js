@@ -5,7 +5,7 @@ import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
 import { useUrlNome } from '../../context/urlNome';
 import { rmv, finalizar_compras } from '../../models/prodCar';
-import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import { Table } from 'react-bootstrap';
 
 export default function Carrinho() {
@@ -87,14 +87,12 @@ export default function Carrinho() {
                         {lista.map((produto, indice) => {
                             return <tr key={indice}>
                                 <td>{produto.nome}</td>
-                                <td>{produto.preco}</td>
-                                <td><button
-                                    type="button"
-                                    className="btn btn-outline-dark"
+                                <td>{produto.preco.toFixed(2)}</td>
+                                <td><Button
                                     onClick={()=>{
                                         rmv(setLista, lista, idCliente, indice)(produto.id);
                                     }}
-                                    >X</button></td>
+                                    >X</Button></td>
                             </tr>
                         })}
                     </tbody>
