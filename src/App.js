@@ -34,9 +34,8 @@ export default function App() {
           <Route path='/carrinho'>
             <Carrinho />
           </Route>
-          <Route path="/categoria/:categoria" children={<CategoriaEsp />}>
-          </Route>
           <Route path="/produto_buscado/:produto" children={<ProdutoBuscado />}></Route>
+          <Route path="/categoria/:categoria" children={<CategoriaEsp />}></Route>
           <Route path="/login">
             <AdmLogin />
           </Route>
