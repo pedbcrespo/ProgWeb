@@ -13,6 +13,7 @@ export default function Cabecalho() {
     const { listaProdutos } = useProdutos();
 
     const [produto, setProduto] = useState('');
+    const [nome_produto, setNomeProduto] = useState('');
 
     return acesso ? <CabecalhoAdm /> : (
         <>
@@ -52,10 +53,10 @@ export default function Cabecalho() {
                             onChange={(event)=>{
                                 setProduto(event.target.value);
                             }}/>
-                            <Link to={`/produto_buscado/${produto}`}>
+                            <Link to={`/produto_buscado/${nome_produto}`}>
                             <button class ="btn btn-outline-light"
                             onClick={()=>{
-                                busca_prod_lista(listaProdutos, produto);
+                                setNomeProduto(busca_prod_lista(listaProdutos, produto));
                             }}>Search</button></Link>
                         </form>
                     </div>

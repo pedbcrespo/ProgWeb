@@ -14,6 +14,7 @@ export default function ProdutoBuscado(){
     const { produto } = useParams();
     var objProduto;
     var novo_produto = produto;
+    
     if(produto.includes('_')){
         novo_produto = produto.replace('_', ' ');
     }
