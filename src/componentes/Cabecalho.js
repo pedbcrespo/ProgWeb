@@ -53,11 +53,11 @@ export default function Cabecalho() {
                             onChange={(event)=>{
                                 setProduto(event.target.value);
                             }}/>
-                            <Link to={`/produto_buscado/${nome_produto}`}></Link>
+                            <Link to={`/produto_buscado/${nome_produto}`}>
                             <button class ="btn btn-outline-light"
                             onClick={()=>{
                                 setNomeProduto(busca_prod_lista(listaProdutos, produto));
-                            }}>Search</button>
+                            }}>Search</button></Link>
                         </form>
                     </div>
                 </div>
