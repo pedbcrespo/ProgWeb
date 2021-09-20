@@ -56,7 +56,8 @@ export default function Cabecalho() {
                                 }} />
                                 <button class="btn btn-outline-light"
                                 onClick={
-                                    ()=>{
+                                    (e)=>{
+                                        e.preventDefault();
                                         setBuscados(busca_prod_lista(listaProdutos, produto));
                                     }
                                 }>Search</button>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Produto from '../../componentes/Produto';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
@@ -13,15 +13,12 @@ export default function Inicial() {
     const { idCliente } = useCliente();
     const { buscados } = useBuscados();
 
-    var produtos_apresetar = listaProdutos;
+    const [produtos_apresetar, setApresentar] = useState(listaProdutos);
 
     if(buscados !== -1){
         let obj = ret_prod(listaProdutos, buscados);
-        produtos_apresetar = [obj];
+        setApresentar([obj]);
     }
-    // else{
-    //     produtos_apresetar = listaProdutos;
-    // }
 
     return (
         <section className="campInicial">
