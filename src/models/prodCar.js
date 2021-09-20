@@ -99,13 +99,21 @@ function atualiza_produto(setFuncao, lista, id_produto) {
 
 function busca_prod_lista(lista, nome_produto){
     for(let i in lista){
-        console.log(lista[i])
         if(lista[i].nome === nome_produto){
             return lista[i].id;
         }
     }
 
     return -1;
+}
+
+function ret_prod(lista, id_prod){
+    for(let i in lista){
+        if(lista[i].id === id_prod){
+            return lista[i];
+        }
+    }
+    return null;
 }
 
 export {
@@ -116,5 +124,6 @@ export {
     finalizar_compras,
     add_categoria,
     add_estoque,
-    busca_prod_lista
+    busca_prod_lista,
+    ret_prod
 }
