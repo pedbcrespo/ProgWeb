@@ -6,6 +6,7 @@ import ProdutoProvider from '../context/produto';
 import ListaCatProvider from '../context/categoria';
 import ListaProvider from '../context/carrinho';
 import UrlProvider from '../context/urlNome';
+import BuscadoProvider from '../context/produto_buscado';
 
 export default function Providers(props) {
     return (
@@ -14,11 +15,13 @@ export default function Providers(props) {
                 <ClienteProvider>
                     <SessaoProvider>
                         <ProdutoProvider>
-                            <ListaCatProvider>
-                                <ListaProvider>
-                                    {props.children}
-                                </ListaProvider>
-                            </ListaCatProvider>
+                            <BuscadoProvider>
+                                <ListaCatProvider>
+                                    <ListaProvider>
+                                        {props.children}
+                                    </ListaProvider>
+                                </ListaCatProvider>
+                            </BuscadoProvider>
                         </ProdutoProvider>
                     </SessaoProvider>
                 </ClienteProvider>

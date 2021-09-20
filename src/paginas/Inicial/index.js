@@ -2,16 +2,26 @@ import React from 'react';
 import Produto from '../../componentes/Produto';
 import { useListaCarrinho } from '../../context/carrinho';
 import { useCliente } from '../../context/cliente';
-import { add } from '../../models/prodCar';
+import { add, ret_prod } from '../../models/prodCar';
 import { useProdutos } from '../../context/produto';
+import { useBuscados } from '../../context/produto_buscado';
 
 export default function Inicial() {
 
     const { listaProdutos } = useProdutos();
     const { lista, setLista } = useListaCarrinho();
     const { idCliente } = useCliente();
+    const { buscados } = useBuscados();
 
     var produtos_apresetar = listaProdutos;
+
+    if(buscados !== -1){
+        let obj = ret_prod(listaProdutos, buscados);
+        produtos_apresetar = [obj];
+    }
+    else{
+        produtos_apresetar = listaProdutos;
+    }
 
     return (
         <section className="campInicial">

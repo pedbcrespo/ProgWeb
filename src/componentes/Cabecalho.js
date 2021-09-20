@@ -4,6 +4,7 @@ import { useListaCateg } from '../context/categoria';
 import CabecalhoAdm from './CabecalhoAdm';
 import { useAdmin } from '../context/admin';
 import { useProdutos } from '../context/produto';
+import { useBuscados } from '../context/produto_buscado';
 import { busca_prod_lista } from '../models/prodCar';
 import logo from "../imagens/logo.png";
 
@@ -11,9 +12,9 @@ export default function Cabecalho() {
     const { listaCat } = useListaCateg();
     const { acesso } = useAdmin();
     const { listaProdutos } = useProdutos();
+    const { setBuscados } = useBuscados();
 
     const [produto, setProduto] = useState('');
-    var val;
 
     return acesso ? <CabecalhoAdm /> : (
         <>
@@ -53,9 +54,15 @@ export default function Cabecalho() {
                                 onChange={(event) => {
                                     setProduto(event.target.value);
                                 }} />
-                            <Link to={`/produto_buscado/${busca_prod_lista(listaProdutos, produto)}`}>
+                            {/* <Link to={`/produto_buscado/${busca_prod_lista(listaProdutos, produto)}`}>
                                 <button class="btn btn-outline-light">Search</button>
-                            </Link>
+                            </Link> */}
+                                <button class="btn btn-outline-light"
+                                onClick={
+                                    ()=>{
+                                        setBuscados(busca_prod_lista(listaProdutos, produto));
+                                    }
+                                }>Search</button>
                         </form>
                     </div>
                 </div>
