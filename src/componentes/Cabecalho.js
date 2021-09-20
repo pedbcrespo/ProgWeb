@@ -45,19 +45,18 @@ export default function Cabecalho() {
                             </li>
                         </ul>
                         <form class="d-flex">
-                            <input 
-                            class="form-control me-2" 
-                            type="search" 
-                            placeholder="Search" 
-                            aria-label="Search"
-                            onChange={(event)=>{
-                                setProduto(event.target.value);
-                            }}/>
-                            <Link to={`/produto_buscado/`}>
-                            <button class ="btn btn-outline-light"
-                            onClick={()=>{
-                                setIdProduto(busca_prod_lista(listaProdutos, produto));
-                            }}>Search</button></Link>
+                            <input
+                                class="form-control me-2"
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                                onChange={(event) => {
+                                    setProduto(event.target.value);
+                                    setIdProduto(busca_prod_lista(listaProdutos, produto));
+                                }} />
+                            <Link to={`/produto_buscado/${idProduto}`}>
+                                <button class="btn btn-outline-light">Search</button>
+                            </Link>
                         </form>
                     </div>
                 </div>

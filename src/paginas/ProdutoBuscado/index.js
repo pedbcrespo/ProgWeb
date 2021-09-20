@@ -11,12 +11,13 @@ export default function ProdutoBuscado(){
     const { listaProdutos } = useProdutos();
     const { lista, setLista } = useListaCarrinho();
     const { idCliente } = useCliente();
-    const { id_produto } = useParams();
+    const { id_produto_buscado } = useParams();
     var objProduto;
-    var novo_produto = id_produto;
+
+    console.log(id_produto_buscado);
 
     objProduto = listaProdutos.filter((prod)=>{
-        return prod.id === id_produto
+        return prod.id === id_produto_buscado
     })[0];
 
     return (
