@@ -14,6 +14,7 @@ export default function Cabecalho() {
 
     const [produto, setProduto] = useState('');
     const [idProduto, setIdProdutoBuscado] = useState(-1);
+    var val;
 
     useEffect(()=>{
         console.log(idProduto);
@@ -57,13 +58,13 @@ export default function Cabecalho() {
                                 onChange={(event) => {
                                     setProduto(event.target.value);
                                 }} />
-                            <Link to={`/produto_buscado/${idProduto}`}>
+                            <Link to={`/produto_buscado/${val}`}>
                                 <button class="btn btn-outline-light"
                                 onClick={
                                     ()=>{
-                                        let val = busca_prod_lista(listaProdutos, produto);
+                                        val = busca_prod_lista(listaProdutos, produto);
                                         setIdProdutoBuscado(val);
-                                        console.log(`val:${val} idProduto: ${idProduto}`);
+                                        console.log(`val:${val}`);
                                     }
                                 }>Search</button>
                             </Link>
