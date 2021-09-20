@@ -13,11 +13,11 @@ export default function Inicial() {
     const { idCliente } = useCliente();
     const { buscados } = useBuscados();
 
-    const [produtos_apresetar, setApresentar] = useState(listaProdutos);
+    var produtos_apresetar = listaProdutos;
 
     if(buscados !== -1){
         let obj = ret_prod(listaProdutos, buscados);
-        setApresentar([obj]);
+        produtos_apresetar = [obj];
     }
 
     return (
