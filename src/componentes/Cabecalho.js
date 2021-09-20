@@ -54,13 +54,14 @@ export default function Cabecalho() {
                                 onChange={(event) => {
                                     setProduto(event.target.value);
                                 }} />
-                                <button class="btn btn-outline-light"
+                            <button class="btn btn-outline-light"
+                                type='button'
                                 onClick={
-                                    (e)=>{
-                                        e.preventDefault();
+                                    () => {
                                         setBuscados(busca_prod_lista(listaProdutos, produto));
                                     }
-                                }>Search</button>
+                                }
+                            >Search</button>
                         </form>
                     </div>
                 </div>
