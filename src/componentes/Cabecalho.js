@@ -13,7 +13,7 @@ export default function Cabecalho() {
     const { listaProdutos } = useProdutos();
 
     const [produto, setProduto] = useState('');
-    const [idProduto, setIdProduto] = useState('');
+    const [idProduto, setIdProduto] = useState(-1);
 
     return acesso ? <CabecalhoAdm /> : (
         <>
@@ -52,10 +52,14 @@ export default function Cabecalho() {
                                 aria-label="Search"
                                 onChange={(event) => {
                                     setProduto(event.target.value);
-                                    setIdProduto(busca_prod_lista(listaProdutos, produto));
                                 }} />
                             <Link to={`/produto_buscado/${idProduto}`}>
-                                <button class="btn btn-outline-light">Search</button>
+                                <button class="btn btn-outline-light"
+                                onClick={
+                                    ()=>{
+                                        setIdProduto(busca_prod_lista(listaProdutos, produto));
+                                    }
+                                }>Search</button>
                             </Link>
                         </form>
                     </div>
