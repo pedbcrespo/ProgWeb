@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useListaCateg } from '../context/categoria';
 import CabecalhoAdm from './CabecalhoAdm';
@@ -13,7 +13,11 @@ export default function Cabecalho() {
     const { listaProdutos } = useProdutos();
 
     const [produto, setProduto] = useState('');
-    const [idProduto, setIdProduto] = useState(-1);
+    const [idProduto, setIdProdutoBuscado] = useState(-1);
+
+    useEffect(()=>{
+        console.log(idProduto);
+    }, [idProduto]);
 
     return acesso ? <CabecalhoAdm /> : (
         <>
@@ -58,7 +62,7 @@ export default function Cabecalho() {
                                 onClick={
                                     ()=>{
                                         let val = busca_prod_lista(listaProdutos, produto);
-                                        setIdProduto(val);
+                                        setIdProdutoBuscado(val);
                                         console.log(`val:${val} idProduto: ${idProduto}`);
                                     }
                                 }>Search</button>
