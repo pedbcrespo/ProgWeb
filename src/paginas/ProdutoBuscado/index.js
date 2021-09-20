@@ -14,8 +14,6 @@ export default function ProdutoBuscado(){
     const { id_produto_buscado } = useParams();
     var objProduto;
 
-    console.log(id_produto_buscado);
-
     objProduto = listaProdutos.filter((prod)=>{
         return prod.id === id_produto_buscado
     })[0];

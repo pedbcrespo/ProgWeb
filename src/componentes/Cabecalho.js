@@ -57,7 +57,9 @@ export default function Cabecalho() {
                                 <button class="btn btn-outline-light"
                                 onClick={
                                     ()=>{
-                                        setIdProduto(busca_prod_lista(listaProdutos, produto));
+                                        console.log(`cabecalho: ${listaProdutos}`);
+                                        let val = busca_prod_lista(listaProdutos, produto);
+                                        setIdProduto(val);
                                     }
                                 }>Search</button>
                             </Link>
