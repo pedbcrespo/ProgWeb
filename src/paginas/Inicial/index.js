@@ -19,9 +19,9 @@ export default function Inicial() {
         let obj = ret_prod(listaProdutos, buscados);
         produtos_apresetar = [obj];
     }
-    else{
-        produtos_apresetar = listaProdutos;
-    }
+    // else{
+    //     produtos_apresetar = listaProdutos;
+    // }
 
     return (
         <section className="campInicial">
