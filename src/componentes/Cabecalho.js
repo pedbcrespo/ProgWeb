@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useListaCateg } from '../context/categoria';
 import CabecalhoAdm from './CabecalhoAdm';
@@ -13,12 +13,7 @@ export default function Cabecalho() {
     const { listaProdutos } = useProdutos();
 
     const [produto, setProduto] = useState('');
-    const [idProduto, setIdProdutoBuscado] = useState(-1);
     var val;
-
-    useEffect(()=>{
-        console.log(idProduto);
-    }, [idProduto]);
 
     return acesso ? <CabecalhoAdm /> : (
         <>
@@ -58,15 +53,8 @@ export default function Cabecalho() {
                                 onChange={(event) => {
                                     setProduto(event.target.value);
                                 }} />
-                            <Link to={`/produto_buscado/${val}`}>
-                                <button class="btn btn-outline-light"
-                                onClick={
-                                    ()=>{
-                                        val = busca_prod_lista(listaProdutos, produto);
-                                        setIdProdutoBuscado(val);
-                                        console.log(`val:${val}`);
-                                    }
-                                }>Search</button>
+                            <Link to={`/produto_buscado/${busca_prod_lista(listaProdutos, produto)}`}>
+                                <button class="btn btn-outline-light">Search</button>
                             </Link>
                         </form>
                     </div>
