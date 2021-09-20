@@ -14,8 +14,8 @@ export default function ProdutoBuscado(){
     const { id_produto_buscado } = useParams();
 
     return(
-        <>
+        <section>
             <h1>Item Buscado</h1>
-        </>
+        </section>
     );
 }
