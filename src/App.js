@@ -34,8 +34,11 @@ export default function App() {
           <Route path='/carrinho'>
             <Carrinho />
           </Route>
-          <Route path="/produto_buscado/:id_produto" children={<ProdutoBuscado />}></Route>
+
+          <Route path="/produto_buscado/" children={<ProdutoBuscado />}></Route>
+          
           <Route path="/categoria/:categoria" children={<CategoriaEsp />}></Route>
+          
           <Route path="/login">
             <AdmLogin />
           </Route>
