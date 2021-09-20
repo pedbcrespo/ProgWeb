@@ -11,10 +11,12 @@ export default function Inicial() {
     const { lista, setLista } = useListaCarrinho();
     const { idCliente } = useCliente();
 
+    var produtos_apresetar = listaProdutos;
+
     return (
         <section className="campInicial">
             <section className="campProduto">
-                {listaProdutos.map((prod) => {
+                {produtos_apresetar.map((prod) => {
                     return (
                         <div key={prod.id}>
                             <Produto
