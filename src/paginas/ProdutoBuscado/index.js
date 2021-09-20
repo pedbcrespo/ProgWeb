@@ -11,16 +11,12 @@ export default function ProdutoBuscado(){
     const { listaProdutos } = useProdutos();
     const { lista, setLista } = useListaCarrinho();
     const { idCliente } = useCliente();
-    const { produto } = useParams();
+    const { id_produto } = useParams();
     var objProduto;
-    var novo_produto = produto;
-    
-    if(produto.includes('_')){
-        novo_produto = produto.replace('_', ' ');
-    }
+    var novo_produto = id_produto;
 
     objProduto = listaProdutos.filter((prod)=>{
-        return prod.nome === novo_produto
+        return prod.id === id_produto
     })[0];
 
     return (
