@@ -18,6 +18,8 @@ export default function ProdutoBuscado(){
         return prod.id === id_produto_buscado
     })[0];
 
+    console.log(objProduto);
+
     return (
         <section className="campInicial">
             <section className="campProduto">
